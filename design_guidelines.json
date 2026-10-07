@@ -1,0 +1,130 @@
+{
+  "project_name": "Aashay Soni - GenAI & Agentic AI Portfolio",
+  "design_archetype": "Architectural Monolith & Tactical Glow (Swiss-Editorial Dark Lux)",
+  "emotional_tone": "Sophisticated, authoritative, cutting-edge, quietly confident, highly functional",
+  "theme": {
+    "mode": "dark",
+    "background": "bg-[#0A0B10]",
+    "background_secondary": "bg-[#12141D]",
+    "surface": "bg-[#181B26]/80",
+    "surface_border": "border-white/10",
+    "accent_primary": "#E06D3B",
+    "accent_secondary": "#38BDF8",
+    "text_primary": "text-[#F4F5F8]",
+    "text_secondary": "text-[#94A3B8]",
+    "text_muted": "text-[#64748B]",
+    "glow_effect": "shadow-[0_0_50px_rgba(224,109,59,0.15)]"
+  },
+  "typography": {
+    "headline_font": "Outfit, Syne, sans-serif (Google Fonts)",
+    "body_font": "Plus Jakarta Sans, sans-serif (Google Fonts)",
+    "code_font": "JetBrains Mono, monospace",
+    "scale": {
+      "hero_title": "text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08]",
+      "section_heading": "text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight",
+      "card_heading": "text-xl sm:text-2xl font-semibold tracking-normal",
+      "body": "text-base sm:text-lg text-slate-300 leading-relaxed",
+      "caption": "text-xs sm:text-sm text-slate-400 font-mono tracking-wider uppercase"
+    }
+  },
+  "layout_strategy": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "hero": "relative min-h-screen pt-28 pb-16 flex flex-col justify-between overflow-hidden",
+    "bento_grid": "grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-6 lg:gap-8",
+    "timeline": "relative border-l border-white/10 ml-4 md:ml-8 pl-6 md:pl-10 space-y-12"
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "name": "Kinetic Hero with Masked Reveal & Dynamic Particle Canvas",
+      "features": [
+        "Masked line-by-line title reveal on initial load using Framer Motion",
+        "Subtle 3D tilt effect on main interactive identity badge",
+        "Interactive Agent Signal Node Canvas in background (lightweight HTML5 Canvas / particle mesh)",
+        "Live simulated Agent Output Stream badge showing real-time system status",
+        "Quick action CTAs: 'Explore Architecture', 'Initiate Contact', 'Download Resume (PDF placeholder)'"
+      ]
+    },
+    {
+      "id": "about",
+      "name": "About My Work & Core Capabilities (GenAI, Agentic AI, Automation)",
+      "features": [
+        "Tetris Bento Grid layout with 3 major capability pillars",
+        "Interactive LLM Agent Sandbox Simulator widget (allows users to select agent roles and view simulated step-by-step reasoning logs)",
+        "Metrics & Benchmarks display (Task accuracy %, token efficiency, workflow latency reduction)",
+        "Architecture methodology breakdown with clear visual nodes"
+      ]
+    },
+    {
+      "id": "experience",
+      "name": "Work Experience & Featured Deployments",
+      "features": [
+        "Interactive timeline with filter tabs (All Systems, Agentic AI, Autonomous Workflows, RAG & Fine-tuning)",
+        "Rich expandable cards showcasing roles, key technical innovations, impact metrics, and tech stack badges",
+        "Editable example entries with structured placeholders"
+      ]
+    },
+    {
+      "id": "genz_vibe",
+      "name": "The Vibe Zone (Gen Z Personality & Interactive Motion)",
+      "features": [
+        "Slow editorial kinetic marquee ribbon (`react-fast-marquee`) with low-contrast subtle text",
+        "Interactive Agent Mood & Tech Stack Selector ('Choose Aashay's Mode')",
+        "Magnetic cursor-follow effect / micro-interaction spotlight card",
+        "Tasteful playful micro-copy ('Not your average wrapper dev', 'We build autonomous systems, not pitch decks')",
+        "Quick interactive sound / haptic feedback toggle visualizer"
+      ]
+    },
+    {
+      "id": "contact",
+      "name": "Contact & Project Inquiry",
+      "features": [
+        "Frontend-only contact form with mailto trigger & instant client-side feedback",
+        "Copy-email micro-interaction button with feedback toast",
+        "Project scope quick-selector tags (e.g. 'Multi-Agent Systems', 'Workflow Automation', 'Custom RAG Architectures')",
+        "Interactive availability status indicator ('Currently accepting select projects & advisory')"
+      ]
+    },
+    {
+      "id": "footer",
+      "name": "Refined Editorial Footer",
+      "features": [
+        "Massive typography brand watermark ('AASHAY SONI')",
+        "Live UTC local time clock display",
+        "Social placeholders (GitHub, X / Twitter, LinkedIn, HuggingFace, Substack)",
+        "Smooth scroll to top button"
+      ]
+    }
+  ],
+  "image_urls": {
+    "hero_abstract_bg": "https://images.unsplash.com/photo-1637166185518-058f5896a2e9?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "agent_network_mesh": "https://images.unsplash.com/photo-1579567761406-4684ee0c75b6?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "futuristic_light_tunnel": "https://images.unsplash.com/photo-1634834300387-8015d9fb7550?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "developer_portrait": "https://images.unsplash.com/photo-1612021972081-a1c39f9955b7?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "ai_head_visualization": "https://images.unsplash.com/photo-1677212004257-103cfa6b59d0?crop=entropy&cs=srgb&fm=jpg&q=85"
+  },
+  "required_packages": [
+    "framer-motion",
+    "lucide-react",
+    "clsx",
+    "tailwind-merge",
+    "sonner"
+  ],
+  "instructions_to_main_agent": [
+    "Install `react-fast-marquee` or standard CSS keyframe marquee for smooth kinetic text ribbons if needed, or use Framer Motion loop.",
+    "Include Google Fonts links in `public/index.html` for 'Outfit', 'Syne', 'Plus Jakarta Sans', and 'JetBrains Mono'.",
+    "Ensure Lenis smooth scrolling or smooth native behavior is initialized with Lenis library (`@studio-freight/lenis` or standard smooth scroll handling).",
+    "Set dark mode as default background on `<html>` and `<body>` tags.",
+    "Ensure all interactive elements have explicit `data-testid` attributes (e.g. `data-testid=\"nav-contact-btn\"`, `data-testid=\"hero-cta-button\"`, `data-testid=\"agent-simulator-trigger\"`).",
+    "Use standard SVG graphics for the custom logo mark and favicon.",
+    "Replace the splash screen marker in App.js cleanly.",
+    "Implement clear responsive breakpoints so mobile views remain sleek with drawer or mobile nav overlay."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Never use generic centered layouts or plain flat gray backgrounds. Use layered depth, subtle borders (`border-white/10`), ambient radial glows, and crisp micro-borders.",
+    "Avoid Inter for headings. Use Outfit or Syne for Display headlines.",
+    "Ensure high text contrast ratios (minimum 4.5:1 for body text, 3:1 for large display headlines).",
+    "All interactive elements MUST contain `data-testid` attributes.",
+    "Hover states MUST explicitly declare both background AND text color changes."
+  ]
+}
