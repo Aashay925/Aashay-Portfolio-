@@ -41,7 +41,7 @@ export const Contact = () => {
     <section id="contact" className="relative py-28 sm:py-36 bg-[#0D0F16]" data-testid="contact-section">
       <div className="absolute -top-24 right-0 w-[28rem] h-[28rem] rounded-full bg-[#E06D3B]/[0.06] blur-[140px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-14">
+      <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 grid lg:grid-cols-12 gap-14">
         <div className="lg:col-span-5">
           <SectionHeading
             id="contact"

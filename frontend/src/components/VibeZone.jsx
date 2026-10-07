@@ -29,7 +29,7 @@ export const VibeZone = () => {
     <section id="vibe" className="relative py-28 sm:py-36 overflow-hidden" data-testid="vibe-section">
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] rounded-full bg-[#38BDF8]/[0.05] blur-[160px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+      <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 mb-16">
         <Reveal>
           <p className="font-mono2 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#E06D3B] mb-4" data-testid="vibe-eyebrow">
             03 — The Vibe Zone
@@ -50,7 +50,7 @@ export const VibeZone = () => {
 
       <Marquee />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+      <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 mt-16">
         <div className="grid lg:grid-cols-12 gap-8 items-stretch">
           <Reveal className="lg:col-span-5">
             <div className="flex flex-col gap-3 h-full justify-center" data-testid="vibe-mode-selector">

@@ -134,8 +134,8 @@ export const Hero = () => {
         <div className="absolute bottom-0 right-0 w-[30rem] h-[30rem] rounded-full bg-[#38BDF8]/[0.07] blur-[140px]" />
       </motion.div>
 
-      <motion.div style={{ opacity }} className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid lg:grid-cols-12 gap-12 items-center">
-        <div className="lg:col-span-8">
+      <motion.div style={{ opacity }} className="relative w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 grid lg:grid-cols-12 gap-12 items-center">
+        <div className="lg:col-span-7 xl:col-span-8">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15, duration: 0.6 }}>
             <AgentStream />
           </motion.div>
@@ -194,7 +194,7 @@ export const Hero = () => {
         </div>
 
         {/* 3D tilt identity badge */}
-        <motion.div style={{ y: yCard }} className="hidden lg:block lg:col-span-4 [perspective:1000px]">
+        <motion.div style={{ y: yCard }} className="hidden lg:block lg:col-span-5 xl:col-span-4 justify-self-end w-full max-w-[440px] [perspective:1000px]">
           <motion.div
             initial={{ opacity: 0, rotateY: -18, y: 30 }}
             animate={{ opacity: 1, rotateY: 0, y: 0 }}
@@ -208,22 +208,22 @@ export const Hero = () => {
             }}
             onMouseLeave={() => setTilt({ x: 0, y: 0 })}
             style={{ transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`, transformStyle: "preserve-3d" }}
-            className="relative rounded-2xl border border-white/10 bg-[#12141D]/80 backdrop-blur p-8 shadow-[0_0_60px_rgba(224,109,59,0.12)] transition-transform duration-200 will-change-transform"
+            className="relative rounded-2xl border border-white/10 bg-[#12141D]/80 backdrop-blur p-9 xl:p-10 shadow-[0_0_60px_rgba(224,109,59,0.12)] transition-transform duration-200 will-change-transform w-full"
             data-testid="hero-identity-card"
           >
             <div style={{ transform: "translateZ(40px)" }}>
-              <p className="font-mono2 text-[10px] tracking-[0.3em] uppercase text-[#64748B]">identity.py</p>
-              <p className="mt-4 font-display text-2xl font-bold text-[#F4F5F8]">{PROFILE.name}</p>
-              <p className="mt-1 text-sm text-[#94A3B8]">{PROFILE.role}</p>
-              <div className="mt-6 space-y-2 font-mono2 text-xs text-[#64748B]">
+              <p className="font-mono2 text-[11px] tracking-[0.3em] uppercase text-[#64748B]">identity.py</p>
+              <p className="mt-4 font-display text-2xl xl:text-3xl font-bold text-[#F4F5F8]">{PROFILE.name}</p>
+              <p className="mt-1 text-sm xl:text-[15px] text-[#94A3B8]">{PROFILE.role}</p>
+              <div className="mt-6 space-y-2.5 font-mono2 text-xs xl:text-[13px] text-[#64748B]">
                 <p><span className="text-[#38BDF8]">class</span> <span className="text-[#FBBF24]">Agent</span>:</p>
                 <p className="pl-4"><span className="text-[#38BDF8]">focus</span> = [<span className="text-[#E06D3B]">"GenAI"</span>, <span className="text-[#E06D3B]">"Agents"</span>, <span className="text-[#E06D3B]">"Automation"</span>]</p>
                 <p className="pl-4"><span className="text-[#38BDF8]">status</span> = <span className="text-emerald-400">"available"</span></p>
                 <p className="pl-4"><span className="text-[#38BDF8]">location</span> = <span className="text-[#E06D3B]">"{PROFILE.location}"</span></p>
               </div>
-              <div className="mt-6 pt-5 border-t border-white/10 flex items-center justify-between">
-                <span className="font-mono2 text-[10px] tracking-widest text-[#64748B]">EST. 2020</span>
-                <span className="h-1.5 w-1.5 rounded-full bg-[#E06D3B]" />
+              <div className="mt-7 pt-5 border-t border-white/10 flex items-center justify-between">
+                <span className="font-mono2 text-[11px] tracking-widest text-[#64748B]">EST. 2020</span>
+                <span className="h-2 w-2 rounded-full bg-[#E06D3B]" />
               </div>
             </div>
           </motion.div>

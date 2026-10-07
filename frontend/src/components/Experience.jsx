@@ -12,7 +12,7 @@ export const Experience = () => {
 
   return (
     <section id="experience" className="relative py-28 sm:py-36 bg-[#0D0F16]" data-testid="experience-section">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20">
         <SectionHeading
           id="experience"
           eyebrow="02 — Work Experience"
@@ -38,7 +38,7 @@ export const Experience = () => {
           </div>
         </Reveal>
 
-        <div className="relative border-l border-white/10 ml-2 md:ml-6 pl-6 md:pl-12 space-y-8">
+        <div className="relative border-l border-white/10 ml-2 md:ml-6 pl-6 md:pl-12 space-y-8 max-w-5xl xl:max-w-6xl">
           <AnimatePresence mode="popLayout">
             {items.map((e, i) => {
               const open = openId === e.id;

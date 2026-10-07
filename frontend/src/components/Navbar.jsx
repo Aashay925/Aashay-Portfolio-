@@ -31,26 +31,26 @@ export const Navbar = () => {
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-white/5 bg-[#0A0B10]/70 backdrop-blur-xl">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <nav className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 h-16 sm:h-20 flex items-center justify-between">
         <button
           data-testid="nav-logo"
           onClick={() => window.__lenis?.scrollTo(0) ?? window.scrollTo({ top: 0, behavior: "smooth" })}
           className="flex items-center gap-3 group"
           aria-label="Back to top"
         >
-          <LogoMark />
-          <span className="font-display font-bold tracking-tight text-sm text-[#F4F5F8] group-hover:text-[#E06D3B] transition-colors">
+          <LogoMark size={36} />
+          <span className="font-display font-bold tracking-tight text-base sm:text-lg text-[#F4F5F8] group-hover:text-[#E06D3B] transition-colors">
             {PROFILE.name}
           </span>
         </button>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-8 lg:gap-10">
           {LINKS.map((l) => (
             <button
               key={l.href}
               data-testid={`nav-${l.label.toLowerCase()}-link`}
               onClick={() => scrollTo(l.href)}
-              className="font-mono2 text-xs tracking-[0.2em] uppercase text-[#94A3B8] hover:text-[#F4F5F8] transition-colors"
+              className="font-mono2 text-sm tracking-[0.18em] uppercase text-[#94A3B8] hover:text-[#F4F5F8] transition-colors font-medium"
             >
               {l.label}
             </button>
@@ -58,7 +58,7 @@ export const Navbar = () => {
           <button
             data-testid="nav-contact-btn"
             onClick={() => scrollTo("#contact")}
-            className="rounded-full bg-[#E06D3B] px-5 py-2 text-xs font-semibold tracking-wide text-[#0A0B10] hover:bg-[#F4F5F8] hover:text-[#0A0B10] transition-colors"
+            className="rounded-full bg-[#E06D3B] px-6 py-2.5 text-sm font-semibold tracking-wide text-[#0A0B10] hover:bg-[#F4F5F8] hover:text-[#0A0B10] transition-colors shadow-sm"
           >
             Initiate Contact
           </button>
