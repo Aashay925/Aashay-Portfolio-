@@ -139,12 +139,12 @@ export const Hero = () => {
         style={{ opacity }}
         className="relative w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 flex flex-col lg:flex-row items-center justify-between gap-8 xl:gap-12"
       >
-        <div className="w-full lg:max-w-[560px] xl:max-w-[620px] shrink-0">
+        <div className="w-full lg:max-w-[580px] xl:max-w-[640px] shrink-0">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15, duration: 0.6 }}>
             <AgentStream />
           </motion.div>
 
-          <h1 className="mt-7 font-display font-extrabold tracking-tight leading-[0.98] text-3xl sm:text-5xl lg:text-[3.75rem] xl:text-[4.25rem] text-[#F4F5F8]" data-testid="hero-title">
+          <h1 className="mt-7 font-display font-extrabold tracking-tight leading-[0.98] text-[2.5rem] sm:text-[3.5rem] lg:text-[4.15rem] xl:text-[4.65rem] text-[#F4F5F8]" data-testid="hero-title">
             <MaskedLine delay={0.25}>AASHAY</MaskedLine>
             <MaskedLine delay={0.37} className="text-stroke">SONI</MaskedLine>
             <MaskedLine delay={0.49} className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold leading-[1.15] mt-5 text-[#94A3B8]">
@@ -200,7 +200,7 @@ export const Hero = () => {
         {/* Interactive AI Agent Orchestration Workflow Node Graph (Side-by-side on the right) */}
         <motion.div
           style={{ y: yCard }}
-          className="hidden lg:block w-full max-w-[680px] xl:max-w-[740px] shrink-0"
+          className="hidden lg:block w-full max-w-[540px] xl:max-w-[590px] shrink-0"
         >
           <motion.div
             initial={{ opacity: 0, y: 30 }}
