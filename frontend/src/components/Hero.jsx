@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, ArrowUpRight, FileDown } from "lucide-react";
 import { PROFILE, HERO_STREAM } from "../data/content";
+import { AgentWorkflowGraph } from "./AgentWorkflowGraph";
 
 /* Lightweight agent-signal node mesh */
 const NodeMesh = () => {
@@ -98,10 +99,10 @@ const AgentStream = () => {
   );
 };
 
-const MaskedLine = ({ children, delay, className }) => (
-  <span className="block overflow-hidden pb-1">
+const MaskedLine = ({ children, delay, className = "" }) => (
+  <span className="block overflow-hidden pb-1" style={{ overflowClipMargin: "50px" }}>
     <motion.span
-      className={`block ${className}`}
+      className={`inline-block pr-8 sm:pr-10 lg:pr-12 ${className}`}
       initial={{ y: "110%" }}
       animate={{ y: 0 }}
       transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
@@ -134,19 +135,22 @@ export const Hero = () => {
         <div className="absolute bottom-0 right-0 w-[30rem] h-[30rem] rounded-full bg-[#38BDF8]/[0.07] blur-[140px]" />
       </motion.div>
 
-      <motion.div style={{ opacity }} className="relative w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 grid lg:grid-cols-12 gap-12 items-center">
-        <div className="lg:col-span-7 xl:col-span-8">
+      <motion.div
+        style={{ opacity }}
+        className="relative w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 flex flex-col lg:flex-row items-center justify-between gap-8 xl:gap-12"
+      >
+        <div className="w-full lg:max-w-[560px] xl:max-w-[620px] shrink-0">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15, duration: 0.6 }}>
             <AgentStream />
           </motion.div>
 
-          <h1 className="mt-8 font-display font-extrabold tracking-tight leading-[0.98] text-5xl sm:text-7xl lg:text-[6.5rem] text-[#F4F5F8]" data-testid="hero-title">
+          <h1 className="mt-7 font-display font-extrabold tracking-tight leading-[0.98] text-3xl sm:text-5xl lg:text-[3.75rem] xl:text-[4.25rem] text-[#F4F5F8]" data-testid="hero-title">
             <MaskedLine delay={0.25}>AASHAY</MaskedLine>
             <MaskedLine delay={0.37} className="text-stroke">SONI</MaskedLine>
-            <MaskedLine delay={0.49} className="text-2xl sm:text-4xl lg:text-5xl font-bold leading-[1.15] mt-6 text-[#94A3B8]">
+            <MaskedLine delay={0.49} className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold leading-[1.15] mt-5 text-[#94A3B8]">
               builds <span className="text-[#E06D3B]">agentic systems</span>
             </MaskedLine>
-            <MaskedLine delay={0.58} className="text-2xl sm:text-4xl lg:text-5xl font-bold leading-[1.15] text-[#94A3B8]">
+            <MaskedLine delay={0.58} className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold leading-[1.15] text-[#94A3B8]">
               that ship to production.
             </MaskedLine>
           </h1>
@@ -155,7 +159,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.85, duration: 0.7 }}
-            className="mt-8 max-w-xl text-base sm:text-lg text-[#94A3B8] leading-relaxed"
+            className="mt-6 max-w-lg text-base sm:text-lg text-[#94A3B8] leading-relaxed"
             data-testid="hero-tagline"
           >
             {PROFILE.tagline}
@@ -165,7 +169,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.7 }}
-            className="mt-10 flex flex-wrap items-center gap-4"
+            className="mt-8 flex flex-wrap items-center gap-4"
           >
             <button
               data-testid="hero-cta-explore"
@@ -193,39 +197,17 @@ export const Hero = () => {
           </motion.div>
         </div>
 
-        {/* 3D tilt identity badge */}
-        <motion.div style={{ y: yCard }} className="hidden lg:block lg:col-span-5 xl:col-span-4 justify-self-end w-full max-w-[440px] [perspective:1000px]">
+        {/* Interactive AI Agent Orchestration Workflow Node Graph (Side-by-side on the right) */}
+        <motion.div
+          style={{ y: yCard }}
+          className="hidden lg:block w-full max-w-[680px] xl:max-w-[740px] shrink-0"
+        >
           <motion.div
-            initial={{ opacity: 0, rotateY: -18, y: 30 }}
-            animate={{ opacity: 1, rotateY: 0, y: 0 }}
-            transition={{ delay: 0.7, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            onMouseMove={(e) => {
-              const r = e.currentTarget.getBoundingClientRect();
-              setTilt({
-                x: ((e.clientY - r.top) / r.height - 0.5) * -14,
-                y: ((e.clientX - r.left) / r.width - 0.5) * 14,
-              });
-            }}
-            onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-            style={{ transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`, transformStyle: "preserve-3d" }}
-            className="relative rounded-2xl border border-white/10 bg-[#12141D]/80 backdrop-blur p-9 xl:p-10 shadow-[0_0_60px_rgba(224,109,59,0.12)] transition-transform duration-200 will-change-transform w-full"
-            data-testid="hero-identity-card"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div style={{ transform: "translateZ(40px)" }}>
-              <p className="font-mono2 text-[11px] tracking-[0.3em] uppercase text-[#64748B]">identity.py</p>
-              <p className="mt-4 font-display text-2xl xl:text-3xl font-bold text-[#F4F5F8]">{PROFILE.name}</p>
-              <p className="mt-1 text-sm xl:text-[15px] text-[#94A3B8]">{PROFILE.role}</p>
-              <div className="mt-6 space-y-2.5 font-mono2 text-xs xl:text-[13px] text-[#64748B]">
-                <p><span className="text-[#38BDF8]">class</span> <span className="text-[#FBBF24]">Agent</span>:</p>
-                <p className="pl-4"><span className="text-[#38BDF8]">focus</span> = [<span className="text-[#E06D3B]">"GenAI"</span>, <span className="text-[#E06D3B]">"Agents"</span>, <span className="text-[#E06D3B]">"Automation"</span>]</p>
-                <p className="pl-4"><span className="text-[#38BDF8]">status</span> = <span className="text-emerald-400">"available"</span></p>
-                <p className="pl-4"><span className="text-[#38BDF8]">location</span> = <span className="text-[#E06D3B]">"{PROFILE.location}"</span></p>
-              </div>
-              <div className="mt-7 pt-5 border-t border-white/10 flex items-center justify-between">
-                <span className="font-mono2 text-[11px] tracking-widest text-[#64748B]">EST. 2020</span>
-                <span className="h-2 w-2 rounded-full bg-[#E06D3B]" />
-              </div>
-            </div>
+            <AgentWorkflowGraph />
           </motion.div>
         </motion.div>
       </motion.div>

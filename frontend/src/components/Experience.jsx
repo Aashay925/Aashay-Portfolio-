@@ -15,7 +15,7 @@ export const Experience = () => {
       <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20">
         <SectionHeading
           id="experience"
-          eyebrow="02 — Work Experience"
+          eyebrow="04 — Work Experience"
           title="Featured deployments & roles."
         />
 

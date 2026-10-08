@@ -45,7 +45,7 @@ export const Contact = () => {
         <div className="lg:col-span-5">
           <SectionHeading
             id="contact"
-            eyebrow="04 — Contact"
+            eyebrow="06 — Contact"
             title="Have a system worth building?"
           />
           <Reveal delay={0.15}>

@@ -5,6 +5,8 @@ import { PROFILE } from "../data/content";
 
 const LINKS = [
   { label: "Work", href: "#work" },
+  { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Vibe", href: "#vibe" },
   { label: "Contact", href: "#contact" },

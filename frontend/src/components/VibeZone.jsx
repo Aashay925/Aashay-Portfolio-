@@ -32,7 +32,7 @@ export const VibeZone = () => {
       <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 mb-16">
         <Reveal>
           <p className="font-mono2 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#E06D3B] mb-4" data-testid="vibe-eyebrow">
-            03 — The Vibe Zone
+            05 — The Vibe Zone
           </p>
         </Reveal>
         <Reveal delay={0.08}>

@@ -198,3 +198,158 @@ export const PROJECT_SCOPES = [
   "Fine-tuning & Evals",
   "AI Advisory",
 ];
+
+export const PROJECTS = [
+  {
+    id: "agentmesh",
+    index: "01",
+    title: "AgentMesh Consensus Runtime",
+    subtitle: "Distributed multi-agent coordination engine with deterministic rollback",
+    description:
+      "Engineered an asynchronous orchestration layer enabling multiple LLM agents to communicate over structured event buses, negotiate sub-tasks via voting consensus, and self-heal failed tool invocations.",
+    metrics: [
+      { label: "Consensus Rate", value: "99.8%" },
+      { label: "Dispatch Latency", value: "<42ms" },
+      { label: "Tasks Routed", value: "4.2M" },
+    ],
+    features: [
+      "Dynamic DAG dependency resolution",
+      "Strict schema-enforced tool contracts",
+      "Sandboxed Python & shell runtime execution",
+      "Replayable state logs with time-travel debugging",
+    ],
+    stack: ["LangGraph", "Python", "Redis", "FastAPI", "OpenTelemetry"],
+    githubUrl: "https://github.com",
+    demoUrl: "https://demo.example.com",
+    badge: "Open Source Core",
+  },
+  {
+    id: "cognitiverag",
+    index: "02",
+    title: "CognitiveRAG Engine",
+    subtitle: "Self-corrective hybrid retrieval with multi-hop query decomposition",
+    description:
+      "Enterprise knowledge retrieval engine combining dense vector embeddings with sparse BM25 indexing and cross-encoder reranking. Features self-reflective critique loops that re-write queries when semantic confidence drops.",
+    metrics: [
+      { label: "P95 Latency", value: "88ms" },
+      { label: "NDCG@10 Lift", value: "+38%" },
+      { label: "Zero-Result Fallback", value: "0.2%" },
+    ],
+    features: [
+      "Hybrid dense + BM25 reciprocal rank fusion (RRF)",
+      "Contextual chunking with sliding window compression",
+      "Cross-encoder re-ranking threshold calibration",
+      "Real-time vector index updates with Qdrant",
+    ],
+    stack: ["Qdrant", "vLLM", "Cross-Encoder", "PyTorch", "Docker"],
+    githubUrl: "https://github.com",
+    demoUrl: "https://demo.example.com",
+    badge: "Production Deployed",
+  },
+  {
+    id: "traceguard",
+    index: "03",
+    title: "TraceGuard Eval & Safety Harness",
+    subtitle: "Automated regression testing and token governance platform",
+    description:
+      "Continuous evaluation pipeline that stress-tests LLM agents against synthetic adversarial datasets, prompt injection probes, and cost budgets before pull requests can merge to main branches.",
+    metrics: [
+      { label: "Evals / Run", value: "12.5k" },
+      { label: "Leak Regressions", value: "0" },
+      { label: "Cost Savings", value: "44%" },
+    ],
+    features: [
+      "Adversarial jailbreak and prompt-injection test suite",
+      "Semantic similarity & factual consistency metrics",
+      "Token allocation budgets with hard circuit breakers",
+      "Automated regression reporting to GitHub actions",
+    ],
+    stack: ["ClickHouse", "Next.js", "Python", "DeepEval", "Temporal"],
+    githubUrl: "https://github.com",
+    demoUrl: "https://demo.example.com",
+    badge: "CI/CD Gate",
+  },
+  {
+    id: "autoops",
+    index: "04",
+    title: "AutoOps Kubernetes Sentinel",
+    subtitle: "Autonomous SRE agent for cluster incident diagnosis and recovery",
+    description:
+      "Incident triage agent that ingests Prometheus alerts, inspects pod metrics and cluster logs, generates root-cause hypotheses, and stages verified remedial manifest patches with human approval checkpoints.",
+    metrics: [
+      { label: "MTTR Reduction", value: "−54%" },
+      { label: "Diagnostic Accuracy", value: "98.2%" },
+      { label: "False Positive Cut", value: "71%" },
+    ],
+    features: [
+      "Automated log anomaly detection and trace correlation",
+      "Kubernetes ephemeral container sandbox validation",
+      "Deterministic rollbacks via ArgoCD integration",
+      "Interactive Slack bot with human-in-the-loop approval",
+    ],
+    stack: ["Kubernetes", "Prometheus", "FastAPI", "ArgoCD", "LangChain"],
+    githubUrl: "https://github.com",
+    demoUrl: "https://demo.example.com",
+    badge: "Infrastructure AI",
+  },
+];
+
+export const SKILLS_CATEGORIES = [
+  {
+    id: "agentic",
+    title: "Agentic Systems & Orchestration",
+    tagline: "Deterministic multi-agent execution, planning & tool sandboxing",
+    icon: "Bot",
+    skills: [
+      { name: "LangGraph", level: "Expert", highlight: "State graphs & cycles" },
+      { name: "Multi-Agent Consensus", level: "Expert", highlight: "Voting protocols" },
+      { name: "Tool Calling & Sandboxes", level: "Advanced", highlight: "Strict JSON contracts" },
+      { name: "ReAct & Plan-and-Solve", level: "Expert", highlight: "Task decomposition" },
+      { name: "Agent Memory Systems", level: "Advanced", highlight: "Semantic & episodic" },
+      { name: "Self-Correction Loops", level: "Expert", highlight: "Reflective retry gates" },
+    ],
+  },
+  {
+    id: "rag",
+    title: "Retrieval & Vector Infrastructure",
+    tagline: "Sub-100ms hybrid search engines with zero hallucinated context",
+    icon: "Database",
+    skills: [
+      { name: "Qdrant & Pinecone", level: "Expert", highlight: "HNSW & payload filtering" },
+      { name: "Hybrid Search (BM25 + Dense)", level: "Expert", highlight: "Reciprocal Rank Fusion" },
+      { name: "Cross-Encoder Reranking", level: "Advanced", highlight: "Cohere & BGE models" },
+      { name: "Contextual Chunking", level: "Advanced", highlight: "Semantic boundary splits" },
+      { name: "GraphRAG & Knowledge Graphs", level: "Proficient", highlight: "Entity-relation triples" },
+      { name: "Document Ingestion", level: "Advanced", highlight: "Unstructured & PDF parsing" },
+    ],
+  },
+  {
+    id: "evals",
+    title: "LLM Ops, Evals & Model Serving",
+    tagline: "Production test gates, structured outputs & high-throughput serving",
+    icon: "Cpu",
+    skills: [
+      { name: "vLLM & TensorRT-LLM", level: "Advanced", highlight: "Continuous batching" },
+      { name: "Eval Harnesses (DeepEval)", level: "Expert", highlight: "Automated CI/CD gates" },
+      { name: "Structured Outputs", level: "Expert", highlight: "Pydantic & Instructor" },
+      { name: "Fine-Tuning & LoRA", level: "Advanced", highlight: "Domain adaptation" },
+      { name: "Prompt Governance", level: "Expert", highlight: "Versioned rollout & diffs" },
+      { name: "Cost & Tier Routing", level: "Expert", highlight: "Dynamic model allocation" },
+    ],
+  },
+  {
+    id: "backend",
+    title: "Backend, Cloud & Distributed Systems",
+    tagline: "Resilient asynchronous primitives supporting enterprise model execution",
+    icon: "Layers",
+    skills: [
+      { name: "Python (FastAPI, Asyncio)", level: "Expert", highlight: "High-concurrency services" },
+      { name: "Temporal.io Workflows", level: "Advanced", highlight: "Durable execution & sagas" },
+      { name: "Docker & Kubernetes", level: "Advanced", highlight: "Containerized deployments" },
+      { name: "Kafka & Redis", level: "Advanced", highlight: "Pub/sub & state caching" },
+      { name: "PostgreSQL & pgvector", level: "Expert", highlight: "Relational & vector storage" },
+      { name: "OpenTelemetry & Tracing", level: "Advanced", highlight: "Distributed agent spans" },
+    ],
+  },
+];
+
