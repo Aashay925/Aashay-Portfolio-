@@ -15,12 +15,12 @@ export const Reveal = ({ children, delay = 0, y = 28, className = "" }) => (
 export const SectionHeading = ({ eyebrow, title, id }) => (
   <div className="mb-12 sm:mb-16">
     <Reveal>
-      <p className="font-mono2 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#E06D3B] mb-4" data-testid={`${id}-eyebrow`}>
+      <p className="font-mono2 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#7C8CFF] mb-4" data-testid={`${id}-eyebrow`}>
         {eyebrow}
       </p>
     </Reveal>
     <Reveal delay={0.08}>
-      <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#F4F5F8] max-w-3xl leading-[1.1]" data-testid={`${id}-heading`}>
+      <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-[#F2F4F7] max-w-3xl leading-[1.1]" data-testid={`${id}-heading`}>
         {title}
       </h2>
     </Reveal>

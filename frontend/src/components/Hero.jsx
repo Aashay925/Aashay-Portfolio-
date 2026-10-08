@@ -43,7 +43,7 @@ const NodeMesh = () => {
           const dx = (a.x - b.x) * w, dy = (a.y - b.y) * h;
           const d = Math.hypot(dx, dy);
           if (d < w * 0.09) {
-            ctx.strokeStyle = `rgba(148,163,184,${0.10 * (1 - d / (w * 0.09))})`;
+            ctx.strokeStyle = `rgba(161,167,179,${0.08 * (1 - d / (w * 0.09))})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x * w, a.y * h);
@@ -53,7 +53,7 @@ const NodeMesh = () => {
         }
       }
       for (const n of nodes) {
-        ctx.fillStyle = n.ember ? "rgba(224,109,59,0.85)" : "rgba(148,163,184,0.5)";
+        ctx.fillStyle = n.ember ? "rgba(124,140,255,0.75)" : "rgba(161,167,179,0.35)";
         ctx.beginPath();
         ctx.arc(n.x * w, n.y * h, n.r * devicePixelRatio, 0, Math.PI * 2);
         ctx.fill();
@@ -85,15 +85,15 @@ const AgentStream = () => {
   return (
     <div
       data-testid="agent-stream-badge"
-      className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-[#12141D]/80 backdrop-blur px-4 py-2"
+      className="inline-flex items-center gap-3 rounded-full border border-[#262B33] bg-[#14171C]/80 backdrop-blur px-4 py-2"
     >
       <span className="relative flex h-2 w-2">
-        <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-[#38BDF8]" />
-        <span className="relative inline-flex h-2 w-2 rounded-full bg-[#38BDF8]" />
+        <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-[#7C8CFF]" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-[#7C8CFF]" />
       </span>
-      <span className="font-mono2 text-xs sm:text-sm text-[#94A3B8]">
+      <span className="font-mono2 text-xs sm:text-sm text-[#A1A7B3]">
         {HERO_STREAM[line].slice(0, chars)}
-        <span className="caret-blink text-[#E06D3B]">▍</span>
+        <span className="caret-blink text-[#7C8CFF]">▍</span>
       </span>
     </div>
   );
@@ -131,8 +131,8 @@ export const Hero = () => {
       {/* atmosphere */}
       <motion.div style={{ y: yBg }} className="absolute inset-0">
         <NodeMesh />
-        <div className="absolute -top-40 -left-40 w-[34rem] h-[34rem] rounded-full bg-[#E06D3B]/10 blur-[140px]" />
-        <div className="absolute bottom-0 right-0 w-[30rem] h-[30rem] rounded-full bg-[#38BDF8]/[0.07] blur-[140px]" />
+        <div className="absolute -top-40 -left-40 w-[34rem] h-[34rem] rounded-full bg-[#7C8CFF]/[0.05] blur-[140px]" />
+        <div className="absolute bottom-0 right-0 w-[30rem] h-[30rem] rounded-full bg-[#7C8CFF]/[0.03] blur-[140px]" />
       </motion.div>
 
       <motion.div
@@ -144,13 +144,13 @@ export const Hero = () => {
             <AgentStream />
           </motion.div>
 
-          <h1 className="mt-7 font-display font-extrabold tracking-tight leading-[0.98] text-[2.5rem] sm:text-[3.5rem] lg:text-[4.15rem] xl:text-[4.65rem] text-[#F4F5F8]" data-testid="hero-title">
+          <h1 className="mt-7 font-display font-semibold tracking-tight leading-[0.98] text-[2.5rem] sm:text-[3.5rem] lg:text-[4.15rem] xl:text-[4.65rem] text-[#F2F4F7]" data-testid="hero-title">
             <MaskedLine delay={0.25}>AASHAY</MaskedLine>
-            <MaskedLine delay={0.37} className="text-stroke">SONI</MaskedLine>
-            <MaskedLine delay={0.49} className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold leading-[1.15] mt-5 text-[#94A3B8]">
-              builds <span className="text-[#E06D3B]">agentic systems</span>
+            <MaskedLine delay={0.37} className="text-[#A1A7B3]">SONI</MaskedLine>
+            <MaskedLine delay={0.49} className="text-2xl sm:text-3xl lg:text-[2.25rem] font-semibold leading-[1.15] mt-5 text-[#A1A7B3]">
+              builds <span className="text-[#7C8CFF]">agentic systems</span>
             </MaskedLine>
-            <MaskedLine delay={0.58} className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold leading-[1.15] text-[#94A3B8]">
+            <MaskedLine delay={0.58} className="text-2xl sm:text-3xl lg:text-[2.25rem] font-semibold leading-[1.15] text-[#A1A7B3]">
               that ship to production.
             </MaskedLine>
           </h1>
@@ -159,7 +159,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.85, duration: 0.7 }}
-            className="mt-6 max-w-lg text-base sm:text-lg text-[#94A3B8] leading-relaxed"
+            className="mt-6 max-w-lg text-base sm:text-lg text-[#A1A7B3] leading-relaxed font-normal"
             data-testid="hero-tagline"
           >
             {PROFILE.tagline}
@@ -174,7 +174,7 @@ export const Hero = () => {
             <button
               data-testid="hero-cta-explore"
               onClick={() => scrollTo("#work")}
-              className="group inline-flex items-center gap-2 rounded-full bg-[#E06D3B] px-7 py-3.5 text-sm font-semibold text-[#0A0B10] hover:bg-[#F4F5F8] hover:text-[#0A0B10] transition-colors"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#7C8CFF] px-7 py-3.5 text-sm font-semibold text-[#0D0F12] hover:bg-[#A5AEFF] hover:text-[#0D0F12] transition-colors"
             >
               Explore Architecture
               <ArrowDown size={16} className="transition-transform group-hover:translate-y-0.5" />
@@ -182,7 +182,7 @@ export const Hero = () => {
             <button
               data-testid="hero-cta-contact"
               onClick={() => scrollTo("#contact")}
-              className="group inline-flex items-center gap-2 rounded-full border border-white/15 px-7 py-3.5 text-sm font-semibold text-[#F4F5F8] hover:border-[#E06D3B] hover:text-[#E06D3B] transition-colors"
+              className="group inline-flex items-center gap-2 rounded-full border border-[#303640] px-7 py-3.5 text-sm font-semibold text-[#F2F4F7] hover:border-[#7C8CFF] hover:text-[#7C8CFF] transition-colors"
             >
               Initiate Contact
               <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -190,7 +190,7 @@ export const Hero = () => {
             <a
               data-testid="hero-cta-resume"
               href={PROFILE.resumeUrl}
-              className="group inline-flex items-center gap-2 font-mono2 text-xs tracking-[0.15em] uppercase text-[#64748B] hover:text-[#38BDF8] transition-colors"
+              className="group inline-flex items-center gap-2 font-mono2 text-xs tracking-[0.15em] uppercase text-[#6B7280] hover:text-[#A5AEFF] transition-colors"
             >
               <FileDown size={15} /> Resume.pdf
             </a>
@@ -216,7 +216,7 @@ export const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono2 text-[10px] tracking-[0.35em] uppercase text-[#64748B]"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono2 text-[10px] tracking-[0.35em] uppercase text-[#6B7280]"
       >
         scroll to descend
       </motion.div>

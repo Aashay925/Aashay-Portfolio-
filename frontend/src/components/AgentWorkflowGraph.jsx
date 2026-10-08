@@ -271,28 +271,28 @@ export const AgentWorkflowGraph = () => {
 
   return (
     <div
-      className="relative rounded-2xl border border-white/10 bg-[#12141D]/90 backdrop-blur p-4.5 sm:p-5 shadow-[0_0_60px_rgba(224,109,59,0.14)] w-full overflow-hidden transition-all duration-300"
+      className="relative rounded-2xl border border-[#262B33] bg-[#14171C]/90 backdrop-blur p-4.5 sm:p-5 shadow-[0_0_50px_rgba(124,140,255,0.06)] w-full overflow-hidden transition-all duration-300"
       data-testid="hero-agent-workflow-graph"
     >
       {/* Top Titlebar */}
-      <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-3.5">
+      <div className="flex items-center justify-between pb-3 border-b border-[#262B33] mb-3.5">
         <div className="flex items-center gap-2.5">
           <div className="flex gap-1.5">
-            <span className="h-2 w-2 rounded-full bg-[#E06D3B]/80" />
-            <span className="h-2 w-2 rounded-full bg-[#FBBF24]/80" />
-            <span className="h-2 w-2 rounded-full bg-emerald-400/80" />
+            <span className="h-2 w-2 rounded-full bg-[#7C8CFF]/80" />
+            <span className="h-2 w-2 rounded-full bg-[#FBBF24]/70" />
+            <span className="h-2 w-2 rounded-full bg-[#65C18C]/80" />
           </div>
-          <span className="font-mono2 text-[10px] tracking-[0.2em] uppercase text-[#94A3B8]">
+          <span className="font-mono2 text-[10px] tracking-[0.2em] uppercase text-[#A1A7B3]">
             {workflow.badge}
           </span>
         </div>
 
         <div className="flex items-center gap-2">
           <span className="relative flex h-2 w-2">
-            <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-[#38BDF8]" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#38BDF8]" />
+            <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-[#7C8CFF]" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#7C8CFF]" />
           </span>
-          <span className="font-mono2 text-[9.5px] tracking-wider text-[#38BDF8] uppercase font-semibold">
+          <span className="font-mono2 text-[9.5px] tracking-wider text-[#7C8CFF] uppercase font-semibold">
             Live Execution Mesh
           </span>
         </div>
@@ -300,7 +300,7 @@ export const AgentWorkflowGraph = () => {
 
       {/* Switcher Buttons: Real-world Workflows */}
       <div className="mb-3.5">
-        <p className="font-mono2 text-[9.5px] tracking-widest uppercase text-[#64748B] mb-2">
+        <p className="font-mono2 text-[9.5px] tracking-widest uppercase text-[#6B7280] mb-2">
           Switch Production Agent Pipeline:
         </p>
         <div className="grid grid-cols-3 gap-2">
@@ -312,8 +312,8 @@ export const AgentWorkflowGraph = () => {
                 onClick={() => setActiveWorkflowKey(wf.id)}
                 className={`group relative rounded-lg px-2.5 py-1.5 font-mono2 text-[11px] tracking-wide transition-all text-center flex flex-col items-center justify-center gap-0.5 ${
                   isActive
-                    ? "bg-[#E06D3B] text-[#0A0B10] font-bold shadow-[0_0_20px_rgba(224,109,59,0.35)] scale-[1.02]"
-                    : "border border-white/10 bg-white/[0.02] text-[#94A3B8] hover:border-[#E06D3B]/50 hover:text-[#F4F5F8]"
+                    ? "bg-[#7C8CFF] text-[#0D0F12] font-semibold shadow-[0_0_20px_rgba(124,140,255,0.25)] scale-[1.02]"
+                    : "border border-[#262B33] bg-[#191D23] text-[#A1A7B3] hover:border-[#7C8CFF]/50 hover:text-[#F2F4F7]"
                 }`}
                 data-testid={`workflow-switch-${wf.id}`}
               >
@@ -325,10 +325,10 @@ export const AgentWorkflowGraph = () => {
       </div>
 
       {/* Node Graph Canvas (Wide 4-Column Layout with Bezier Cables) */}
-      <div className="relative rounded-xl border border-white/10 bg-[#090A0F] p-3 sm:p-3.5 overflow-hidden min-h-[185px]">
+      <div className="relative rounded-xl border border-[#262B33] bg-[#0D0F12] p-3 sm:p-3.5 overflow-hidden min-h-[185px]">
         {/* Dot grid canvas background */}
         <div
-          className="absolute inset-0 opacity-20 pointer-events-none"
+          className="absolute inset-0 opacity-15 pointer-events-none"
           style={{
             backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.25) 1px, transparent 1px)",
             backgroundSize: "16px 16px"
@@ -346,13 +346,13 @@ export const AgentWorkflowGraph = () => {
           <path
             d="M 130 110 C 145 110, 150 55, 175 55"
             fill="none"
-            stroke="rgba(255,255,255,0.12)"
+            stroke="#262B33"
             strokeWidth="2"
           />
           <motion.path
             d="M 130 110 C 145 110, 150 55, 175 55"
             fill="none"
-            stroke="#E06D3B"
+            stroke="#7C8CFF"
             strokeWidth="2"
             strokeDasharray="6 8"
             animate={{ strokeDashoffset: [28, 0] }}
@@ -363,13 +363,13 @@ export const AgentWorkflowGraph = () => {
           <path
             d="M 130 110 C 145 110, 150 165, 175 165"
             fill="none"
-            stroke="rgba(255,255,255,0.12)"
+            stroke="#262B33"
             strokeWidth="2"
           />
           <motion.path
             d="M 130 110 C 145 110, 150 165, 175 165"
             fill="none"
-            stroke="#38BDF8"
+            stroke="#A1A7B3"
             strokeWidth="2"
             strokeDasharray="6 8"
             animate={{ strokeDashoffset: [28, 0] }}
@@ -380,13 +380,13 @@ export const AgentWorkflowGraph = () => {
           <path
             d="M 330 55 C 345 55, 350 110, 365 110"
             fill="none"
-            stroke="rgba(255,255,255,0.12)"
+            stroke="#262B33"
             strokeWidth="2"
           />
           <motion.path
             d="M 330 55 C 345 55, 350 110, 365 110"
             fill="none"
-            stroke="#38BDF8"
+            stroke="#7C8CFF"
             strokeWidth="2"
             strokeDasharray="6 8"
             animate={{ strokeDashoffset: [28, 0] }}
@@ -397,13 +397,13 @@ export const AgentWorkflowGraph = () => {
           <path
             d="M 330 165 C 345 165, 350 110, 365 110"
             fill="none"
-            stroke="rgba(255,255,255,0.12)"
+            stroke="#262B33"
             strokeWidth="2"
           />
           <motion.path
             d="M 330 165 C 345 165, 350 110, 365 110"
             fill="none"
-            stroke="#F59E0B"
+            stroke="#A1A7B3"
             strokeWidth="2"
             strokeDasharray="6 8"
             animate={{ strokeDashoffset: [28, 0] }}
@@ -414,13 +414,13 @@ export const AgentWorkflowGraph = () => {
           <path
             d="M 505 110 C 515 110, 520 110, 530 110"
             fill="none"
-            stroke="rgba(255,255,255,0.12)"
+            stroke="#262B33"
             strokeWidth="2"
           />
           <motion.path
             d="M 505 110 C 515 110, 520 110, 530 110"
             fill="none"
-            stroke="#34D399"
+            stroke="#65C18C"
             strokeWidth="2"
             strokeDasharray="6 8"
             animate={{ strokeDashoffset: [28, 0] }}
@@ -432,7 +432,7 @@ export const AgentWorkflowGraph = () => {
             <motion.path
               d="M 460 85 C 470 15, 230 15, 220 30"
               fill="none"
-              stroke="#F59E0B"
+              stroke="#7C8CFF"
               strokeWidth="1.5"
               strokeDasharray="4 6"
               animate={{ strokeDashoffset: [20, 0] }}
@@ -499,33 +499,33 @@ export const AgentWorkflowGraph = () => {
       </div>
 
       {/* State Inspector & Live Agent Thought */}
-      <div className="mt-3 rounded-xl border border-white/10 bg-[#090A0F]/90 p-3">
+      <div className="mt-3 rounded-xl border border-[#262B33] bg-[#0D0F12]/90 p-3">
         <div className="flex items-center justify-between mb-1.5">
           <div className="flex items-center gap-2">
-            <Sparkles size={13} className="text-[#E06D3B]" />
-            <span className="font-mono2 text-[11px] tracking-wider uppercase text-[#E06D3B] font-bold">
+            <Sparkles size={13} className="text-[#7C8CFF]" />
+            <span className="font-mono2 text-[11px] tracking-wider uppercase text-[#7C8CFF] font-semibold">
               Inspecting: {selectedNode.label}
             </span>
-            <span className="font-mono2 text-[9.5px] text-[#64748B]">
+            <span className="font-mono2 text-[9.5px] text-[#6B7280]">
               ({selectedNode.latency})
             </span>
           </div>
-          <span className="font-mono2 text-[9.5px] tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full uppercase font-medium">
+          <span className="font-mono2 text-[9.5px] tracking-wider text-[#65C18C] bg-[#65C18C]/10 border border-[#65C18C]/20 px-2 py-0.5 rounded-full uppercase font-medium">
             {selectedNode.tag}
           </span>
         </div>
 
         {/* Selected Node's live thought */}
-        <p className="font-mono2 text-[11px] text-[#F4F5F8] leading-relaxed">
-          <span className="text-[#38BDF8]">state.thought:</span> "{selectedNode.thought}"
+        <p className="font-mono2 text-[11px] text-[#F2F4F7] leading-relaxed">
+          <span className="text-[#7C8CFF]">state.thought:</span> "{selectedNode.thought}"
         </p>
 
         {/* Real-time streaming log */}
-        <div className="mt-2.5 pt-2 border-t border-white/5 flex items-center justify-between text-[11px] font-mono2 text-[#64748B]">
+        <div className="mt-2.5 pt-2 border-t border-[#262B33] flex items-center justify-between text-[11px] font-mono2 text-[#6B7280]">
           <span className="truncate max-w-[440px]">
-            <span className="text-[#E06D3B]">▸</span> {workflow.thoughtStream[streamIndex]}
+            <span className="text-[#7C8CFF]">▸</span> {workflow.thoughtStream[streamIndex]}
           </span>
-          <span className="caret-blink text-[#E06D3B]">▍</span>
+          <span className="caret-blink text-[#7C8CFF]">▍</span>
         </div>
       </div>
     </div>
@@ -544,35 +544,35 @@ const WideNodeCard = ({ node, isSelected, onSelect, isSpecial = false, isOutput 
       whileTap={{ scale: 0.98 }}
       className={`group relative cursor-pointer rounded-xl border p-2 transition-all select-none ${
         isSelected
-          ? "border-[#E06D3B] bg-[#181B26] shadow-[0_0_20px_rgba(224,109,59,0.3)] ring-1 ring-[#E06D3B]"
+          ? "border-[#7C8CFF] bg-[#191D23] shadow-[0_0_20px_rgba(124,140,255,0.25)] ring-1 ring-[#7C8CFF]"
           : isOutput
-          ? "border-emerald-500/40 bg-[#12141D] hover:border-emerald-500/70"
+          ? "border-[#65C18C]/40 bg-[#14171C] hover:border-[#65C18C]/70"
           : isSpecial
-          ? "border-[#38BDF8]/50 bg-[#12141D] hover:border-[#38BDF8]/80"
-          : "border-white/10 bg-[#12141D]/90 hover:border-white/30"
+          ? "border-[#7C8CFF]/40 bg-[#14171C] hover:border-[#7C8CFF]/70"
+          : "border-[#262B33] bg-[#14171C] hover:border-[#303640]"
       }`}
     >
       {/* Port connection dots */}
-      <span className="absolute -left-1.5 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full border border-black bg-[#E06D3B]" />
-      <span className="absolute -right-1.5 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full border border-black bg-[#38BDF8]" />
+      <span className="absolute -left-1.5 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full border border-black bg-[#7C8CFF]" />
+      <span className="absolute -right-1.5 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full border border-black bg-[#A1A7B3]" />
 
       <div className="flex items-start gap-1.5">
         <div
           className={`h-6 w-6 rounded-md flex items-center justify-center shrink-0 mt-0.5 ${
             isOutput
-              ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
+              ? "bg-[#65C18C]/15 text-[#65C18C] border border-[#65C18C]/30"
               : isSpecial
-              ? "bg-[#E06D3B]/20 text-[#E06D3B] border border-[#E06D3B]/30"
-              : "bg-white/5 text-[#38BDF8] border border-white/10"
+              ? "bg-[#7C8CFF]/15 text-[#7C8CFF] border border-[#7C8CFF]/30"
+              : "bg-white/[0.03] text-[#A1A7B3] border border-[#262B33]"
           }`}
         >
           <Icon size={12} className={isActive ? "animate-pulse" : ""} />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="font-display font-bold text-[11px] text-[#F4F5F8] group-hover:text-[#E06D3B] transition-colors leading-tight truncate">
+          <p className="font-display font-semibold text-[11px] text-[#F2F4F7] group-hover:text-[#7C8CFF] transition-colors leading-tight truncate">
             {node.label}
           </p>
-          <p className="font-mono2 text-[8.5px] text-[#64748B] leading-tight mt-0.5 truncate">
+          <p className="font-mono2 text-[8.5px] text-[#6B7280] leading-tight mt-0.5 truncate">
             {node.role}
           </p>
         </div>
