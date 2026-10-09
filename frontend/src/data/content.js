@@ -123,7 +123,7 @@ export const EXPERIENCE = [
       "Designed a conversion-focused business website and architecting an end-to-end wedding management software platform.",
     details:
       "Architecting a comprehensive enterprise platform handling logistics, guest management, vehicle coordination, vendor contracts, and procurement workflows. Completed Phase 1 with a solid functional core, with Phase 2 underway for advanced automation and reporting. The platform is projected to reduce manual event coordination effort by 60% and eliminate spreadsheet tracking across events.",
-    stack: ["React", "Python", "FastAPI", "PostgreSQL", "Workflow Automation"],
+    stack: ["Next.js", "TypeScript", "Python", "FastAPI", "PostgreSQL", "Workflow Automation"],
     impact: "60% projected reduction in manual event coordination",
   },
   {

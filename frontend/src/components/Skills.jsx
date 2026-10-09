@@ -100,7 +100,7 @@ export const Skills = () => {
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-12 sm:mb-14">
           <AnimatePresence mode="popLayout">
             {filteredCategories.map((cat, idx) => {
               const Icon = DOMAIN_ICONS[cat.icon] || Bot;
@@ -112,21 +112,21 @@ export const Skills = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  className="rounded-2xl border border-[#262B33] bg-[#14171C]/90 backdrop-blur p-8 sm:p-9 flex flex-col justify-between hover:border-[#7C8CFF]/40 transition-all duration-300 hover:shadow-[0_0_40px_rgba(124,140,255,0.06)]"
+                  className="rounded-xl sm:rounded-2xl border border-[#262B33] bg-[#14171C]/90 backdrop-blur p-5 sm:p-6 lg:p-6.5 flex flex-col justify-between hover:border-[#7C8CFF]/40 transition-all duration-300 hover:shadow-[0_0_35px_rgba(124,140,255,0.06)]"
                   data-testid={`skill-domain-${cat.id}`}
                 >
                   <div>
                     {/* Domain Header */}
-                    <div className="flex items-center justify-between pb-6 border-b border-[#262B33] mb-6">
-                      <div className="flex items-center gap-3.5">
-                        <div className="h-10 w-10 rounded-xl bg-[#7C8CFF]/10 border border-[#7C8CFF]/20 flex items-center justify-center text-[#7C8CFF]">
-                          <Icon size={20} />
+                    <div className="flex items-center justify-between pb-4 border-b border-[#262B33] mb-4.5">
+                      <div className="flex items-center gap-3">
+                        <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-[#7C8CFF]/10 border border-[#7C8CFF]/20 flex items-center justify-center text-[#7C8CFF] shrink-0">
+                          <Icon size={18} />
                         </div>
                         <div>
-                          <h3 className="font-display text-xl sm:text-2xl font-semibold text-[#F2F4F7]">
+                          <h3 className="font-display text-lg sm:text-xl font-semibold text-[#F2F4F7]">
                             {cat.title}
                           </h3>
-                          <p className="font-mono2 text-xs text-[#6B7280] mt-0.5">
+                          <p className="font-mono2 text-[11px] sm:text-xs text-[#6B7280] mt-0.5">
                             {cat.tagline}
                           </p>
                         </div>
@@ -134,18 +134,18 @@ export const Skills = () => {
                     </div>
 
                     {/* Skill List with Level Badges & Real-World Highlights */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       {cat.skills.map((s) => (
                         <div
                           key={s.name}
-                          className="group relative rounded-xl border border-[#262B33] bg-[#0D0F12] p-3.5 hover:border-[#7C8CFF]/30 hover:bg-[#191D23] transition-all"
+                          className="group relative rounded-lg border border-[#262B33] bg-[#0D0F12] p-2.5 sm:p-3 hover:border-[#7C8CFF]/30 hover:bg-[#191D23] transition-all"
                         >
-                          <div className="flex items-center justify-between gap-2 mb-1.5">
-                            <span className="font-display font-medium text-sm text-[#F2F4F7] group-hover:text-[#7C8CFF] transition-colors">
+                          <div className="flex items-center justify-between gap-1.5 mb-1">
+                            <span className="font-display font-medium text-xs sm:text-[13px] text-[#F2F4F7] group-hover:text-[#7C8CFF] transition-colors">
                               {s.name}
                             </span>
                             <span
-                              className={`font-mono2 text-[10px] tracking-wider px-2 py-0.5 rounded-full uppercase ${
+                              className={`font-mono2 text-[9px] tracking-wider px-1.5 py-0.5 rounded-full uppercase shrink-0 ${
                                 s.level === "Expert"
                                   ? "bg-[#7C8CFF]/15 text-[#7C8CFF] border border-[#7C8CFF]/30"
                                   : "bg-white/[0.04] text-[#A1A7B3] border border-[#262B33]"
@@ -154,7 +154,7 @@ export const Skills = () => {
                               {s.level}
                             </span>
                           </div>
-                          <p className="font-mono2 text-[11px] text-[#6B7280] leading-tight">
+                          <p className="font-mono2 text-[10px] sm:text-[10.5px] text-[#6B7280] leading-snug">
                             {s.highlight}
                           </p>
                         </div>
