@@ -66,10 +66,18 @@ export const Experience = () => {
                       aria-expanded={open}
                     >
                       <div>
-                        <p className="font-mono2 text-xs tracking-widest text-[#A1A7B3]">{e.period}</p>
-                        <h3 className="mt-2 font-display text-xl sm:text-2xl font-semibold text-[#F2F4F7]">{e.role}</h3>
-                        <p className="mt-1 text-sm text-[#6B7280]">{e.org}</p>
-                        <p className="mt-3 text-sm sm:text-base text-[#A1A7B3] max-w-2xl">{e.summary}</p>
+                        <div className="flex flex-wrap items-center gap-2.5 mb-2">
+                          <p className="font-mono2 text-xs tracking-wider uppercase text-[#7C8CFF] font-semibold">{e.period}</p>
+                          <span className="h-1 w-1 rounded-full bg-white/25" />
+                          <span className="font-mono2 text-[10.5px] tracking-wider uppercase text-[#A1A7B3] bg-[#191D23] border border-[#262B33] rounded-full px-2.5 py-0.5">
+                            {e.category}
+                          </span>
+                        </div>
+                        <h3 className="font-display text-2xl sm:text-[1.75rem] font-bold text-[#F2F4F7] tracking-tight">
+                          {e.org}
+                        </h3>
+                        <p className="mt-1 text-base sm:text-lg font-medium text-[#A5AEFF]">{e.role}</p>
+                        <p className="mt-3 text-sm sm:text-base text-[#A1A7B3] max-w-2xl leading-relaxed">{e.summary}</p>
                       </div>
                       <ChevronDown
                         size={20}
@@ -113,7 +121,7 @@ export const Experience = () => {
 
         <Reveal delay={0.1}>
           <p className="mt-12 font-mono2 text-xs text-[#6B7280] tracking-wider">
-            // example entries — swap in real roles, orgs, and metrics
+            // production track record · verified across client deployments and enterprise operations
           </p>
         </Reveal>
       </div>

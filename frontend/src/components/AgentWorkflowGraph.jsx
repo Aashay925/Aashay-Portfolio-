@@ -20,227 +20,227 @@ import {
 export const WORKFLOWS = {
   rag: {
     id: "rag",
-    name: "Enterprise Hybrid RAG",
-    badge: "LANGGRAPH RETRIEVAL ENGINE",
-    description: "Hybrid search combining dense vectors & sparse BM25 with reciprocal rank fusion",
+    name: "KABPL RAG Assistant",
+    badge: "GEMINI & MONGODB RAG PIPELINE",
+    description: "Conversational product catalog assistant with Gemini embeddings, MongoDB Vector Search, and LangChain",
     nodes: [
       {
         id: "n1",
         label: "Query Ingest",
-        role: "Intent Parsing & Embedding",
+        role: "Gemini Embedding & Intent",
         icon: Search,
         status: "done",
-        latency: "12ms",
+        latency: "14ms",
         col: 1,
         row: "center",
-        thought: "Normalized user query. Generated text-embedding-3-large dense vector.",
-        tag: "Input Router"
+        thought: "Normalized agrochemical inquiry. Generated Gemini dense vector representation.",
+        tag: "Input Parser"
       },
       {
         id: "n2a",
-        label: "Dense Vector",
-        role: "Qdrant HNSW Search",
+        label: "MongoDB Vector",
+        role: "Semantic Vector Search",
         icon: Database,
         status: "done",
-        latency: "44ms",
+        latency: "38ms",
         col: 2,
         row: "top",
-        thought: "Retrieved 20 candidate chunks with semantic cosine similarity ≥ 0.87.",
-        tag: "Qdrant Vector"
+        thought: "Queried MongoDB Vector Search: retrieved top 8 matching product catalog chunks.",
+        tag: "Vector Index"
       },
       {
         id: "n2b",
-        label: "Sparse BM25",
-        role: "Exact Lexical Index",
+        label: "Product Catalog",
+        role: "Domain Catalog Filter",
         icon: Layers,
         status: "done",
-        latency: "22ms",
+        latency: "20ms",
         col: 2,
         row: "bottom",
-        thought: "Retrieved 15 chunks matching specific domain keywords and SKU tokens.",
-        tag: "BM25 Lexical"
+        thought: "Filtered by active ingredient, application dosage, and crop protection taxonomy.",
+        tag: "Catalog Match"
       },
       {
         id: "n3",
-        label: "Cohere Rerank",
-        role: "Cross-Encoder Fusion",
+        label: "LangChain Grounding",
+        role: "Context Assembly & Rank",
         icon: ShieldCheck,
         status: "active",
-        latency: "58ms",
+        latency: "52ms",
         col: 3,
         row: "center",
-        thought: "Applied Reciprocal Rank Fusion (RRF) + cross-encoder rerank. Retained top 4 chunks.",
-        tag: "RRF Fusion"
+        thought: "Synthesized grounded context window. Applied relevance re-ranking with zero hallucination.",
+        tag: "Grounded Synthesis"
       },
       {
         id: "n4",
-        label: "Grounded Synthesis",
-        role: "Faithful Response Stream",
+        label: "Verified Output",
+        role: "Client Validated Answer",
         icon: CheckCircle2,
         status: "ready",
-        latency: "96ms",
+        latency: "90% Acc",
         col: 4,
         row: "center",
-        thought: "Generated synthesized response with 3 inline verified citations. 0 hallucination.",
-        tag: "Verified Answer"
+        thought: "Streamed answer with validated technical specs. 60% faster information retrieval.",
+        tag: "90% Accuracy"
       }
     ],
     thoughtStream: [
-      "query_ingest: parsed enterprise question → dense embedding vector generated (12ms)",
-      "retrieval_mesh: parallel dispatch [Qdrant: 20 chunks · BM25: 15 chunks] completed",
-      "rrf_fusion: reciprocal rank fusion reranked 35 items → top 4 selected (score: 0.94)",
-      "faithfulness_gate: hallucination verification pass 100% · citations grounded ✓",
-      "response_stream: streaming production answer with token latency 18ms/tok ✓"
+      "query_ingest: parsed agrochemical inquiry, generated Gemini dense embeddings (14ms)",
+      "vector_search: MongoDB Vector Search returned top 8 contextual catalog chunks",
+      "catalog_filter: filtered by crop taxonomy, dosage, and chemical formulations",
+      "grounded_synthesis: LangChain verified factual consistency against product documentation",
+      "response_stream: streamed context-aware answer with client-validated 90% accuracy ✓"
     ]
   },
-  code: {
-    id: "code",
-    name: "Code Review & Auto-Patch",
-    badge: "CYCLIC CI/CD AGENT",
-    description: "Automated PR scanner running SAST security, sandbox tests & patch generator",
+  campaign: {
+    id: "campaign",
+    name: "WhatsApp AI Agent",
+    badge: "LANGGRAPH AGENTIC WORKFLOW",
+    description: "Agentic campaign orchestration with natural language drafting, audience targeting, and mandatory human signoff",
     nodes: [
       {
         id: "n1",
-        label: "PR Webhook",
-        role: "Diff Parser & AST Tree",
-        icon: GitBranch,
+        label: "Prompt Ingest",
+        role: "Goal & Audience Input",
+        icon: Terminal,
         status: "done",
         latency: "16ms",
         col: 1,
         row: "center",
-        thought: "Ingested PR #142: 3 files changed (+84 / -12). AST symbol graph mapped.",
-        tag: "Git Hook"
+        thought: "Parsed campaign objective in natural language. Formulated execution graph in LangGraph.",
+        tag: "Goal Parser"
       },
       {
         id: "n2a",
-        label: "Security SAST",
-        role: "Injection & Auth Scan",
-        icon: ShieldCheck,
+        label: "Draft Synthesis",
+        role: "LangChain Copy Engine",
+        icon: Sparkles,
         status: "done",
-        latency: "68ms",
+        latency: "62ms",
         col: 2,
         row: "top",
-        thought: "Scanned AST tree: flagged missing boundary check on endpoint parameter.",
-        tag: "SAST Checker"
+        thought: "Drafted 3 personalized marketing message variations with clear calls to action.",
+        tag: "AI Drafter"
       },
       {
         id: "n2b",
-        label: "Pytest Runner",
-        role: "Docker Sandbox Execution",
-        icon: Terminal,
+        label: "Audience Target",
+        role: "Customer Segment Filter",
+        icon: Database,
         status: "done",
-        latency: "92ms",
+        latency: "28ms",
         col: 2,
         row: "bottom",
-        thought: "Executed test suite: 47 passed, 1 failed on edge-case empty payload.",
-        tag: "Sandbox Pytest"
+        thought: "Filtered recipient segments from database based on previous purchasing behavior.",
+        tag: "Segment Query"
       },
       {
         id: "n3",
-        label: "Critic Auto-Patch",
-        role: "Self-Correction Engine",
-        icon: RefreshCw,
+        label: "Human Signoff",
+        role: "Mandatory Approval Gate",
+        icon: ShieldCheck,
         status: "active",
-        latency: "74ms",
+        latency: "HITL Gate",
         col: 3,
         row: "center",
-        thought: "Synthesized auto-patch v2 inserting Pydantic validator. Re-executing tests.",
-        tag: "Self-Healing Loop"
+        thought: "Generated interactive preview card. Staged for one-click human verification.",
+        tag: "100% Oversight"
       },
       {
         id: "n4",
-        label: "PR Merge Gate",
-        role: "Zero Regression Check",
+        label: "API Dispatch",
+        role: "Scheduled WhatsApp Send",
         icon: CheckCircle2,
         status: "ready",
-        latency: "48/48 pass",
+        latency: "₹72k Saved",
         col: 4,
         row: "center",
-        thought: "Re-run successful. All 48/48 tests passing. Pushed approved review comment.",
-        tag: "Merge Approved"
+        thought: "Approved by manager. Dispatched via WhatsApp API middleware. Saved ₹72,000/month.",
+        tag: "Zero SaaS Cost"
       }
     ],
     thoughtStream: [
-      "git_ingest: parsed PR diff across 3 modules (+84 lines changed)",
-      "parallel_audit: security scan clean · pytest runner identified 1 boundary failure",
-      "self_critique: analyzing stack trace → generated targeted validator patch v2",
-      "sandbox_retest: suite re-executed in Docker container: 48/48 passed (0 regressions)",
-      "merge_gate: approved PR review comment posted with full audit trail ✓"
+      "prompt_ingest: parsed natural language campaign goal into structured execution plan",
+      "draft_engine: LangGraph synthesized personalized copy variants with call to action",
+      "audience_segment: MongoDB queried and segmented targeted customer groups",
+      "human_signoff: preview staged, awaiting one-click administrator verification ✓",
+      "dispatch_middleware: scheduled broadcast sent via WhatsApp API, saving ₹72,000/mo ✓"
     ]
   },
-  sre: {
-    id: "sre",
-    name: "SRE Incident Triage",
-    badge: "EVENT-DRIVEN SRE AGENT",
-    description: "Alert responder analyzing telemetry, diagnosing root-cause & staging canary",
+  zoho: {
+    id: "zoho",
+    name: "Zoho Process Engine",
+    badge: "ZOHO DELUGE AUTOMATION",
+    description: "Cross-platform orchestration synchronizing CRM, Books, People, ERP, and Webhooks",
     nodes: [
       {
         id: "n1",
-        label: "Prometheus Hook",
-        role: "P1 Alert Ingestion",
-        icon: AlertTriangle,
+        label: "Webhook Trigger",
+        role: "Inbound Lead & Form Event",
+        icon: Zap,
         status: "done",
-        latency: "8ms",
+        latency: "9ms",
         col: 1,
         row: "center",
-        thought: "P1 Alert: api-gateway p99 latency spike to 2,400ms across 4 pods.",
-        tag: "P1 Trigger"
+        thought: "Captured real-time lead event from web form and WhatsApp lead capture pipeline.",
+        tag: "Event Hook"
       },
       {
         id: "n2a",
-        label: "Jaeger Tracing",
-        role: "Span Bottleneck Scan",
-        icon: Zap,
+        label: "Deluge Script",
+        role: "Custom Business Logic",
+        icon: Cpu,
         status: "done",
-        latency: "52ms",
+        latency: "46ms",
         col: 2,
         row: "top",
-        thought: "Correlated 480 distributed spans. Root span isolated to db-pool exhaustion.",
-        tag: "OpenTelemetry"
+        thought: "Executed custom Deluge script: computed lead score and product cross-sell tier.",
+        tag: "Deluge Script"
       },
       {
         id: "n2b",
-        label: "Log Anomaly",
-        role: "Cluster Error Parsing",
+        label: "CRM Pipeline",
+        role: "Zoho CRM Routing",
         icon: Bot,
         status: "done",
-        latency: "64ms",
+        latency: "26ms",
         col: 2,
         row: "bottom",
-        thought: "Parsed Elasticsearch logs: 120 connection timeout errors in last 2 minutes.",
-        tag: "Log Analyzer"
+        thought: "Created lead record, assigned sales rep, and set automated deal stage triggers.",
+        tag: "Zoho CRM"
       },
       {
         id: "n3",
-        label: "Canary Stager",
-        role: "K8s Patch Sandbox",
-        icon: Cpu,
+        label: "ERP & Books Sync",
+        role: "Cross-Platform Entity Sync",
+        icon: RefreshCw,
         status: "active",
-        latency: "46ms",
+        latency: "54ms",
         col: 3,
         row: "center",
-        thought: "Formed hypothesis: Pool capacity insufficient. Staged pool scale 20 → 50 in canary.",
-        tag: "Canary Staged"
+        thought: "Synchronized customer profile into Zoho Books, ERP, and People records.",
+        tag: "Books & ERP"
       },
       {
         id: "n4",
-        label: "Slack HITL",
-        role: "Human-in-the-Loop Signoff",
+        label: "Instant Outreach",
+        role: "Automated Communication",
         icon: CheckCircle2,
         status: "ready",
-        latency: "Dispatched",
+        latency: "−50% Time",
         col: 4,
         row: "center",
-        thought: "Pushed verified runbook + 1-click canary rollout button to #sre-oncall.",
-        tag: "1-Click Signoff"
+        thought: "Triggered personalized follow-up notification. Reduced manual overhead by 50%.",
+        tag: "Zero Manual Work"
       }
     ],
     thoughtStream: [
-      "alert_hook: Prometheus P1 triggered (api-gateway p99 latency > 2.4s)",
-      "telemetry_scan: Jaeger traces isolate database pool connection starvation",
-      "diagnosis: unindexed analytical query blocking pool connections",
-      "canary_staged: temporary replica pool scaling applied to canary namespace",
-      "slack_dispatch: runbook summary and 1-click approval sent to #sre-incidents ✓"
+      "webhook_trigger: captured real-time lead event from web form and WhatsApp chat",
+      "deluge_engine: custom Deluge script parsed data, calculated tier, and applied business rules",
+      "crm_pipeline: automated deal record created in Zoho CRM with assigned representative",
+      "multi_app_sync: real-time data sync completed across Zoho Books, ERP, and Analytics",
+      "automated_outreach: instant customer response triggered, eliminating manual data entry ✓"
     ]
   }
 };

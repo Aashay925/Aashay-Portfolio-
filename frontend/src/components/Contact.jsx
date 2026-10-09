@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Copy, Check, Send } from "lucide-react";
+import { Copy, Check, Send, Phone, MapPin, Mail } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal, SectionHeading } from "./Reveal";
 import { PROFILE, PROJECT_SCOPES } from "../data/content";
@@ -21,17 +21,17 @@ export const Contact = () => {
       toast.success("Email copied to clipboard");
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error("Copy failed — select the email manually");
+      toast.error("Copy failed, please select email manually");
     }
   };
 
   const submit = (e) => {
     e.preventDefault();
     const subject = encodeURIComponent(
-      `Project inquiry${scopes.length ? ` — ${scopes.join(", ")}` : ""} · ${name || "New contact"}`
+      `Project inquiry${scopes.length ? ` · ${scopes.join(", ")}` : ""} · ${name || "New contact"}`
     );
     const body = encodeURIComponent(
-      `Hi Aashay,\n\n${message}\n\nScopes: ${scopes.join(", ") || "—"}\n\n— ${name}\n${email}`
+      `Hi Aashay,\n\n${message}\n\nScopes: ${scopes.join(", ") || "General Inquiry"}\n\nFrom: ${name}\nEmail: ${email}`
     );
     window.location.href = `mailto:${PROFILE.email}?subject=${subject}&body=${body}`;
     toast.success("Opening your email client…");
@@ -58,18 +58,39 @@ export const Contact = () => {
             </div>
           </Reveal>
           <Reveal delay={0.2}>
-            <button
-              data-testid="copy-email-btn"
-              onClick={copyEmail}
-              className="group inline-flex items-center gap-3 rounded-xl border border-[#262B33] bg-[#14171C] px-5 py-4 font-mono2 text-sm text-[#F2F4F7] hover:border-[#7C8CFF]/50 transition-colors"
-            >
-              {PROFILE.email}
-              {copied ? <Check size={16} className="text-[#65C18C]" /> : <Copy size={16} className="text-[#6B7280] group-hover:text-[#7C8CFF] transition-colors" />}
-            </button>
+            <div className="flex flex-col gap-3">
+              <button
+                data-testid="copy-email-btn"
+                onClick={copyEmail}
+                className="group inline-flex items-center justify-between rounded-xl border border-[#262B33] bg-[#14171C] px-5 py-3.5 font-mono2 text-sm text-[#F2F4F7] hover:border-[#7C8CFF]/50 transition-colors w-full"
+              >
+                <span className="flex items-center gap-3">
+                  <Mail size={16} className="text-[#7C8CFF]" />
+                  <span>{PROFILE.email}</span>
+                </span>
+                {copied ? <Check size={16} className="text-[#65C18C]" /> : <Copy size={16} className="text-[#6B7280] group-hover:text-[#7C8CFF] transition-colors" />}
+              </button>
+
+              <a
+                href={`tel:${PROFILE.phone}`}
+                className="group inline-flex items-center justify-between rounded-xl border border-[#262B33] bg-[#14171C] px-5 py-3.5 font-mono2 text-sm text-[#F2F4F7] hover:border-[#7C8CFF]/50 transition-colors"
+              >
+                <span className="flex items-center gap-3">
+                  <Phone size={16} className="text-[#7C8CFF]" />
+                  <span>{PROFILE.phone}</span>
+                </span>
+                <span className="text-xs text-[#6B7280] uppercase tracking-wider font-mono2">Call</span>
+              </a>
+
+              <div className="inline-flex items-center gap-3 px-5 py-2 font-mono2 text-xs text-[#A1A7B3]">
+                <MapPin size={15} className="text-[#7C8CFF] shrink-0" />
+                <span>{PROFILE.location}</span>
+              </div>
+            </div>
           </Reveal>
           <Reveal delay={0.25}>
-            <div className="mt-10">
-              <p className="font-mono2 text-[10px] tracking-[0.3em] uppercase text-[#6B7280] mb-4">project scope — select any</p>
+            <div className="mt-8">
+              <p className="font-mono2 text-[10px] tracking-[0.3em] uppercase text-[#6B7280] mb-4">project scope · select any</p>
               <div className="flex flex-wrap gap-2" data-testid="scope-selector">
                 {PROJECT_SCOPES.map((s) => (
                   <button

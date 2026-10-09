@@ -14,23 +14,23 @@ const DOMAIN_ICONS = {
 const PRINCIPLES = [
   {
     icon: ShieldCheck,
-    title: "Determinism Over Vibes",
-    desc: "Rigorous automated evals run before any prompt or agent reaches staging.",
+    title: "Production Engineering Over Demos",
+    desc: "Building reliable, tested AI applications rather than fragile prototypes.",
   },
   {
     icon: Zap,
-    title: "Zero Tool Hallucination",
-    desc: "Strict Pydantic schemas and sandbox verification on every tool call.",
+    title: "Grounded Knowledge Retrieval",
+    desc: "Strict vector indexing and domain validation to eliminate hallucination.",
   },
   {
     icon: Sliders,
-    title: "Resilient Agent Sagas",
-    desc: "Durable workflow orchestration for long-running multi-step agents.",
+    title: "Human-in-the-Loop Oversight",
+    desc: "Strategic review checkpoints before high-stakes actions or automated dispatches.",
   },
   {
     icon: Server,
-    title: "Cost & Tier Routing",
-    desc: "Intelligent dynamic routing across frontier, fast, and local models.",
+    title: "Cross-Platform Orchestration",
+    desc: "Seamless integration across APIs, databases, Zoho ecosystem, and cloud services.",
   },
 ];
 

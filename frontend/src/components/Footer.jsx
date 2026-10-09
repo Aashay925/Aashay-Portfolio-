@@ -1,20 +1,6 @@
-import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import { PROFILE } from "../data/content";
 import { LogoMark } from "./Navbar";
-
-const UtcClock = () => {
-  const [now, setNow] = useState(new Date());
-  useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(t);
-  }, []);
-  return (
-    <span className="font-mono2 text-xs sm:text-sm text-[#A1A7B3] tabular-nums" data-testid="footer-clock">
-      {now.toISOString().slice(11, 19)} UTC
-    </span>
-  );
-};
 
 export const Footer = () => (
   <footer className="relative border-t border-[#262B33] overflow-hidden bg-[#0D0F12]" data-testid="footer">
@@ -47,7 +33,6 @@ export const Footer = () => (
             ))}
           </div>
           <div className="flex items-center gap-5">
-            <UtcClock />
             <button
               data-testid="scroll-top-btn"
               onClick={() => window.__lenis?.scrollTo(0) ?? window.scrollTo({ top: 0, behavior: "smooth" })}

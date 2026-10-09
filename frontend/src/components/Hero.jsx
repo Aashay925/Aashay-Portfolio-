@@ -99,13 +99,13 @@ const AgentStream = () => {
   );
 };
 
-const MaskedLine = ({ children, delay, className = "" }) => (
-  <span className="block overflow-hidden pb-1" style={{ overflowClipMargin: "50px" }}>
+const MaskedLine = ({ children, delay, className = "", wrapperClassName = "" }) => (
+  <span className={`block overflow-hidden ${wrapperClassName}`} style={{ overflowClipMargin: "20px" }}>
     <motion.span
-      className={`inline-block pr-8 sm:pr-10 lg:pr-12 ${className}`}
+      className={`inline-block ${className}`}
       initial={{ y: "110%" }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.85, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.span>
@@ -144,22 +144,27 @@ export const Hero = () => {
             <AgentStream />
           </motion.div>
 
-          <h1 className="mt-7 font-display font-semibold tracking-tight leading-[0.98] text-[2.5rem] sm:text-[3.5rem] lg:text-[4.15rem] xl:text-[4.65rem] text-[#F2F4F7]" data-testid="hero-title">
-            <MaskedLine delay={0.25}>AASHAY</MaskedLine>
-            <MaskedLine delay={0.37} className="text-[#A1A7B3]">SONI</MaskedLine>
-            <MaskedLine delay={0.49} className="text-2xl sm:text-3xl lg:text-[2.25rem] font-semibold leading-[1.15] mt-5 text-[#A1A7B3]">
-              builds <span className="text-[#7C8CFF]">agentic systems</span>
-            </MaskedLine>
-            <MaskedLine delay={0.58} className="text-2xl sm:text-3xl lg:text-[2.25rem] font-semibold leading-[1.15] text-[#A1A7B3]">
-              that ship to production.
-            </MaskedLine>
+          <h1 className="mt-6 font-display tracking-tight text-[#F2F4F7]" data-testid="hero-title">
+            <div className="leading-[0.92] text-[2.5rem] sm:text-[3.5rem] lg:text-[4.15rem] xl:text-[4.65rem] font-semibold">
+              <MaskedLine delay={0.25} className="pr-4">AASHAY</MaskedLine>
+              <MaskedLine delay={0.37} className="pr-4 text-[#A1A7B3]">SONI</MaskedLine>
+            </div>
+
+            <div className="mt-3.5 flex flex-col gap-0.5 leading-tight text-xl sm:text-2xl lg:text-[1.85rem] font-medium">
+              <MaskedLine delay={0.49} className="text-[#F2F4F7]">
+                Architecting <span className="text-[#7C8CFF] font-semibold">Autonomous Systems</span>
+              </MaskedLine>
+              <MaskedLine delay={0.58} className="text-[#A1A7B3]">
+                and intelligent automation built for real impact.
+              </MaskedLine>
+            </div>
           </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.85, duration: 0.7 }}
-            className="mt-6 max-w-lg text-base sm:text-lg text-[#A1A7B3] leading-relaxed font-normal"
+            className="mt-4 max-w-lg text-base sm:text-lg text-[#A1A7B3] leading-relaxed font-normal"
             data-testid="hero-tagline"
           >
             {PROFILE.tagline}

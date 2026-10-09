@@ -1,23 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, Sparkles, Bot, Workflow } from "lucide-react";
+import { Terminal, Sparkles, Bot, Workflow, Layers, Database } from "lucide-react";
 import { Reveal } from "./Reveal";
-import { CAPABILITIES, METRICS, AGENT_SIMULATIONS } from "../data/content";
+import { CAPABILITIES, METRICS, AGENT_SIMULATIONS, PROFILE } from "../data/content";
 
 const CAP_ICONS = {
-  genai: Sparkles,
   agentic: Bot,
-  automation: Workflow,
+  rag: Database,
+  zoho: Workflow,
+  fullstack: Layers,
 };
 
 const AgentSandbox = () => {
-  const [active, setActive] = useState("researcher");
+  const defaultAgent = Object.keys(AGENT_SIMULATIONS)[0] || "rag";
+  const [active, setActive] = useState(defaultAgent);
   const [visible, setVisible] = useState(0);
   const timer = useRef(null);
 
   useEffect(() => {
     setVisible(0);
     clearInterval(timer.current);
+    if (!AGENT_SIMULATIONS[active]) return;
     timer.current = setInterval(() => {
       setVisible((v) => {
         if (v >= AGENT_SIMULATIONS[active].steps.length) {
@@ -109,12 +112,12 @@ export const About = () => (
           </Reveal>
           <Reveal delay={0.08}>
             <h2 className="font-display text-3xl sm:text-5xl lg:text-[3.25rem] font-semibold tracking-tight text-[#F2F4F7] leading-[1.08]" data-testid="about-heading">
-              Systems that reason, retrieve, and act <span className="text-[#7C8CFF]">—</span> without hand-holding.
+              Practical AI systems and reliable automation <span className="text-[#7C8CFF]">built to ship.</span>
             </h2>
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mt-5 text-base sm:text-lg text-[#A1A7B3] leading-relaxed max-w-xl font-normal">
-              Architecting autonomous agents and production LLM pipelines that recover from failure, verify their own outputs, and scale deterministically.
+              {PROFILE.summary}
             </p>
           </Reveal>
 

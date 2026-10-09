@@ -28,7 +28,7 @@ export const Projects = () => {
             </Reveal>
             <Reveal delay={0.14}>
               <p className="mt-5 text-base sm:text-lg text-[#A1A7B3] leading-relaxed max-w-2xl font-normal">
-                Real-world autonomous systems designed to eliminate model hallucinations, enforce deterministic validation, and coordinate multi-agent consensus.
+                Production AI systems and real-world applications engineered to eliminate manual bottlenecks, replace expensive commercial SaaS, and automate business operations.
               </p>
             </Reveal>
           </div>
@@ -36,18 +36,22 @@ export const Projects = () => {
           <Reveal delay={0.2}>
             <div className="flex items-center gap-2 border border-[#262B33] bg-[#14171C]/80 rounded-full px-4 py-2 font-mono2 text-xs text-[#A1A7B3]">
               <span className="h-2 w-2 rounded-full bg-[#65C18C] animate-pulse" />
-              <span>4 PRODUCTION ARCHITECTURES VERIFIED</span>
+              <span>{PROJECTS.length} PRODUCTION DEPLOYMENTS VERIFIED</span>
             </div>
           </Reveal>
         </div>
 
-        {/* 2x2 Bento Showcase Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-10">
+        {/* Bento Showcase Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8">
           {PROJECTS.map((p, i) => (
-            <Reveal key={p.id} delay={0.1 + i * 0.1} className="h-full">
+            <Reveal
+              key={p.id}
+              delay={0.08 + i * 0.06}
+              className={`h-full ${i === PROJECTS.length - 1 && PROJECTS.length % 2 === 1 ? "lg:col-span-2" : ""}`}
+            >
               <div
                 data-testid={`project-card-${p.id}`}
-                className="spotlight-card group relative h-full rounded-2xl border border-[#262B33] bg-[#14171C]/90 backdrop-blur p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 hover:border-[#7C8CFF]/50 hover:shadow-[0_0_50px_rgba(124,140,255,0.06)]"
+                className="spotlight-card group relative h-full rounded-2xl border border-[#262B33] bg-[#14171C]/90 backdrop-blur p-6 sm:p-7 xl:p-8 flex flex-col justify-between transition-all duration-300 hover:border-[#7C8CFF]/50 hover:shadow-[0_0_40px_rgba(124,140,255,0.06)]"
                 onMouseMove={(e) => {
                   const r = e.currentTarget.getBoundingClientRect();
                   e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
@@ -56,57 +60,57 @@ export const Projects = () => {
               >
                 <div>
                   {/* Top Bar: Index, Badge & Links */}
-                  <div className="flex items-center justify-between gap-4 mb-6">
-                    <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <div className="flex items-center gap-2.5">
                       <span className="font-mono2 text-xs font-semibold text-[#7C8CFF]">{p.index}</span>
                       <span className="h-1 w-1 rounded-full bg-white/20" />
-                      <span className="font-mono2 text-[11px] tracking-wider uppercase text-[#7C8CFF] bg-[#7C8CFF]/10 border border-[#7C8CFF]/20 rounded-full px-3 py-1">
+                      <span className="font-mono2 text-[10.5px] tracking-wider uppercase text-[#7C8CFF] bg-[#7C8CFF]/10 border border-[#7C8CFF]/20 rounded-full px-2.5 py-0.5">
                         {p.badge}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
                       <a
                         href={p.githubUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="h-9 w-9 rounded-full border border-[#262B33] bg-[#191D23] flex items-center justify-center text-[#A1A7B3] hover:text-[#F2F4F7] hover:border-[#7C8CFF]/50 hover:bg-[#7C8CFF]/10 transition-all"
+                        className="h-8 w-8 rounded-full border border-[#262B33] bg-[#191D23] flex items-center justify-center text-[#A1A7B3] hover:text-[#F2F4F7] hover:border-[#7C8CFF]/50 hover:bg-[#7C8CFF]/10 transition-all"
                         aria-label={`View ${p.title} source`}
                       >
-                        <Github size={16} />
+                        <Github size={15} />
                       </a>
                       <a
                         href={p.demoUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="h-9 w-9 rounded-full border border-[#262B33] bg-[#191D23] flex items-center justify-center text-[#A1A7B3] hover:text-[#7C8CFF] hover:border-[#7C8CFF]/50 hover:bg-[#7C8CFF]/10 transition-all"
+                        className="h-8 w-8 rounded-full border border-[#262B33] bg-[#191D23] flex items-center justify-center text-[#A1A7B3] hover:text-[#7C8CFF] hover:border-[#7C8CFF]/50 hover:bg-[#7C8CFF]/10 transition-all"
                         aria-label={`Open ${p.title} live demo`}
                       >
-                        <ArrowUpRight size={17} />
+                        <ArrowUpRight size={15} />
                       </a>
                     </div>
                   </div>
 
                   {/* Title & Subtitle */}
-                  <h3 className="font-display text-2xl sm:text-3xl font-semibold text-[#F2F4F7] group-hover:text-[#7C8CFF] transition-colors">
+                  <h3 className="font-display text-xl sm:text-2xl font-semibold text-[#F2F4F7] group-hover:text-[#7C8CFF] transition-colors tracking-tight">
                     {p.title}
                   </h3>
-                  <p className="mt-2 font-mono2 text-xs sm:text-sm text-[#A1A7B3] tracking-wide">
+                  <p className="mt-1 font-mono2 text-xs text-[#A1A7B3] tracking-wide">
                     {p.subtitle}
                   </p>
 
-                  <p className="mt-4 text-sm sm:text-base text-[#A1A7B3] leading-relaxed">
+                  <p className="mt-3 text-xs sm:text-sm text-[#A1A7B3] leading-relaxed">
                     {p.description}
                   </p>
 
                   {/* High-Impact Metrics Strip */}
-                  <div className="mt-6 grid grid-cols-3 gap-3 p-4 rounded-xl border border-[#262B33] bg-[#0D0F12]">
+                  <div className="mt-4 grid grid-cols-3 gap-2.5 p-3 rounded-xl border border-[#262B33] bg-[#0D0F12]">
                     {p.metrics.map((m) => (
                       <div key={m.label} className="text-center">
-                        <p className="font-display text-xl sm:text-2xl font-semibold text-[#F2F4F7] group-hover:text-[#7C8CFF] transition-colors">
+                        <p className="font-display text-lg sm:text-xl font-semibold text-[#F2F4F7] group-hover:text-[#7C8CFF] transition-colors">
                           {m.value}
                         </p>
-                        <p className="mt-1 font-mono2 text-[10px] sm:text-[11px] tracking-wider uppercase text-[#6B7280]">
+                        <p className="mt-0.5 font-mono2 text-[9.5px] sm:text-[10px] tracking-wider uppercase text-[#6B7280]">
                           {m.label}
                         </p>
                       </div>
@@ -114,11 +118,11 @@ export const Projects = () => {
                   </div>
 
                   {/* Architectural Highlights */}
-                  <div className="mt-6 space-y-2">
-                    <p className="font-mono2 text-[11px] tracking-wider uppercase text-[#6B7280] mb-2">Key Highlights</p>
+                  <div className="mt-4 space-y-1.5">
+                    <p className="font-mono2 text-[10px] tracking-wider uppercase text-[#6B7280] mb-1">Key Highlights</p>
                     {p.features.map((f) => (
-                      <div key={f} className="flex items-center gap-2 text-xs sm:text-sm text-[#A1A7B3]">
-                        <CheckCircle2 size={14} className="text-[#65C18C] shrink-0" />
+                      <div key={f} className="flex items-center gap-2 text-xs text-[#A1A7B3]">
+                        <CheckCircle2 size={13} className="text-[#65C18C] shrink-0" />
                         <span>{f}</span>
                       </div>
                     ))}
@@ -126,11 +130,11 @@ export const Projects = () => {
                 </div>
 
                 {/* Tech Stack Tags */}
-                <div className="mt-8 pt-6 border-t border-[#262B33] flex flex-wrap gap-2">
+                <div className="mt-5 pt-4 border-t border-[#262B33] flex flex-wrap gap-1.5">
                   {p.stack.map((t) => (
                     <span
                       key={t}
-                      className="rounded-md border border-[#262B33] bg-[#191D23] px-3 py-1 font-mono2 text-[11px] text-[#A1A7B3] transition-colors"
+                      className="rounded-md border border-[#262B33] bg-[#191D23] px-2.5 py-0.5 font-mono2 text-[10.5px] text-[#A1A7B3] transition-colors"
                     >
                       {t}
                     </span>
