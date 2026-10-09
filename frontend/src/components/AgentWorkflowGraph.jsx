@@ -325,23 +325,25 @@ export const AgentWorkflowGraph = () => {
       </div>
 
       {/* Node Graph Canvas (Wide 4-Column Layout with Bezier Cables) */}
-      <div className="relative rounded-xl border border-[#262B33] bg-[#0D0F12] p-3 sm:p-3.5 overflow-hidden min-h-[185px]">
-        {/* Dot grid canvas background */}
-        <div
-          className="absolute inset-0 opacity-15 pointer-events-none"
-          style={{
-            backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.25) 1px, transparent 1px)",
-            backgroundSize: "16px 16px"
-          }}
-        />
+      <div className="relative rounded-xl border border-[#262B33] bg-[#0D0F12] p-2.5 sm:p-3.5 overflow-hidden">
+        <div className="overflow-x-auto pb-1 scrollbar-none">
+          <div className="min-w-[490px] sm:min-w-0 relative min-h-[175px]">
+            {/* Dot grid canvas background */}
+            <div
+              className="absolute inset-0 opacity-15 pointer-events-none"
+              style={{
+                backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.25) 1px, transparent 1px)",
+                backgroundSize: "16px 16px"
+              }}
+            />
 
-        {/* Dynamic SVG Connecting Wires */}
-        <svg
-          className="absolute inset-0 w-full h-full pointer-events-none z-0"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 630 220"
-          preserveAspectRatio="none"
-        >
+            {/* Dynamic SVG Connecting Wires */}
+            <svg
+              className="absolute inset-0 w-full h-full pointer-events-none z-0"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 630 220"
+              preserveAspectRatio="none"
+            >
           {/* Wire 1: Col 1 -> Col 2 Top */}
           <path
             d="M 130 110 C 145 110, 150 55, 175 55"
@@ -497,6 +499,8 @@ export const AgentWorkflowGraph = () => {
           </div>
         </div>
       </div>
+    </div>
+    </div>
 
       {/* State Inspector & Live Agent Thought */}
       <div className="mt-3 rounded-xl border border-[#262B33] bg-[#0D0F12]/90 p-3">

@@ -100,12 +100,12 @@ const AgentStream = () => {
 };
 
 const MaskedLine = ({ children, delay, className = "", wrapperClassName = "" }) => (
-  <span className={`block overflow-hidden ${wrapperClassName}`} style={{ overflowClipMargin: "20px" }}>
+  <span className={`block overflow-hidden ${wrapperClassName}`}>
     <motion.span
       className={`inline-block ${className}`}
-      initial={{ y: "110%" }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.85, delay, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ y: "100%", opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.span>
@@ -114,11 +114,10 @@ const MaskedLine = ({ children, delay, className = "", wrapperClassName = "" }) 
 
 export const Hero = () => {
   const sectionRef = useRef(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   const yBg = useTransform(scrollYProgress, [0, 1], [0, 180]);
   const yCard = useTransform(scrollYProgress, [0, 1], [0, -90]);
-  const opacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
 
   const scrollTo = (href) => {
     const el = document.querySelector(href);
@@ -127,9 +126,9 @@ export const Hero = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-28 pb-16" data-testid="hero-section">
+    <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-start lg:justify-center pt-24 sm:pt-28 lg:pt-32 pb-16 overflow-x-hidden" data-testid="hero-section">
       {/* atmosphere */}
-      <motion.div style={{ y: yBg }} className="absolute inset-0">
+      <motion.div style={{ y: yBg }} className="absolute inset-0 overflow-hidden pointer-events-none">
         <NodeMesh />
         <div className="absolute -top-40 -left-40 w-[34rem] h-[34rem] rounded-full bg-[#7C8CFF]/[0.05] blur-[140px]" />
         <div className="absolute bottom-0 right-0 w-[30rem] h-[30rem] rounded-full bg-[#7C8CFF]/[0.03] blur-[140px]" />
@@ -137,24 +136,24 @@ export const Hero = () => {
 
       <motion.div
         style={{ opacity }}
-        className="relative w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 flex flex-col lg:flex-row items-center justify-between gap-8 xl:gap-12"
+        className="relative w-full max-w-[1800px] mx-auto px-5 sm:px-10 lg:px-14 xl:px-20 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 xl:gap-14"
       >
         <div className="w-full lg:max-w-[580px] xl:max-w-[640px] shrink-0">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15, duration: 0.6 }}>
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
             <AgentStream />
           </motion.div>
 
-          <h1 className="mt-6 font-display tracking-tight text-[#F2F4F7]" data-testid="hero-title">
-            <div className="leading-[0.92] text-[2.5rem] sm:text-[3.5rem] lg:text-[4.15rem] xl:text-[4.65rem] font-semibold">
-              <MaskedLine delay={0.25} className="pr-4">AASHAY</MaskedLine>
-              <MaskedLine delay={0.37} className="pr-4 text-[#A1A7B3]">SONI</MaskedLine>
+          <h1 className="mt-5 sm:mt-6 font-display tracking-tight text-[#F2F4F7]" data-testid="hero-title">
+            <div className="leading-[0.92] text-[2.4rem] sm:text-[3.5rem] lg:text-[4.15rem] xl:text-[4.65rem] font-semibold">
+              <MaskedLine delay={0.2} className="pr-3 sm:pr-4">AASHAY</MaskedLine>
+              <MaskedLine delay={0.3} className="pr-3 sm:pr-4 text-[#A1A7B3]">SONI</MaskedLine>
             </div>
 
-            <div className="mt-3.5 flex flex-col gap-0.5 leading-tight text-xl sm:text-2xl lg:text-[1.85rem] font-medium">
-              <MaskedLine delay={0.49} className="text-[#F2F4F7]">
+            <div className="mt-3.5 flex flex-col gap-0.5 leading-tight text-lg sm:text-2xl lg:text-[1.85rem] font-medium">
+              <MaskedLine delay={0.4} className="text-[#F2F4F7]">
                 Architecting <span className="text-[#7C8CFF] font-semibold">Autonomous Systems</span>
               </MaskedLine>
-              <MaskedLine delay={0.58} className="text-[#A1A7B3]">
+              <MaskedLine delay={0.5} className="text-[#A1A7B3]">
                 and intelligent automation built for real impact.
               </MaskedLine>
             </div>
@@ -163,8 +162,8 @@ export const Hero = () => {
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.85, duration: 0.7 }}
-            className="mt-4 max-w-lg text-base sm:text-lg text-[#A1A7B3] leading-relaxed font-normal"
+            transition={{ delay: 0.65, duration: 0.7 }}
+            className="mt-4 max-w-lg text-sm sm:text-base lg:text-lg text-[#A1A7B3] leading-relaxed font-normal"
             data-testid="hero-tagline"
           >
             {PROFILE.tagline}
@@ -173,44 +172,44 @@ export const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.7 }}
-            className="mt-8 flex flex-wrap items-center gap-4"
+            transition={{ delay: 0.8, duration: 0.7 }}
+            className="mt-7 sm:mt-8 flex flex-wrap items-center gap-3.5 sm:gap-4"
           >
             <button
               data-testid="hero-cta-explore"
               onClick={() => scrollTo("#work")}
-              className="group inline-flex items-center gap-2 rounded-full bg-[#7C8CFF] px-7 py-3.5 text-sm font-semibold text-[#0D0F12] hover:bg-[#A5AEFF] hover:text-[#0D0F12] transition-colors"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#7C8CFF] px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold text-[#0D0F12] hover:bg-[#A5AEFF] hover:text-[#0D0F12] transition-colors"
             >
               Explore Architecture
-              <ArrowDown size={16} className="transition-transform group-hover:translate-y-0.5" />
+              <ArrowDown size={15} className="transition-transform group-hover:translate-y-0.5" />
             </button>
             <button
               data-testid="hero-cta-contact"
               onClick={() => scrollTo("#contact")}
-              className="group inline-flex items-center gap-2 rounded-full border border-[#303640] px-7 py-3.5 text-sm font-semibold text-[#F2F4F7] hover:border-[#7C8CFF] hover:text-[#7C8CFF] transition-colors"
+              className="group inline-flex items-center gap-2 rounded-full border border-[#303640] px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold text-[#F2F4F7] hover:border-[#7C8CFF] hover:text-[#7C8CFF] transition-colors"
             >
               Initiate Contact
-              <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight size={15} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </button>
             <a
               data-testid="hero-cta-resume"
               href={PROFILE.resumeUrl}
-              className="group inline-flex items-center gap-2 font-mono2 text-xs tracking-[0.15em] uppercase text-[#6B7280] hover:text-[#A5AEFF] transition-colors"
+              className="group inline-flex items-center gap-2 font-mono2 text-xs tracking-[0.15em] uppercase text-[#6B7280] hover:text-[#A5AEFF] transition-colors py-2"
             >
-              <FileDown size={15} /> Resume.pdf
+              <FileDown size={14} /> Resume.pdf
             </a>
           </motion.div>
         </div>
 
-        {/* Interactive AI Agent Orchestration Workflow Node Graph (Side-by-side on the right) */}
+        {/* Interactive AI Agent Orchestration Workflow Node Graph (Visible on all devices, fully responsive) */}
         <motion.div
           style={{ y: yCard }}
-          className="hidden lg:block w-full max-w-[540px] xl:max-w-[590px] shrink-0"
+          className="w-full max-w-[540px] xl:max-w-[590px] shrink-0 mt-6 lg:mt-0"
         >
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.45, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
           >
             <AgentWorkflowGraph />
           </motion.div>
@@ -220,8 +219,8 @@ export const Hero = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono2 text-[10px] tracking-[0.35em] uppercase text-[#6B7280]"
+        transition={{ delay: 1.2 }}
+        className="hidden lg:block absolute bottom-8 left-1/2 -translate-x-1/2 font-mono2 text-[10px] tracking-[0.35em] uppercase text-[#6B7280]"
       >
         scroll to descend
       </motion.div>
