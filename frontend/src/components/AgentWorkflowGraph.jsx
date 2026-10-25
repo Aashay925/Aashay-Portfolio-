@@ -153,10 +153,10 @@ export const WORKFLOWS = {
         role: "Scheduled WhatsApp Send",
         icon: CheckCircle2,
         status: "ready",
-        latency: "₹72k Saved",
+        latency: "₹80k Saved",
         col: 4,
         row: "center",
-        thought: "Approved by manager. Dispatched via WhatsApp API middleware. Saved ₹72,000/month.",
+        thought: "Approved by manager. Dispatched via WhatsApp API middleware. Saved ₹80,000/month.",
         tag: "Zero SaaS Cost"
       }
     ],
@@ -165,7 +165,7 @@ export const WORKFLOWS = {
       "draft_engine: LangGraph synthesized personalized copy variants with call to action",
       "audience_segment: MongoDB queried and segmented targeted customer groups",
       "human_signoff: preview staged, awaiting one-click administrator verification ✓",
-      "dispatch_middleware: scheduled broadcast sent via WhatsApp API, saving ₹72,000/mo ✓"
+      "dispatch_middleware: scheduled broadcast sent via WhatsApp API, saving ₹80,000/mo ✓"
     ]
   },
   zoho: {

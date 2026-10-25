@@ -11,6 +11,7 @@ import { Experience } from "./components/Experience";
 import { VibeZone } from "./components/VibeZone";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { AIAssistant } from "./components/AIAssistant";
 
 function App() {
   useEffect(() => {
@@ -42,6 +43,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <AIAssistant />
       <Toaster theme="dark" position="bottom-right" toastOptions={{ style: { background: "#14171C", border: "1px solid #262B33", color: "#F2F4F7" } }} />
     </div>
   );

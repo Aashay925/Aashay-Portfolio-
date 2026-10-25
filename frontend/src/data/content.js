@@ -94,7 +94,7 @@ export const AGENT_SIMULATIONS = {
       "→ formatting interactive WhatsApp message templates",
       "→ requesting human review and approval",
       "→ scheduling automated broadcast via middleware",
-      "✓ dispatched · saved ₹72,000/month vs SaaS tools",
+      "✓ dispatched · saved ₹80,000/month vs SaaS tools",
     ],
   },
   zoho: {
@@ -235,7 +235,7 @@ export const PROJECTS = [
       "In-house marketing middleware developed to replace an expensive third-party SaaS tool costing ₹80,000 per month. Powered by LangGraph and LangChain, the agent converts natural language instructions into campaign drafts, segments target audiences, and schedules delivery after human signoff.",
     metrics: [
       { label: "Cost Reduction", value: "90%" },
-      { label: "Monthly Savings", value: "₹72,000" },
+      { label: "Savings", value: "₹80,000" },
       { label: "Human Oversight", value: "100% HITL" },
     ],
     features: [

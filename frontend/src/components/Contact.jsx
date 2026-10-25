@@ -10,6 +10,7 @@ export const Contact = () => {
   const [message, setMessage] = useState("");
   const [scopes, setScopes] = useState([]);
   const [copied, setCopied] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const toggleScope = (s) =>
     setScopes((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
@@ -25,16 +26,43 @@ export const Contact = () => {
     }
   };
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(
-      `Project inquiry${scopes.length ? ` · ${scopes.join(", ")}` : ""} · ${name || "New contact"}`
-    );
-    const body = encodeURIComponent(
-      `Hi Aashay,\n\n${message}\n\nScopes: ${scopes.join(", ") || "General Inquiry"}\n\nFrom: ${name}\nEmail: ${email}`
-    );
-    window.location.href = `mailto:${PROFILE.email}?subject=${subject}&body=${body}`;
-    toast.success("Opening your email client…");
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      toast.error("Please fill in your name, email, and message.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const formData = new FormData();
+      formData.append("access_key", "b32f5bda-a0a7-4d19-8f3d-061529f7ea94");
+      formData.append("name", name.trim());
+      formData.append("email", email.trim());
+      formData.append("message", message.trim());
+      formData.append("project_scope", scopes.join(", ") || "General Inquiry");
+      formData.append("subject", `New Inquiry from ${name.trim()} · Portfolio`);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        toast.success("Message sent successfully! I'll get back to you shortly.");
+        setName("");
+        setEmail("");
+        setMessage("");
+        setScopes([]);
+      } else {
+        toast.error(data.message || "Failed to send message. Please try again.");
+      }
+    } catch (err) {
+      toast.error("Unable to send message right now. Please email directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -81,11 +109,6 @@ export const Contact = () => {
                 </span>
                 <span className="text-xs text-[#6B7280] uppercase tracking-wider font-mono2">Call</span>
               </a>
-
-              <div className="inline-flex items-center gap-3 px-5 py-2 font-mono2 text-xs text-[#A1A7B3]">
-                <MapPin size={15} className="text-[#7C8CFF] shrink-0" />
-                <span>{PROFILE.location}</span>
-              </div>
             </div>
           </Reveal>
           <Reveal delay={0.25}>
@@ -123,10 +146,12 @@ export const Contact = () => {
                 <label htmlFor="contact-name" className="block font-mono2 text-[10px] tracking-[0.25em] uppercase text-[#6B7280] mb-2">Name</label>
                 <input
                   id="contact-name"
+                  name="name"
                   data-testid="contact-name-input"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Ada Lovelace"
+                  required
                   className="w-full rounded-lg border border-[#262B33] bg-[#0D0F12] px-4 py-3 text-sm text-[#F2F4F7] placeholder:text-[#6B7280] outline-none focus:border-[#7C8CFF]/60 transition-colors"
                 />
               </div>
@@ -134,11 +159,13 @@ export const Contact = () => {
                 <label htmlFor="contact-email" className="block font-mono2 text-[10px] tracking-[0.25em] uppercase text-[#6B7280] mb-2">Email</label>
                 <input
                   id="contact-email"
+                  name="email"
                   type="email"
                   data-testid="contact-email-input"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="ada@analytical.engine"
+                  required
                   className="w-full rounded-lg border border-[#262B33] bg-[#0D0F12] px-4 py-3 text-sm text-[#F2F4F7] placeholder:text-[#6B7280] outline-none focus:border-[#7C8CFF]/60 transition-colors"
                 />
               </div>
@@ -147,21 +174,24 @@ export const Contact = () => {
               <label htmlFor="contact-message" className="block font-mono2 text-[10px] tracking-[0.25em] uppercase text-[#6B7280] mb-2">What are we building?</label>
               <textarea
                 id="contact-message"
+                name="message"
                 data-testid="contact-message-input"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={5}
                 placeholder="Tell me about the workflow you want to make autonomous…"
+                required
                 className="w-full rounded-lg border border-[#262B33] bg-[#0D0F12] px-4 py-3 text-sm text-[#F2F4F7] placeholder:text-[#6B7280] outline-none focus:border-[#7C8CFF]/60 transition-colors resize-none"
               />
             </div>
             <button
               type="submit"
+              disabled={isSubmitting}
               data-testid="contact-submit-btn"
-              className="group inline-flex items-center gap-2 rounded-full bg-[#7C8CFF] px-8 py-3.5 text-sm font-semibold text-[#0D0F12] hover:bg-[#A5AEFF] hover:text-[#0D0F12] transition-colors"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#7C8CFF] px-8 py-3.5 text-sm font-semibold text-[#0D0F12] hover:bg-[#A5AEFF] hover:text-[#0D0F12] transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
-              Send via Email
-              <Send size={15} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              {isSubmitting ? "Sending..." : "Send Message"}
+              <Send size={15} className={`transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${isSubmitting ? "animate-pulse" : ""}`} />
             </button>
           </form>
         </Reveal>
