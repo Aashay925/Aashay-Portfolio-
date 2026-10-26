@@ -3,27 +3,32 @@
 @tailwind utilities;
 
 :root {
-    --background: #0d0f12;
-    --surface: #14171c;
-    --surface-elevated: #191d23;
-    --text-primary: #f2f4f7;
-    --text-secondary: #a1a7b3;
-    --text-muted: #6b7280;
-    --border: #262b33;
-    --border-strong: #303640;
-    --accent: #7c8cff;
-    --accent-hover: #a5aeff;
-    --success: #65c18c;
-    --error: #f07178;
+    --background: #F2F5EE;
+    --surface: #FFFFFF;
+    --surface-elevated: #F7FBF1;
+    --text-primary: #14261F;
+    --text-secondary: #424845;
+    --text-muted: #52635B;
+    --border: #C8D1C3;
+    --border-strong: #B0BBA9;
+    --accent: #FF5A2B;
+    --accent-hover: #e0481b;
+    --accent-dark: #c4380f;
+    --forest: #14261F;
+    --forest-mid: #1F4D40;
+    --forest-light: #BCEDDB;
+    --neutral-bone: #E4E8DF;
+    --success: #1F4D40;
+    --error: #ba1a1a;
 
     /* Legacy mapping aliases */
-    --bg: #0d0f12;
-    --bg-2: #14171c;
-    --ink: #f2f4f7;
-    --ink-2: #a1a7b3;
-    --ink-3: #6b7280;
-    --ember: #7c8cff;
-    --signal: #a1a7b3;
+    --bg: #F2F5EE;
+    --bg-2: #FFFFFF;
+    --ink: #14261F;
+    --ink-2: #424845;
+    --ink-3: #52635B;
+    --ember: #FF5A2B;
+    --signal: #424845;
 }
 
 html {
@@ -51,7 +56,7 @@ body {
 
 ::selection {
     background: var(--accent);
-    color: #0d0f12;
+    color: #ffffff;
 }
 
 ::-webkit-scrollbar {
@@ -70,16 +75,16 @@ body {
 }
 
 .font-display {
-    font-family: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+    font-family: "Bricolage Grotesque", "Geist", sans-serif;
 }
 .font-body2 {
     font-family: "Geist", "Inter", system-ui, -apple-system, sans-serif;
 }
 .font-mono2 {
-    font-family: "Geist Mono", "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-family: "JetBrains Mono", "Geist Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
-/* grain overlay */
+/* grain overlay — lighter on light bg */
 .grain::after {
     content: "";
     position: fixed;
@@ -88,7 +93,7 @@ body {
     height: 200%;
     pointer-events: none;
     z-index: 60;
-    opacity: 0.05;
+    opacity: 0.025;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     animation: grain-shift 9s steps(6) infinite;
 }
@@ -121,22 +126,31 @@ body {
     animation: blink-caret 1s step-end infinite;
 }
 
-/* pulse dot */
+/* pulse dot — forest green on light theme */
 @keyframes pulse-dot {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(124, 140, 255, 0.45); }
-    60% { box-shadow: 0 0 0 8px rgba(124, 140, 255, 0); }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(31, 77, 64, 0.4); }
+    60% { box-shadow: 0 0 0 8px rgba(31, 77, 64, 0); }
 }
 .pulse-dot {
     animation: pulse-dot 2.4s ease-out infinite;
 }
 
+/* pulse dot accent variant */
+@keyframes pulse-dot-accent {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 90, 43, 0.4); }
+    60% { box-shadow: 0 0 0 8px rgba(255, 90, 43, 0); }
+}
+.pulse-dot-accent {
+    animation: pulse-dot-accent 2.4s ease-out infinite;
+}
+
 /* outlined watermark text */
 .text-stroke {
-    -webkit-text-stroke: 1px rgba(242, 244, 247, 0.12);
+    -webkit-text-stroke: 1px rgba(20, 38, 31, 0.08);
     color: transparent;
 }
 
-/* magnetic spotlight card */
+/* magnetic spotlight card — warm tint on light surfaces */
 .spotlight-card {
     position: relative;
     overflow: hidden;
@@ -147,7 +161,7 @@ body {
     inset: 0;
     background: radial-gradient(
         320px circle at var(--mx, 50%) var(--my, 50%),
-        rgba(124, 140, 255, 0.10),
+        rgba(255, 90, 43, 0.06),
         transparent 65%
     );
     opacity: 0;
@@ -158,10 +172,38 @@ body {
     opacity: 1;
 }
 
+/* Spec numeral watermark */
+.spec-numeral {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(100px, 15vw, 200px);
+    line-height: 0.85;
+    font-weight: 800;
+    letter-spacing: -0.06em;
+    user-select: none;
+    pointer-events: none;
+    color: rgba(200, 209, 195, 0.5);
+}
+
+/* section divider lines */
+.section-rule {
+    border-color: var(--border);
+}
+
+/* Terminal scrollbar */
+.terminal-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+.terminal-scrollbar::-webkit-scrollbar-thumb {
+    background: #C8D1C3;
+    border-radius: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .animate-marquee,
     .grain::after,
-    .pulse-dot {
+    .pulse-dot,
+    .pulse-dot-accent {
         animation: none !important;
     }
 }

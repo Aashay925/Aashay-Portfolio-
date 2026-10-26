@@ -219,15 +219,15 @@ export function AIAssistant() {
     }
 
     return (
-      <div className="space-y-2 text-[13.5px] leading-relaxed text-[#D4D9E2] font-sans">
+      <div className="space-y-2 text-[13.5px] leading-relaxed text-[#DCE4DF] font-sans">
         {blocks.map((block, idx) => {
           if (block.type === "list") {
             return (
-              <ul key={idx} className="space-y-1.5 my-1.5 pl-3 border-l border-[#2B313B]">
+              <ul key={idx} className="space-y-1.5 my-1.5 pl-3 border-l border-[#1F4D40]">
                 {block.items.map((item, itemIdx) => (
                   <li
                     key={itemIdx}
-                    className="text-[#CFD5E0]"
+                    className="text-[#CFD9D4]"
                     dangerouslySetInnerHTML={{ __html: formatInline(item) }}
                   />
                 ))}
@@ -253,7 +253,7 @@ export function AIAssistant() {
       // Inline code
       .replace(
         /`([^`]+)`/g,
-        "<code class='bg-[#222731] text-[#93A2FF] px-1 py-0.5 rounded text-xs font-mono'>$1</code>"
+        "<code class='bg-[#172E24] text-[#FF8E6E] px-1 py-0.5 rounded text-xs font-mono'>$1</code>"
       )
       // Remove any lingering single asterisks
       .replace(/(^|[^\*])\*([^\*]|$)/g, "$1$2");
@@ -264,7 +264,7 @@ export function AIAssistant() {
   return (
     <>
       {/* Floating Launcher Trigger */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
         <AnimatePresence>
           {!isOpen && (
             <motion.button
@@ -276,30 +276,30 @@ export function AIAssistant() {
               onClick={() => setIsOpen(true)}
               className="group relative flex items-center cursor-pointer"
             >
-              {/* Vibrant ambient glow ring */}
-              <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#7C8CFF] via-[#9B7CFF] to-[#38BDF8] opacity-80 blur-md group-hover:opacity-100 group-hover:blur-lg transition-all duration-500 animate-pulse" />
+              {/* Warm ambient glow ring */}
+              <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#FF5A2B]/40 via-[#FF5A2B]/20 to-[#1F4D40]/40 opacity-80 blur-md group-hover:opacity-100 group-hover:blur-lg transition-all duration-500 animate-pulse" />
 
               {/* Surface Container */}
-              <div className="relative flex items-center gap-3 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#171B28] via-[#1D2235] to-[#151926] border-2 border-[#7C8CFF] shadow-[0_0_25px_rgba(124,140,255,0.45)] backdrop-blur-xl transition-all duration-300 group-hover:border-[#A5B4FC]">
+              <div className="relative flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full bg-[#14261F] border border-[#1F4D40] shadow-[0_4px_25px_rgba(20,38,31,0.35)] backdrop-blur-xl transition-all duration-300 group-hover:border-[#FF5A2B]/60">
                 {/* Glowing Icon Badge */}
-                <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-tr from-[#7C8CFF] to-[#5969F6] text-white shadow-md shadow-[#7C8CFF]/50">
-                  <Sparkles className="w-4 h-4" />
+                <div className="relative flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#FF5A2B] text-white shadow-md shadow-[#FF5A2B]/40">
+                  <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#56F0A0] opacity-85"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#56F0A0]"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#48D597] opacity-85"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#48D597]"></span>
                   </span>
                 </div>
 
                 <div className="text-left pr-1">
-                  <div className="text-xs font-semibold tracking-wider text-white">
+                  <div className="text-xs font-semibold tracking-wider text-[#F2F5EE]">
                     Ask Aashay AI
                   </div>
-                  <div className="text-[10px] text-[#AAB7CE] font-medium">
+                  <div className="text-[10px] text-[#9CB3A8] font-medium hidden min-[360px]:block">
                     Recruiter & Client Modes
                   </div>
                 </div>
 
-                <div className="hidden sm:flex items-center px-1.5 py-0.5 rounded-md bg-[#252D42] text-[10px] font-mono font-medium text-[#C5D0E6] border border-[#3B4668]">
+                <div className="hidden sm:flex items-center px-1.5 py-0.5 rounded-md bg-[#0E1A15] text-[10px] font-mono font-medium text-[#9CB3A8] border border-[#1F4D40]">
                   Ctrl K
                 </div>
               </div>
@@ -316,34 +316,34 @@ export function AIAssistant() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 280 }}
-            className={`fixed bottom-6 right-6 z-50 flex flex-col bg-[#12151B]/95 border border-[#262B33] rounded-2xl shadow-2xl backdrop-blur-2xl overflow-hidden transition-all duration-300 ${
+            className={`fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-50 flex flex-col bg-[#14261F] border border-[#1F4D40] rounded-2xl shadow-2xl backdrop-blur-2xl overflow-hidden transition-all duration-300 ${
               isExpanded
-                ? "w-[94vw] sm:w-[620px] h-[84vh] max-w-[700px]"
-                : "w-[94vw] sm:w-[440px] h-[600px] max-w-[480px]"
+                ? "w-[calc(100vw-24px)] sm:w-[620px] h-[90vh] sm:h-[84vh] max-w-[700px]"
+                : "w-[calc(100vw-24px)] sm:w-[440px] h-[85vh] sm:h-[600px] max-w-[480px]"
             }`}
           >
             {/* Header */}
-            <div className="px-4 py-3 bg-[#161A22] border-b border-[#262B33]">
+            <div className="px-4 py-3 bg-[#0F1E18] border-b border-[#1F4D40]">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <div
                     className={`relative w-8 h-8 rounded-lg flex items-center justify-center transition-colors border ${
                       isRecruiter
-                        ? "bg-[#7C8CFF]/15 border-[#7C8CFF]/30 text-[#7C8CFF]"
-                        : "bg-[#56F0A0]/15 border-[#56F0A0]/30 text-[#56F0A0]"
+                        ? "bg-[#FF5A2B]/15 border-[#FF5A2B]/40 text-[#FF5A2B]"
+                        : "bg-[#48D597]/15 border-[#48D597]/40 text-[#48D597]"
                     }`}
                   >
                     {isRecruiter ? <Briefcase className="w-4 h-4" /> : <Rocket className="w-4 h-4" />}
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <span className="text-sm font-semibold text-[#F2F4F7]">Aashay AI</span>
-                      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#56F0A0]/10 text-[#56F0A0] border border-[#56F0A0]/20">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#56F0A0]"></span>
+                      <span className="text-sm font-semibold text-[#F2F5EE]">Aashay AI</span>
+                      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#48D597]/10 text-[#48D597] border border-[#48D597]/30">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#48D597]"></span>
                         Online
                       </span>
                     </div>
-                    <p className="text-[10px] text-[#7E8694]">
+                    <p className="text-[10px] text-[#8DA398]">
                       {isRecruiter ? "Technical Architecture & Hiring" : "Business ROI & Project Solutions"}
                     </p>
                   </div>
@@ -353,21 +353,21 @@ export function AIAssistant() {
                   <button
                     onClick={handleClearChat}
                     title="Reset Conversation"
-                    className="p-1.5 rounded-lg text-[#7E8694] hover:text-[#F2F4F7] hover:bg-[#1F242D] transition-colors"
+                    className="p-1.5 rounded-lg text-[#8DA398] hover:text-[#F2F5EE] hover:bg-[#1A3328] transition-colors"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                   </button>
                   <button
                     onClick={() => setIsExpanded(!isExpanded)}
                     title={isExpanded ? "Collapse" : "Expand"}
-                    className="hidden sm:inline-flex p-1.5 rounded-lg text-[#7E8694] hover:text-[#F2F4F7] hover:bg-[#1F242D] transition-colors"
+                    className="hidden sm:inline-flex p-1.5 rounded-lg text-[#8DA398] hover:text-[#F2F5EE] hover:bg-[#1A3328] transition-colors"
                   >
                     {isExpanded ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
                   </button>
                   <button
                     onClick={() => setIsOpen(false)}
                     title="Close Assistant"
-                    className="p-1.5 rounded-lg text-[#7E8694] hover:text-[#F2F4F7] hover:bg-[#1F242D] transition-colors"
+                    className="p-1.5 rounded-lg text-[#8DA398] hover:text-[#F2F5EE] hover:bg-[#1A3328] transition-colors"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -375,14 +375,14 @@ export function AIAssistant() {
               </div>
 
               {/* Mode Switcher Pills */}
-              <div className="mt-2.5 p-1 bg-[#0F1116] rounded-xl border border-[#232832] flex items-center gap-1">
+              <div className="mt-2.5 p-1 bg-[#0B1713] rounded-xl border border-[#1F4D40] flex items-center gap-1">
                 <button
                   type="button"
                   onClick={() => handleModeChange("recruiter")}
-                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs font-medium transition-all ${
+                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs font-semibold transition-all ${
                     isRecruiter
-                      ? "bg-[#7C8CFF] text-white shadow-sm"
-                      : "text-[#8E96A4] hover:text-[#F2F4F7] hover:bg-[#171B22]"
+                      ? "bg-[#FF5A2B] text-white shadow-sm"
+                      : "text-[#8DA398] hover:text-[#F2F5EE] hover:bg-[#142921]"
                   }`}
                 >
                   <Briefcase className="w-3.5 h-3.5" />
@@ -392,10 +392,10 @@ export function AIAssistant() {
                 <button
                   type="button"
                   onClick={() => handleModeChange("client")}
-                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs font-medium transition-all ${
+                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs font-semibold transition-all ${
                     !isRecruiter
-                      ? "bg-[#1E8A5A] text-white shadow-sm"
-                      : "text-[#8E96A4] hover:text-[#F2F4F7] hover:bg-[#171B22]"
+                      ? "bg-[#1F4D40] text-[#BCEDDB] border border-[#48D597]/40 shadow-sm"
+                      : "text-[#8DA398] hover:text-[#F2F5EE] hover:bg-[#142921]"
                   }`}
                 >
                   <Rocket className="w-3.5 h-3.5" />
@@ -405,7 +405,7 @@ export function AIAssistant() {
             </div>
 
             {/* Messages Body */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-[#262B33]">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-[#1F4D40]">
               {messages.map((msg, index) => (
                 <div
                   key={index}
@@ -414,7 +414,7 @@ export function AIAssistant() {
                   }`}
                 >
                   {msg.role === "assistant" && (
-                    <div className="w-6 h-6 rounded-md bg-[#1C2029] border border-[#2B313D] flex items-center justify-center flex-shrink-0 text-[#7C8CFF] mt-0.5">
+                    <div className={`w-6 h-6 rounded-md bg-[#0E1A15] border border-[#1F4D40] flex items-center justify-center flex-shrink-0 ${isRecruiter ? "text-[#FF5A2B]" : "text-[#48D597]"} mt-0.5`}>
                       <Sparkles className="w-3.5 h-3.5" />
                     </div>
                   )}
@@ -423,9 +423,9 @@ export function AIAssistant() {
                     className={`rounded-xl px-3.5 py-2.5 max-w-[85%] ${
                       msg.role === "user"
                         ? isRecruiter
-                          ? "bg-[#7C8CFF] text-white font-medium"
-                          : "bg-[#1E8A5A] text-white font-medium"
-                        : "bg-[#181C24] border border-[#262B33] shadow-md"
+                          ? "bg-[#FF5A2B] text-white font-medium shadow-sm"
+                          : "bg-[#1F4D40] text-white font-medium border border-[#48D597]/30 shadow-sm"
+                        : "bg-[#0E1A15] border border-[#1F4D40] shadow-md"
                     }`}
                   >
                     {msg.role === "user" ? (
@@ -436,7 +436,7 @@ export function AIAssistant() {
                   </div>
 
                   {msg.role === "user" && (
-                    <div className="w-6 h-6 rounded-md bg-[#2B313D] border border-[#3A4252] flex items-center justify-center flex-shrink-0 text-[#A1A7B3] mt-0.5">
+                    <div className="w-6 h-6 rounded-md bg-[#172E24] border border-[#1F4D40] flex items-center justify-center flex-shrink-0 text-[#8DA398] mt-0.5">
                       <User className="w-3.5 h-3.5" />
                     </div>
                   )}
@@ -445,11 +445,11 @@ export function AIAssistant() {
 
               {/* Natural Thinking Indicator */}
               {isThinking && (
-                <div className="flex items-center gap-2.5 text-xs text-[#9DA4B0] pl-9 py-1">
+                <div className="flex items-center gap-2.5 text-xs text-[#8DA398] pl-9 py-1">
                   <span className="flex space-x-1">
-                    <span className="w-1.5 h-1.5 bg-[#7C8CFF] rounded-full animate-bounce [animation-delay:-0.3s]"></span>
-                    <span className="w-1.5 h-1.5 bg-[#7C8CFF] rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                    <span className="w-1.5 h-1.5 bg-[#7C8CFF] rounded-full animate-bounce"></span>
+                    <span className={`w-1.5 h-1.5 ${isRecruiter ? "bg-[#FF5A2B]" : "bg-[#48D597]"} rounded-full animate-bounce [animation-delay:-0.3s]`}></span>
+                    <span className={`w-1.5 h-1.5 ${isRecruiter ? "bg-[#FF5A2B]" : "bg-[#48D597]"} rounded-full animate-bounce [animation-delay:-0.15s]`}></span>
+                    <span className={`w-1.5 h-1.5 ${isRecruiter ? "bg-[#FF5A2B]" : "bg-[#48D597]"} rounded-full animate-bounce`}></span>
                   </span>
                   <span className="font-mono text-[11px]">
                     {isRecruiter ? "Analyzing technical background..." : "Formulating solution & ROI scoping..."}
@@ -459,10 +459,10 @@ export function AIAssistant() {
 
               {/* Streaming Indicator */}
               {isStreaming && (
-                <div className="flex items-center gap-2 text-xs font-mono text-[#7C8CFF] pl-9">
+                <div className={`flex items-center gap-2 text-xs font-mono ${isRecruiter ? "text-[#FF5A2B]" : "text-[#48D597]"} pl-9`}>
                   <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7C8CFF] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#7C8CFF]"></span>
+                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${isRecruiter ? "bg-[#FF5A2B]" : "bg-[#48D597]"} opacity-75`}></span>
+                    <span className={`relative inline-flex rounded-full h-2 w-2 ${isRecruiter ? "bg-[#FF5A2B]" : "bg-[#48D597]"}`}></span>
                   </span>
                   Streaming response...
                 </div>
@@ -473,8 +473,8 @@ export function AIAssistant() {
 
             {/* Quick Prompt Suggestions */}
             {messages.length <= 2 && !isThinking && (
-              <div className="px-4 py-2 border-t border-[#1F242D] bg-[#14171E]/60">
-                <div className="text-[10px] font-mono text-[#69717D] uppercase tracking-wider mb-1.5">
+              <div className="px-4 py-2 border-t border-[#1F4D40] bg-[#0F1E18]">
+                <div className="text-[10px] font-mono text-[#8DA398] uppercase tracking-wider mb-1.5">
                   Suggested Questions
                 </div>
                 <div className="flex flex-wrap gap-1.5">
@@ -482,7 +482,9 @@ export function AIAssistant() {
                     <button
                       key={i}
                       onClick={() => handleSendMessage(question)}
-                      className="text-left text-xs text-[#A1A7B3] hover:text-[#F2F4F7] bg-[#1A1E26] hover:bg-[#222731] border border-[#262B33] hover:border-[#7C8CFF]/40 rounded-lg px-2.5 py-1 transition-all"
+                      className={`text-left text-xs text-[#CFD9D4] hover:text-white bg-[#0E1A15] hover:bg-[#172E24] border border-[#1F4D40] ${
+                        isRecruiter ? "hover:border-[#FF5A2B]/60" : "hover:border-[#48D597]/60"
+                      } rounded-lg px-2.5 py-1 transition-all`}
                     >
                       {question}
                     </button>
@@ -492,7 +494,7 @@ export function AIAssistant() {
             )}
 
             {/* Input Bar */}
-            <div className="p-3 bg-[#161A22] border-t border-[#262B33]">
+            <div className="p-3 bg-[#0F1E18] border-t border-[#1F4D40]">
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -511,19 +513,21 @@ export function AIAssistant() {
                       : "Ask about project scoping, pricing, ROI, turnaround..."
                   }
                   disabled={isStreaming || isThinking}
-                  className="flex-1 bg-[#0F1116] border border-[#262B33] focus:border-[#7C8CFF] focus:outline-none rounded-xl px-3.5 py-2.5 text-sm text-[#F2F4F7] placeholder-[#5A6270] transition-colors"
+                  className={`flex-1 bg-[#0B1713] border border-[#1F4D40] ${
+                    isRecruiter ? "focus:border-[#FF5A2B]" : "focus:border-[#48D597]"
+                  } focus:outline-none rounded-xl px-3.5 py-2.5 text-sm text-[#F2F5EE] placeholder-[#5D776C] transition-colors`}
                 />
                 <button
                   type="submit"
                   disabled={!input.trim() || isStreaming || isThinking}
                   className={`p-2.5 rounded-xl text-white transition-all flex items-center justify-center flex-shrink-0 disabled:opacity-40 ${
-                    isRecruiter ? "bg-[#7C8CFF] hover:bg-[#6879F7]" : "bg-[#1E8A5A] hover:bg-[#1b7a50]"
+                    isRecruiter ? "bg-[#FF5A2B] hover:bg-[#E0481D]" : "bg-[#1F4D40] hover:bg-[#2A6655] border border-[#48D597]/40"
                   }`}
                 >
                   <Send className="w-4 h-4" />
                 </button>
               </form>
-              <div className="text-[10px] text-center text-[#5A6270] mt-2 font-mono">
+              <div className="text-[10px] text-center text-[#5D776C] mt-2 font-mono">
                 {isRecruiter
                   ? "Evaluating Aashay Soni • Press Enter to send"
                   : "Discussing Freelance & Projects • Press Enter to send"}

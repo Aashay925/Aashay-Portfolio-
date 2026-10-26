@@ -12,10 +12,10 @@ Core Expertise: Agentic AI (LangGraph, CrewAI), Production RAG (Gemini, MongoDB 
 
 ### Key Projects & Impact:
 1. WhatsApp Campaigns Automation Tool:
-   - In-house marketing middleware replacing an expensive commercial SaaS tool costing ₹80,000/month.
+   - In-house marketing middleware replacing an expensive commercial SaaS tool costing ₹80,000/annum.
    - Built with LangGraph, LangChain, React, FastAPI, Python, and MongoDB.
    - Converts natural language instructions into segmented campaign drafts with 100% human-in-the-loop review.
-   - Impact: Saves ₹80,000/month, eliminates manual drafting.
+   - Impact: Saves ₹80,000/annum, eliminates manual drafting.
 
 2. KABPL Quiz App & RAG Knowledge Assistant:
    - Replaced manual product lookups across agrochemical documentation.
@@ -55,7 +55,7 @@ const STRICT_RESPONSE_RULES = `
 2. NO LOCATION REFERENCES:
    - Never mention Jabalpur or India. Do not state where Aashay is based.
 3. COST ACCURACY:
-   - The WhatsApp campaign tool saved ₹80,000/month (by replacing an ₹80,000/month SaaS tool). Never state 72,000.
+   - The WhatsApp campaign tool saved ₹80,000/annum (by replacing an ₹80,000/annum SaaS tool). Never state 72,000.
 4. CLEAN FORMATTING & MINIMAL EMOJIS:
    - Avoid excessive emojis (use none or at most one discreet emoji).
    - Do NOT clutter text with inline asterisks (*) or excessive hyphens. Write clean, natural sentences.

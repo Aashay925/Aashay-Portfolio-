@@ -4,7 +4,7 @@ import { ArrowDown, ArrowUpRight, FileDown } from "lucide-react";
 import { PROFILE, HERO_STREAM } from "../data/content";
 import { AgentWorkflowGraph } from "./AgentWorkflowGraph";
 
-/* Lightweight agent-signal node mesh */
+/* Lightweight node mesh — sage/forest palette */
 const NodeMesh = () => {
   const ref = useRef(null);
 
@@ -12,7 +12,7 @@ const NodeMesh = () => {
     const canvas = ref.current;
     const ctx = canvas.getContext("2d");
     let raf, w, h;
-    const N = 42;
+    const N = 38;
     let nodes = [];
 
     const resize = () => {
@@ -24,10 +24,10 @@ const NodeMesh = () => {
 
     nodes = Array.from({ length: N }, () => ({
       x: Math.random(), y: Math.random(),
-      vx: (Math.random() - 0.5) * 0.0006,
-      vy: (Math.random() - 0.5) * 0.0006,
-      r: Math.random() * 1.6 + 0.6,
-      ember: Math.random() > 0.82,
+      vx: (Math.random() - 0.5) * 0.0005,
+      vy: (Math.random() - 0.5) * 0.0005,
+      r: Math.random() * 1.4 + 0.5,
+      accent: Math.random() > 0.82,
     }));
 
     const draw = () => {
@@ -43,7 +43,7 @@ const NodeMesh = () => {
           const dx = (a.x - b.x) * w, dy = (a.y - b.y) * h;
           const d = Math.hypot(dx, dy);
           if (d < w * 0.09) {
-            ctx.strokeStyle = `rgba(161,167,179,${0.08 * (1 - d / (w * 0.09))})`;
+            ctx.strokeStyle = `rgba(31,77,64,${0.07 * (1 - d / (w * 0.09))})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x * w, a.y * h);
@@ -53,7 +53,7 @@ const NodeMesh = () => {
         }
       }
       for (const n of nodes) {
-        ctx.fillStyle = n.ember ? "rgba(124,140,255,0.75)" : "rgba(161,167,179,0.35)";
+        ctx.fillStyle = n.accent ? "rgba(255,90,43,0.45)" : "rgba(31,77,64,0.2)";
         ctx.beginPath();
         ctx.arc(n.x * w, n.y * h, n.r * devicePixelRatio, 0, Math.PI * 2);
         ctx.fill();
@@ -85,15 +85,15 @@ const AgentStream = () => {
   return (
     <div
       data-testid="agent-stream-badge"
-      className="inline-flex items-center gap-3 rounded-full border border-[#262B33] bg-[#14171C]/80 backdrop-blur px-4 py-2"
+      className="inline-flex items-center gap-2.5 sm:gap-3 rounded-full border border-[#C8D1C3] bg-[#E4E8DF] px-3.5 sm:px-4 py-1.5 sm:py-2 shadow-sm max-w-full"
     >
-      <span className="relative flex h-2 w-2">
-        <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-[#7C8CFF]" />
-        <span className="relative inline-flex h-2 w-2 rounded-full bg-[#7C8CFF]" />
+      <span className="relative flex h-2 w-2 shrink-0">
+        <span className="pulse-dot-accent absolute inline-flex h-full w-full rounded-full bg-[#FF5A2B]" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FF5A2B]" />
       </span>
-      <span className="font-mono2 text-xs sm:text-sm text-[#A1A7B3]">
-        {HERO_STREAM[line].slice(0, chars)}
-        <span className="caret-blink text-[#7C8CFF]">▍</span>
+      <span className="font-mono2 text-[11px] sm:text-sm text-[#14261F] tracking-wide truncate">
+        {HERO_STREAM[line]?.slice(0, chars)}
+        <span className="caret-blink text-[#FF5A2B]">▍</span>
       </span>
     </div>
   );
@@ -126,34 +126,38 @@ export const Hero = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-start lg:justify-center pt-24 sm:pt-28 lg:pt-32 pb-16 overflow-x-hidden" data-testid="hero-section">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex flex-col justify-start lg:justify-center pt-20 sm:pt-24 lg:pt-28 pb-16 overflow-x-hidden border-b border-[#C8D1C3]"
+      data-testid="hero-section"
+    >
       {/* atmosphere */}
       <motion.div style={{ y: yBg }} className="absolute inset-0 overflow-hidden pointer-events-none">
         <NodeMesh />
-        <div className="absolute -top-40 -left-40 w-[34rem] h-[34rem] rounded-full bg-[#7C8CFF]/[0.05] blur-[140px]" />
-        <div className="absolute bottom-0 right-0 w-[30rem] h-[30rem] rounded-full bg-[#7C8CFF]/[0.03] blur-[140px]" />
+        <div className="absolute -top-40 -left-40 w-[34rem] h-[34rem] rounded-full bg-[#1F4D40]/[0.04] blur-[140px]" />
+        <div className="absolute bottom-0 right-0 w-[30rem] h-[30rem] rounded-full bg-[#FF5A2B]/[0.03] blur-[140px]" />
       </motion.div>
 
       <motion.div
         style={{ opacity }}
-        className="relative w-full max-w-[1800px] mx-auto px-5 sm:px-10 lg:px-14 xl:px-20 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 xl:gap-14"
+        className="relative w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 xl:gap-14"
       >
-        <div className="w-full lg:max-w-[580px] xl:max-w-[640px] shrink-0">
+        <div className="w-full lg:max-w-[580px] xl:max-w-[640px] shrink-0 space-y-5 sm:space-y-6">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }}>
             <AgentStream />
           </motion.div>
 
-          <h1 className="mt-5 sm:mt-6 font-display tracking-tight text-[#F2F4F7]" data-testid="hero-title">
-            <div className="leading-[0.92] text-[2.4rem] sm:text-[3.5rem] lg:text-[4.15rem] xl:text-[4.65rem] font-semibold">
-              <MaskedLine delay={0.2} className="pr-3 sm:pr-4">AASHAY</MaskedLine>
-              <MaskedLine delay={0.3} className="pr-3 sm:pr-4 text-[#A1A7B3]">SONI</MaskedLine>
+          <h1 className="font-display tracking-tight text-[#14261F]" data-testid="hero-title">
+            <div className="leading-[0.88] text-[2.5rem] min-[380px]:text-[2.9rem] sm:text-[4.2rem] lg:text-[5rem] xl:text-[5.5rem] font-bold uppercase tracking-[-0.04em]">
+              <MaskedLine delay={0.2}>AASHAY</MaskedLine>
+              <MaskedLine delay={0.3} className="text-[#52635B]">SONI</MaskedLine>
             </div>
 
-            <div className="mt-3.5 flex flex-col gap-0.5 leading-tight text-lg sm:text-2xl lg:text-[1.85rem] font-medium">
-              <MaskedLine delay={0.4} className="text-[#F2F4F7]">
-                Architecting <span className="text-[#7C8CFF] font-semibold">Autonomous Systems</span>
+            <div className="mt-3.5 sm:mt-4 space-y-1 text-base min-[380px]:text-lg sm:text-2xl lg:text-[1.6rem] font-semibold leading-tight tracking-tight">
+              <MaskedLine delay={0.4} className="text-[#14261F]">
+                Architecting <span className="text-[#FF5A2B]">Autonomous Systems</span>
               </MaskedLine>
-              <MaskedLine delay={0.5} className="text-[#A1A7B3]">
+              <MaskedLine delay={0.5} className="text-[#52635B] font-normal text-sm sm:text-lg lg:text-xl">
                 and intelligent automation built for real impact.
               </MaskedLine>
             </div>
@@ -163,7 +167,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.65, duration: 0.7 }}
-            className="mt-4 max-w-lg text-sm sm:text-base lg:text-lg text-[#A1A7B3] leading-relaxed font-normal"
+            className="max-w-lg text-sm sm:text-base text-[#424845] leading-relaxed font-normal"
             data-testid="hero-tagline"
           >
             {PROFILE.tagline}
@@ -173,35 +177,56 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.7 }}
-            className="mt-7 sm:mt-8 flex flex-wrap items-center gap-3.5 sm:gap-4"
+            className="flex flex-wrap items-center gap-2.5 sm:gap-4 pt-1"
           >
             <button
               data-testid="hero-cta-explore"
               onClick={() => scrollTo("#work")}
-              className="group inline-flex items-center gap-2 rounded-full bg-[#7C8CFF] px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold text-[#0D0F12] hover:bg-[#A5AEFF] hover:text-[#0D0F12] transition-colors"
+              className="group inline-flex items-center gap-2 rounded-[4px] bg-[#FF5A2B] px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-white hover:bg-[#e0481b] active:bg-[#c4380f] transition-colors shadow-sm"
             >
               Explore Architecture
-              <ArrowDown size={15} className="transition-transform group-hover:translate-y-0.5" />
+              <ArrowDown size={14} className="transition-transform group-hover:translate-y-0.5" />
             </button>
             <button
               data-testid="hero-cta-contact"
               onClick={() => scrollTo("#contact")}
-              className="group inline-flex items-center gap-2 rounded-full border border-[#303640] px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold text-[#F2F4F7] hover:border-[#7C8CFF] hover:text-[#7C8CFF] transition-colors"
+              className="group inline-flex items-center gap-2 rounded-[4px] border border-[#C8D1C3] bg-[#FFFFFF] px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-[#14261F] hover:bg-[#E4E8DF] transition-colors"
             >
               Initiate Contact
-              <ArrowUpRight size={15} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </button>
             <a
               data-testid="hero-cta-resume"
               href={PROFILE.resumeUrl}
-              className="group inline-flex items-center gap-2 font-mono2 text-xs tracking-[0.15em] uppercase text-[#6B7280] hover:text-[#A5AEFF] transition-colors py-2"
+              className="group inline-flex items-center gap-1.5 font-mono2 text-[10px] tracking-[0.15em] uppercase text-[#52635B] hover:text-[#FF5A2B] transition-colors py-2"
             >
-              <FileDown size={14} /> Resume.pdf
+              <FileDown size={13} /> Resume.pdf
             </a>
+          </motion.div>
+
+          {/* Spec strip */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.0 }}
+            className="pt-4 grid grid-cols-1 min-[380px]:grid-cols-3 gap-2 sm:gap-3 border-t border-[#C8D1C3]"
+          >
+            <div>
+              <span className="font-mono2 text-[9px] text-[#52635B] block uppercase tracking-wider">SPECIALTY</span>
+              <span className="font-mono2 text-[10px] text-[#14261F] font-semibold uppercase">AGENTIC RAG</span>
+            </div>
+            <div>
+              <span className="font-mono2 text-[9px] text-[#52635B] block uppercase tracking-wider">ORCHESTRATION</span>
+              <span className="font-mono2 text-[10px] text-[#14261F] font-semibold uppercase">LANGGRAPH</span>
+            </div>
+            <div>
+              <span className="font-mono2 text-[9px] text-[#52635B] block uppercase tracking-wider">DEPLOY STATUS</span>
+              <span className="font-mono2 text-[10px] text-[#1F4D40] font-semibold uppercase">PRODUCTION</span>
+            </div>
           </motion.div>
         </div>
 
-        {/* Interactive AI Agent Orchestration Workflow Node Graph (Visible on all devices, fully responsive) */}
+        {/* Interactive AI Agent Orchestration Workflow Node Graph */}
         <motion.div
           style={{ y: yCard }}
           className="w-full max-w-[540px] xl:max-w-[590px] shrink-0 mt-6 lg:mt-0"
@@ -220,9 +245,10 @@ export const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="hidden lg:block absolute bottom-8 left-1/2 -translate-x-1/2 font-mono2 text-[10px] tracking-[0.35em] uppercase text-[#6B7280]"
+        className="hidden lg:flex flex-col items-center gap-2 absolute bottom-8 left-1/2 -translate-x-1/2 text-[#52635B]"
       >
-        scroll to descend
+        <span className="font-mono2 text-[9px] tracking-[0.35em] uppercase"></span>
+        <div className="w-px h-8 bg-[#C8D1C3]" />
       </motion.div>
     </section>
   );

@@ -35,44 +35,50 @@ const AgentSandbox = () => {
 
   return (
     <div
-      className="rounded-2xl border border-[#262B33] bg-[#14171C]/90 backdrop-blur p-6 sm:p-8 flex flex-col shadow-[0_0_50px_rgba(124,140,255,0.04)]"
+      className="rounded-[6px] border border-[#C8D1C3] bg-[#FFFFFF] overflow-hidden flex flex-col shadow-sm"
       data-testid="agent-sandbox"
     >
-      <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#262B33]">
-        <div className="flex items-center gap-2.5">
-          <Terminal size={16} className="text-[#7C8CFF]" />
-          <p className="font-mono2 text-xs tracking-[0.25em] uppercase text-[#A1A7B3]">agent.sandbox — simulated runtime</p>
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#C8D1C3] bg-[#FFFFFF]">
+        <div className="flex items-center gap-2">
+          <Terminal size={14} className="text-[#FF5A2B]" />
+          <p className="font-mono2 text-[10px] tracking-[0.25em] uppercase text-[#14261F] font-semibold">AGENT.SANDBOX — SIMULATED RUNTIME</p>
         </div>
         <div className="flex items-center gap-2">
           <span className="relative flex h-2 w-2">
-            <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-[#65C18C] opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#65C18C]" />
+            <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-[#1F4D40] opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#1F4D40]" />
           </span>
-          <span className="font-mono2 text-[10px] tracking-wider text-[#65C18C] uppercase hidden sm:inline">Active</span>
+          <span className="font-mono2 text-[9px] tracking-wider text-[#1F4D40] uppercase bg-[#E4E8DF] border border-[#C8D1C3] px-2 py-0.5 rounded-[3px]">STATE: READY</span>
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-6">
+      {/* Tabs */}
+      <div className="flex border-b border-[#C8D1C3] bg-[#E4E8DF]">
         {Object.entries(AGENT_SIMULATIONS).map(([key, a]) => (
           <button
             key={key}
             data-testid={`sandbox-agent-${key}`}
             onClick={() => setActive(key)}
-            className={`rounded-full px-4 py-1.5 font-mono2 text-xs transition-all ${
+            className={`px-3.5 py-1.5 font-mono2 text-[10px] tracking-wide transition-all border-r border-[#C8D1C3] last:border-r-0 font-semibold ${
               active === key
-                ? "bg-[#7C8CFF] text-[#0D0F12] font-semibold shadow-[0_0_20px_rgba(124,140,255,0.25)]"
-                : "border border-[#262B33] bg-[#191D23] text-[#A1A7B3] hover:border-[#7C8CFF]/60 hover:text-[#F2F4F7]"
+                ? "bg-[#FFFFFF] text-[#14261F] border-t-2 border-t-[#1F4D40]"
+                : "bg-transparent text-[#52635B] hover:text-[#14261F] border-t-2 border-t-transparent"
             }`}
           >
-            {a.label}
+            [{a.label}]
           </button>
         ))}
       </div>
 
+      {/* Output */}
       <div
-        className="flex-1 rounded-xl bg-[#0D0F12] border border-[#262B33] p-5 font-mono2 text-xs sm:text-sm leading-7 text-[#A1A7B3] min-h-[220px] shadow-inner"
+        className="flex-1 bg-[#F7FBF1] border-0 p-4 font-mono2 text-xs sm:text-sm leading-7 text-[#14261F] min-h-[220px]"
         data-testid="sandbox-output"
       >
+        <div className="text-[#52635B] text-[9px] mb-2">
+          // EXECUTION LOG: TASK_ID #8921-AGRO-QUERY
+        </div>
         <AnimatePresence mode="wait">
           <motion.div key={active} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             {AGENT_SIMULATIONS[active].steps.slice(0, visible).map((s, i) => (
@@ -80,56 +86,92 @@ const AgentSandbox = () => {
                 key={i}
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
-                className={s.startsWith("✓") ? "text-[#65C18C] font-medium" : s.startsWith("→") ? "text-[#7C8CFF]" : ""}
+                className={
+                  s.startsWith("✓")
+                    ? "text-[#1F4D40] font-medium"
+                    : s.startsWith("→")
+                    ? "text-[#FF5A2B]"
+                    : "text-[#424845]"
+                }
               >
                 {s}
               </motion.p>
             ))}
             {visible < AGENT_SIMULATIONS[active].steps.length && (
-              <span className="caret-blink text-[#7C8CFF]">▍</span>
+              <span className="caret-blink text-[#FF5A2B]">▍</span>
             )}
           </motion.div>
         </AnimatePresence>
+      </div>
+
+      {/* Footer bar */}
+      <div className="bg-[#E4E8DF] px-4 py-2 border-t border-[#C8D1C3] flex justify-between items-center font-mono2 text-[9px] text-[#52635B]">
+        <span>ENV: GCP CONTAINER RUNTIME</span>
+        <span>MEMORY: 184MB // CPU: 0.04 CORE</span>
       </div>
     </div>
   );
 };
 
 export const About = () => (
-  <section id="work" className="relative py-28 sm:py-36 overflow-hidden" data-testid="about-section">
-    {/* Subtle atmospheric glow */}
-    <div className="absolute top-1/3 -left-48 w-96 h-96 rounded-full bg-[#7C8CFF]/[0.05] blur-[120px] pointer-events-none" />
-    <div className="absolute bottom-1/4 -right-48 w-96 h-96 rounded-full bg-[#7C8CFF]/[0.03] blur-[120px] pointer-events-none" />
+  <section id="work" className="relative py-28 sm:py-36 overflow-hidden bg-[#F2F5EE]" data-testid="about-section">
+    {/* Spec numeral watermark */}
+    <div className="spec-numeral absolute -top-16 -left-6 z-0">01</div>
 
-    <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20">
+    <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 relative z-10">
+      {/* Section label */}
+      <div className="flex items-center gap-4 mb-12">
+        <span className="font-mono2 text-[10px] font-semibold tracking-widest text-[#1F4D40] uppercase">01 / ABOUT MY WORK</span>
+        <div className="h-px flex-1 bg-[#C8D1C3]" />
+        <span className="font-mono2 text-[9px] text-[#52635B] uppercase hidden sm:block">SYSTEM SPEC: AGENTIC CORE</span>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-16 items-start">
-        {/* Left Column: Heading, intro & stacked capability cards */}
-        <div className="lg:col-span-6 xl:col-span-6">
+        {/* Left Column */}
+        <div className="lg:col-span-6 space-y-6">
           <Reveal>
-            <p className="font-mono2 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#7C8CFF] mb-4" data-testid="about-eyebrow">
-              01 — About My Work
-            </p>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <h2 className="font-display text-3xl sm:text-5xl lg:text-[3.25rem] font-semibold tracking-tight text-[#F2F4F7] leading-[1.08]" data-testid="about-heading">
-              Practical AI systems and reliable automation <span className="text-[#7C8CFF]">built to ship.</span>
+            <h2
+              className="font-display text-3xl sm:text-5xl lg:text-[3.25rem] font-bold tracking-tight text-[#14261F] leading-[1.08]"
+              data-testid="about-heading"
+            >
+              Practical AI systems and reliable automation{" "}
+              <span className="text-[#FF5A2B]">built to ship.</span>
             </h2>
           </Reveal>
-          <Reveal delay={0.12}>
-            <p className="mt-5 text-base sm:text-lg text-[#A1A7B3] leading-relaxed max-w-xl font-normal">
+          <Reveal delay={0.08}>
+            <p className="text-base sm:text-lg text-[#424845] leading-relaxed max-w-xl font-normal">
               {PROFILE.summary}
             </p>
           </Reveal>
+          <Reveal delay={0.1}>
+            <p className="text-base text-[#424845] leading-relaxed max-w-xl font-normal">
+              Rather than generic wrapper demos, I design fault-tolerant multi-agent loops with deterministic state validation, human-in-the-loop triggers, and rigorous cost-to-latency balance across high-volume workflows.
+            </p>
+          </Reveal>
 
-          {/* Stacked capability cards */}
-          <div className="mt-10 space-y-4 sm:space-y-5">
+          {/* Spec Metrics strip */}
+          <Reveal delay={0.14}>
+            <div className="grid grid-cols-3 gap-3 p-4 bg-[#FFFFFF] border border-[#C8D1C3] rounded-[6px]">
+              {METRICS.map((m, i) => (
+                <div key={m.label} data-testid={`metric-${m.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
+                  <div className={`font-display text-2xl sm:text-3xl font-bold tracking-tight ${i === 1 ? "text-[#FF5A2B]" : "text-[#14261F]"}`}>
+                    {m.value}
+                  </div>
+                  <div className="font-mono2 text-[9px] text-[#52635B] uppercase tracking-wider mt-0.5">{m.label}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          {/* Capability cards */}
+          <div className="space-y-3">
             {CAPABILITIES.map((c, i) => {
               const Icon = CAP_ICONS[c.id] || Sparkles;
               return (
-                <Reveal key={c.id} delay={0.15 + i * 0.08}>
+                <Reveal key={c.id} delay={0.15 + i * 0.06}>
                   <div
                     data-testid={`capability-card-${c.id}`}
-                    className="spotlight-card group relative rounded-2xl border border-[#262B33] bg-[#14171C]/90 p-6 sm:p-7 hover:border-[#7C8CFF]/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(124,140,255,0.06)]"
+                    className="spotlight-card group relative rounded-[4px] border border-[#C8D1C3] bg-[#FFFFFF] p-4 sm:p-5 hover:border-[#FF5A2B]/50 transition-all duration-300 hover:shadow-sm"
                     onMouseMove={(e) => {
                       const r = e.currentTarget.getBoundingClientRect();
                       e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
@@ -138,24 +180,22 @@ export const About = () => (
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <span className="font-mono2 text-xs text-[#7C8CFF] font-semibold">{c.index}</span>
-                        <div className="h-1 w-1 rounded-full bg-white/20" />
-                        <h3 className="font-display text-xl sm:text-2xl font-semibold text-[#F2F4F7] group-hover:text-[#7C8CFF] transition-colors">
+                        <span className="font-mono2 text-[10px] text-[#1F4D40] font-semibold">{c.index}</span>
+                        <div className="h-1 w-1 rounded-full bg-[#C8D1C3]" />
+                        <h3 className="font-display text-base sm:text-lg font-semibold text-[#14261F] group-hover:text-[#FF5A2B] transition-colors">
                           {c.title}
                         </h3>
                       </div>
-                      <div className="h-8 w-8 rounded-lg bg-white/[0.03] border border-[#262B33] flex items-center justify-center text-[#A1A7B3] group-hover:text-[#7C8CFF] group-hover:border-[#7C8CFF]/30 transition-all">
-                        <Icon size={16} />
+                      <div className="h-7 w-7 rounded-[4px] bg-[#E4E8DF] border border-[#C8D1C3] flex items-center justify-center text-[#52635B] group-hover:text-[#FF5A2B] group-hover:border-[#FF5A2B]/30 transition-all">
+                        <Icon size={14} />
                       </div>
                     </div>
-
-                    <p className="mt-3 text-sm sm:text-base text-[#A1A7B3] leading-relaxed">{c.blurb}</p>
-
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <p className="mt-2 text-sm text-[#424845] leading-relaxed">{c.blurb}</p>
+                    <div className="mt-3 flex flex-wrap gap-1.5">
                       {c.tags.map((t) => (
                         <span
                           key={t}
-                          className="rounded-full border border-[#262B33] bg-[#191D23] px-3 py-1 font-mono2 text-[10px] tracking-wider text-[#6B7280] transition-colors"
+                          className="rounded-[3px] border border-[#C8D1C3] bg-[#E4E8DF] px-2 py-0.5 font-mono2 text-[9px] tracking-wider text-[#52635B]"
                         >
                           {t}
                         </span>
@@ -168,34 +208,10 @@ export const About = () => (
           </div>
         </div>
 
-        {/* Right Column: Interactive Agent Sandbox & Production Metrics */}
-        <div className="lg:col-span-6 xl:col-span-6 flex flex-col gap-6 sm:gap-8">
+        {/* Right Column: Agent Sandbox */}
+        <div className="lg:col-span-6 flex flex-col gap-6 sm:gap-8">
           <Reveal delay={0.15}>
             <AgentSandbox />
-          </Reveal>
-
-          {/* 2x2 Metrics Grid */}
-          <Reveal delay={0.25}>
-            <div className="grid grid-cols-2 gap-4">
-              {METRICS.map((m, i) => (
-                <div
-                  key={m.label}
-                  data-testid={`metric-${m.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                  className="group relative rounded-2xl border border-[#262B33] bg-[#14171C]/90 backdrop-blur p-5 sm:p-6 hover:border-[#7C8CFF]/40 transition-all duration-300"
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-mono2 text-[10px] tracking-widest uppercase text-[#6B7280]">METRIC 0{i + 1}</span>
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#7C8CFF]/70 group-hover:scale-125 transition-transform" />
-                  </div>
-                  <p className="font-display text-2xl sm:text-3xl xl:text-4xl font-semibold text-[#F2F4F7] group-hover:text-[#7C8CFF] transition-colors">
-                    {m.value}
-                  </p>
-                  <p className="mt-2 font-mono2 text-[11px] sm:text-xs tracking-wider uppercase text-[#A1A7B3] leading-tight">
-                    {m.label}
-                  </p>
-                </div>
-              ))}
-            </div>
           </Reveal>
         </div>
       </div>

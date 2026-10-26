@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   return (
-    <div className="grain relative bg-[#0D0F12] text-[#F2F4F7] min-h-screen">
+    <div className="grain relative bg-[#F2F5EE] text-[#14261F] min-h-screen">
       <Navbar />
       <main>
         <Hero />
@@ -44,7 +44,7 @@ function App() {
       </main>
       <Footer />
       <AIAssistant />
-      <Toaster theme="dark" position="bottom-right" toastOptions={{ style: { background: "#14171C", border: "1px solid #262B33", color: "#F2F4F7" } }} />
+      <Toaster theme="light" position="bottom-right" toastOptions={{ style: { background: "#FFFFFF", border: "1px solid #C8D1C3", color: "#14261F" } }} />
     </div>
   );
 }

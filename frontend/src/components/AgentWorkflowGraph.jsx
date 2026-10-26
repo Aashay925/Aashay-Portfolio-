@@ -156,7 +156,7 @@ export const WORKFLOWS = {
         latency: "₹80k Saved",
         col: 4,
         row: "center",
-        thought: "Approved by manager. Dispatched via WhatsApp API middleware. Saved ₹80,000/month.",
+        thought: "Approved by manager. Dispatched via WhatsApp API middleware. Saved ₹80,000/annum.",
         tag: "Zero SaaS Cost"
       }
     ],
@@ -271,272 +271,206 @@ export const AgentWorkflowGraph = () => {
 
   return (
     <div
-      className="relative rounded-2xl border border-[#262B33] bg-[#14171C]/90 backdrop-blur p-4.5 sm:p-5 shadow-[0_0_50px_rgba(124,140,255,0.06)] w-full overflow-hidden transition-all duration-300"
+      className="relative rounded-[6px] border border-[#C8D1C3] bg-[#FFFFFF] p-0 shadow-sm w-full overflow-hidden transition-all duration-300"
       data-testid="hero-agent-workflow-graph"
     >
-      {/* Top Titlebar */}
-      <div className="flex items-center justify-between pb-3 border-b border-[#262B33] mb-3.5">
-        <div className="flex items-center gap-2.5">
-          <div className="flex gap-1.5">
-            <span className="h-2 w-2 rounded-full bg-[#7C8CFF]/80" />
-            <span className="h-2 w-2 rounded-full bg-[#FBBF24]/70" />
-            <span className="h-2 w-2 rounded-full bg-[#65C18C]/80" />
-          </div>
-          <span className="font-mono2 text-[10px] tracking-[0.2em] uppercase text-[#A1A7B3]">
+      {/* Top Titlebar — white */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[#C8D1C3] bg-[#FFFFFF]">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#1F4D40]" />
+          <span className="font-mono2 text-[10px] tracking-[0.2em] uppercase text-[#14261F] font-semibold">
             {workflow.badge}
           </span>
         </div>
-
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <span className="relative flex h-2 w-2">
-            <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-[#7C8CFF]" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#7C8CFF]" />
+            <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-[#1F4D40]" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#1F4D40]" />
           </span>
-          <span className="font-mono2 text-[9.5px] tracking-wider text-[#7C8CFF] uppercase font-semibold">
+          <span className="font-mono2 text-[9px] tracking-wider text-[#1F4D40] uppercase font-semibold bg-[#BCEDDB] px-2 py-0.5 rounded-[3px]">
             Live Execution Mesh
           </span>
         </div>
       </div>
 
-      {/* Switcher Buttons: Real-world Workflows */}
-      <div className="mb-3.5">
-        <p className="font-mono2 text-[9.5px] tracking-widest uppercase text-[#6B7280] mb-2">
-          Switch Production Agent Pipeline:
-        </p>
-        <div className="grid grid-cols-3 gap-2">
-          {Object.values(WORKFLOWS).map((wf) => {
-            const isActive = wf.id === activeWorkflowKey;
-            return (
-              <button
-                key={wf.id}
-                onClick={() => setActiveWorkflowKey(wf.id)}
-                className={`group relative rounded-lg px-2.5 py-1.5 font-mono2 text-[11px] tracking-wide transition-all text-center flex flex-col items-center justify-center gap-0.5 ${
-                  isActive
-                    ? "bg-[#7C8CFF] text-[#0D0F12] font-semibold shadow-[0_0_20px_rgba(124,140,255,0.25)] scale-[1.02]"
-                    : "border border-[#262B33] bg-[#191D23] text-[#A1A7B3] hover:border-[#7C8CFF]/50 hover:text-[#F2F4F7]"
+      {/* Switcher Tabs — active tab is #FF5A2B highlighted */}
+      <div className="flex border-b border-[#C8D1C3] bg-[#E4E8DF]">
+        {Object.values(WORKFLOWS).map((wf) => {
+          const isActive = wf.id === activeWorkflowKey;
+          return (
+            <button
+              key={wf.id}
+              onClick={() => setActiveWorkflowKey(wf.id)}
+              className={`flex-1 px-3 py-2 font-mono2 text-[10px] tracking-wide transition-all text-center font-semibold border-r border-[#C8D1C3] last:border-r-0 ${isActive
+                  ? "bg-[#FFFFFF] text-[#14261F] border-t-2 border-t-[#FF5A2B]"
+                  : "bg-transparent text-[#52635B] hover:text-[#14261F] border-t-2 border-t-transparent"
                 }`}
-                data-testid={`workflow-switch-${wf.id}`}
-              >
-                <span className="font-semibold">{wf.name}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Node Graph Canvas (Wide 4-Column Layout with Bezier Cables) */}
-      <div className="relative rounded-xl border border-[#262B33] bg-[#0D0F12] p-2.5 sm:p-3.5 overflow-hidden">
-        <div className="overflow-x-auto pb-1 scrollbar-none">
-          <div className="min-w-[490px] sm:min-w-0 relative min-h-[175px]">
-            {/* Dot grid canvas background */}
-            <div
-              className="absolute inset-0 opacity-15 pointer-events-none"
-              style={{
-                backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.25) 1px, transparent 1px)",
-                backgroundSize: "16px 16px"
-              }}
-            />
-
-            {/* Dynamic SVG Connecting Wires */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none z-0"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 630 220"
-              preserveAspectRatio="none"
+              data-testid={`workflow-switch-${wf.id}`}
             >
-          {/* Wire 1: Col 1 -> Col 2 Top */}
-          <path
-            d="M 130 110 C 145 110, 150 55, 175 55"
-            fill="none"
-            stroke="#262B33"
-            strokeWidth="2"
-          />
-          <motion.path
-            d="M 130 110 C 145 110, 150 55, 175 55"
-            fill="none"
-            stroke="#7C8CFF"
-            strokeWidth="2"
-            strokeDasharray="6 8"
-            animate={{ strokeDashoffset: [28, 0] }}
-            transition={{ repeat: Infinity, duration: 1.3, ease: "linear" }}
-          />
+              {wf.name}
+            </button>
+          );
+        })}
+      </div>
 
-          {/* Wire 2: Col 1 -> Col 2 Bottom */}
-          <path
-            d="M 130 110 C 145 110, 150 165, 175 165"
-            fill="none"
-            stroke="#262B33"
-            strokeWidth="2"
-          />
-          <motion.path
-            d="M 130 110 C 145 110, 150 165, 175 165"
-            fill="none"
-            stroke="#A1A7B3"
-            strokeWidth="2"
-            strokeDasharray="6 8"
-            animate={{ strokeDashoffset: [28, 0] }}
-            transition={{ repeat: Infinity, duration: 1.3, ease: "linear" }}
-          />
+      {/* Node Graph Canvas — dark technical panel */}
+      <div className="p-4 bg-[#FFFFFF]">
+        {/* Topology label */}
+        <p className="font-mono2 text-[9px] tracking-widest uppercase text-[#52635B] mb-3">
+          TOPOLOGY: DETERMINISTIC RETRIEVAL & VECTOR GROUNDING
+        </p>
 
-          {/* Wire 3: Col 2 Top -> Col 3 */}
-          <path
-            d="M 330 55 C 345 55, 350 110, 365 110"
-            fill="none"
-            stroke="#262B33"
-            strokeWidth="2"
-          />
-          <motion.path
-            d="M 330 55 C 345 55, 350 110, 365 110"
-            fill="none"
-            stroke="#7C8CFF"
-            strokeWidth="2"
-            strokeDasharray="6 8"
-            animate={{ strokeDashoffset: [28, 0] }}
-            transition={{ repeat: Infinity, duration: 1.3, ease: "linear" }}
-          />
-
-          {/* Wire 4: Col 2 Bottom -> Col 3 */}
-          <path
-            d="M 330 165 C 345 165, 350 110, 365 110"
-            fill="none"
-            stroke="#262B33"
-            strokeWidth="2"
-          />
-          <motion.path
-            d="M 330 165 C 345 165, 350 110, 365 110"
-            fill="none"
-            stroke="#A1A7B3"
-            strokeWidth="2"
-            strokeDasharray="6 8"
-            animate={{ strokeDashoffset: [28, 0] }}
-            transition={{ repeat: Infinity, duration: 1.3, ease: "linear" }}
-          />
-
-          {/* Wire 5: Col 3 -> Col 4 Output */}
-          <path
-            d="M 505 110 C 515 110, 520 110, 530 110"
-            fill="none"
-            stroke="#262B33"
-            strokeWidth="2"
-          />
-          <motion.path
-            d="M 505 110 C 515 110, 520 110, 530 110"
-            fill="none"
-            stroke="#65C18C"
-            strokeWidth="2"
-            strokeDasharray="6 8"
-            animate={{ strokeDashoffset: [28, 0] }}
-            transition={{ repeat: Infinity, duration: 1.3, ease: "linear" }}
-          />
-
-          {/* Cyclic loop wire for code mode */}
-          {activeWorkflowKey === "code" && (
-            <motion.path
-              d="M 460 85 C 470 15, 230 15, 220 30"
-              fill="none"
-              stroke="#7C8CFF"
-              strokeWidth="1.5"
-              strokeDasharray="4 6"
-              animate={{ strokeDashoffset: [20, 0] }}
-              transition={{ repeat: Infinity, duration: 1.1, ease: "linear" }}
-            />
-          )}
-        </svg>
-
-        {/* Nodes Layer: 4 Columns */}
-        <div className="relative z-10 grid grid-cols-12 gap-2.5 items-center min-h-[165px]">
-          {/* Col 1: Trigger / Input Node (Span 3) */}
-          <div className="col-span-3 flex flex-col justify-center">
-            {col1Node && (
-              <WideNodeCard
-                node={col1Node}
-                isSelected={selectedNodeId === col1Node.id}
-                onSelect={() => setSelectedNodeId(col1Node.id)}
+        <div className="relative rounded-[4px] border border-[#C8D1C3] bg-[#14171C] p-3 overflow-hidden">
+          <div className="overflow-x-auto pb-1 scrollbar-none">
+            <div className="min-w-[490px] sm:min-w-0 relative min-h-[175px]">
+              {/* Dot grid */}
+              <div
+                className="absolute inset-0 opacity-10 pointer-events-none"
+                style={{
+                  backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px)",
+                  backgroundSize: "16px 16px"
+                }}
               />
-            )}
-          </div>
 
-          {/* Col 2: Parallel Workers (Span 3) */}
-          <div className="col-span-3 flex flex-col justify-between gap-2.5">
-            {col2Top && (
-              <WideNodeCard
-                node={col2Top}
-                isSelected={selectedNodeId === col2Top.id}
-                onSelect={() => setSelectedNodeId(col2Top.id)}
-              />
-            )}
-            {col2Bottom && (
-              <WideNodeCard
-                node={col2Bottom}
-                isSelected={selectedNodeId === col2Bottom.id}
-                onSelect={() => setSelectedNodeId(col2Bottom.id)}
-              />
-            )}
-          </div>
+              {/* SVG Connecting Wires */}
+              <svg
+                className="absolute inset-0 w-full h-full pointer-events-none z-0"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 630 220"
+                preserveAspectRatio="none"
+              >
+                {/* Wire 1: Col 1 -> Col 2 Top */}
+                <path d="M 130 110 C 145 110, 150 55, 175 55" fill="none" stroke="#262B33" strokeWidth="2" />
+                <motion.path
+                  d="M 130 110 C 145 110, 150 55, 175 55"
+                  fill="none" stroke="#FF5A2B" strokeWidth="1.5" strokeDasharray="6 8"
+                  animate={{ strokeDashoffset: [28, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.3, ease: "linear" }}
+                />
 
-          {/* Col 3: Evaluator / Fusion / Patch Node (Span 3) */}
-          <div className="col-span-3 flex flex-col justify-center">
-            {col3Node && (
-              <WideNodeCard
-                node={col3Node}
-                isSelected={selectedNodeId === col3Node.id}
-                onSelect={() => setSelectedNodeId(col3Node.id)}
-                isSpecial={true}
-              />
-            )}
-          </div>
+                {/* Wire 2: Col 1 -> Col 2 Bottom */}
+                <path d="M 130 110 C 145 110, 150 165, 175 165" fill="none" stroke="#262B33" strokeWidth="2" />
+                <motion.path
+                  d="M 130 110 C 145 110, 150 165, 175 165"
+                  fill="none" stroke="#A1A7B3" strokeWidth="1.5" strokeDasharray="6 8"
+                  animate={{ strokeDashoffset: [28, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.3, ease: "linear" }}
+                />
 
-          {/* Col 4: Verified Terminal / Signoff Node (Span 3) */}
-          <div className="col-span-3 flex flex-col justify-center">
-            {col4Node && (
-              <WideNodeCard
-                node={col4Node}
-                isSelected={selectedNodeId === col4Node.id}
-                onSelect={() => setSelectedNodeId(col4Node.id)}
-                isOutput={true}
-              />
-            )}
+                {/* Wire 3: Col 2 Top -> Col 3 */}
+                <path d="M 330 55 C 345 55, 350 110, 365 110" fill="none" stroke="#262B33" strokeWidth="2" />
+                <motion.path
+                  d="M 330 55 C 345 55, 350 110, 365 110"
+                  fill="none" stroke="#FF5A2B" strokeWidth="1.5" strokeDasharray="6 8"
+                  animate={{ strokeDashoffset: [28, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.3, ease: "linear" }}
+                />
+
+                {/* Wire 4: Col 2 Bottom -> Col 3 */}
+                <path d="M 330 165 C 345 165, 350 110, 365 110" fill="none" stroke="#262B33" strokeWidth="2" />
+                <motion.path
+                  d="M 330 165 C 345 165, 350 110, 365 110"
+                  fill="none" stroke="#A1A7B3" strokeWidth="1.5" strokeDasharray="6 8"
+                  animate={{ strokeDashoffset: [28, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.3, ease: "linear" }}
+                />
+
+                {/* Wire 5: Col 3 -> Col 4 */}
+                <path d="M 505 110 C 515 110, 520 110, 530 110" fill="none" stroke="#262B33" strokeWidth="2" />
+                <motion.path
+                  d="M 505 110 C 515 110, 520 110, 530 110"
+                  fill="none" stroke="#BCEDDB" strokeWidth="1.5" strokeDasharray="6 8"
+                  animate={{ strokeDashoffset: [28, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.3, ease: "linear" }}
+                />
+              </svg>
+
+              {/* Nodes Layer */}
+              <div className="relative z-10 grid grid-cols-12 gap-2.5 items-center min-h-[165px]">
+                <div className="col-span-3 flex flex-col justify-center">
+                  {col1Node && (
+                    <WideNodeCard
+                      node={col1Node}
+                      isSelected={selectedNodeId === col1Node.id}
+                      onSelect={() => setSelectedNodeId(col1Node.id)}
+                    />
+                  )}
+                </div>
+                <div className="col-span-3 flex flex-col justify-between gap-2.5">
+                  {col2Top && (
+                    <WideNodeCard
+                      node={col2Top}
+                      isSelected={selectedNodeId === col2Top.id}
+                      onSelect={() => setSelectedNodeId(col2Top.id)}
+                    />
+                  )}
+                  {col2Bottom && (
+                    <WideNodeCard
+                      node={col2Bottom}
+                      isSelected={selectedNodeId === col2Bottom.id}
+                      onSelect={() => setSelectedNodeId(col2Bottom.id)}
+                    />
+                  )}
+                </div>
+                <div className="col-span-3 flex flex-col justify-center">
+                  {col3Node && (
+                    <WideNodeCard
+                      node={col3Node}
+                      isSelected={selectedNodeId === col3Node.id}
+                      onSelect={() => setSelectedNodeId(col3Node.id)}
+                      isSpecial={true}
+                    />
+                  )}
+                </div>
+                <div className="col-span-3 flex flex-col justify-center">
+                  {col4Node && (
+                    <WideNodeCard
+                      node={col4Node}
+                      isSelected={selectedNodeId === col4Node.id}
+                      onSelect={() => setSelectedNodeId(col4Node.id)}
+                      isOutput={true}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    </div>
 
-      {/* State Inspector & Live Agent Thought */}
-      <div className="mt-3 rounded-xl border border-[#262B33] bg-[#0D0F12]/90 p-3">
-        <div className="flex items-center justify-between mb-1.5">
+      {/* State Inspector — dark technical telemetry box */}
+      <div className="mx-4 mb-4 mt-0 rounded-[4px] border border-[#1F4D40] bg-[#14261F] p-3.5">
+        <div className="flex items-center justify-between mb-1.5 pb-1.5 border-b border-white/10">
           <div className="flex items-center gap-2">
-            <Sparkles size={13} className="text-[#7C8CFF]" />
-            <span className="font-mono2 text-[11px] tracking-wider uppercase text-[#7C8CFF] font-semibold">
+            <Sparkles size={12} className="text-[#FF5A2B]" />
+            <span className="font-mono2 text-[10px] tracking-wider uppercase text-[#FF5A2B] font-semibold">
               Inspecting: {selectedNode.label}
             </span>
-            <span className="font-mono2 text-[9.5px] text-[#6B7280]">
+            <span className="font-mono2 text-[9px] text-white/50">
               ({selectedNode.latency})
             </span>
           </div>
-          <span className="font-mono2 text-[9.5px] tracking-wider text-[#65C18C] bg-[#65C18C]/10 border border-[#65C18C]/20 px-2 py-0.5 rounded-full uppercase font-medium">
+          <span className="font-mono2 text-[9px] tracking-wider text-white font-semibold bg-[#FF5A2B] px-2 py-0.5 rounded-[2px] uppercase">
             {selectedNode.tag}
           </span>
         </div>
 
-        {/* Selected Node's live thought */}
-        <p className="font-mono2 text-[11px] text-[#F2F4F7] leading-relaxed">
-          <span className="text-[#7C8CFF]">state.thought:</span> "{selectedNode.thought}"
+        <p className="font-mono2 text-[10px] text-[#BCEDDB] leading-relaxed">
+          <span className="text-[#FF5A2B]">state.thought:</span> "{selectedNode.thought}"
         </p>
 
-        {/* Real-time streaming log */}
-        <div className="mt-2.5 pt-2 border-t border-[#262B33] flex items-center justify-between text-[11px] font-mono2 text-[#6B7280]">
+        <div className="mt-2 pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-mono2 text-white/50">
           <span className="truncate max-w-[440px]">
-            <span className="text-[#7C8CFF]">▸</span> {workflow.thoughtStream[streamIndex]}
+            <span className="text-[#BCEDDB]">▸</span> {workflow.thoughtStream[streamIndex]}
           </span>
-          <span className="caret-blink text-[#7C8CFF]">▍</span>
+          <span className="caret-blink text-[#FF5A2B]">▍</span>
         </div>
       </div>
     </div>
   );
 };
 
-/* Wide Node Card Component with Full Text Visibility */
+/* Wide Node Card — stays dark for technical readability */
 const WideNodeCard = ({ node, isSelected, onSelect, isSpecial = false, isOutput = false }) => {
   const Icon = node.icon;
   const isActive = node.status === "active";
@@ -546,34 +480,32 @@ const WideNodeCard = ({ node, isSelected, onSelect, isSpecial = false, isOutput 
       onClick={onSelect}
       whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.98 }}
-      className={`group relative cursor-pointer rounded-xl border p-2 transition-all select-none ${
-        isSelected
-          ? "border-[#7C8CFF] bg-[#191D23] shadow-[0_0_20px_rgba(124,140,255,0.25)] ring-1 ring-[#7C8CFF]"
+      className={`group relative cursor-pointer rounded-[6px] border p-2 transition-all select-none ${isSelected
+          ? "border-[#FF5A2B] bg-[#1A1005] shadow-[0_0_20px_rgba(255,90,43,0.25)] ring-1 ring-[#FF5A2B]"
           : isOutput
-          ? "border-[#65C18C]/40 bg-[#14171C] hover:border-[#65C18C]/70"
-          : isSpecial
-          ? "border-[#7C8CFF]/40 bg-[#14171C] hover:border-[#7C8CFF]/70"
-          : "border-[#262B33] bg-[#14171C] hover:border-[#303640]"
-      }`}
+            ? "border-[#BCEDDB]/40 bg-[#14171C] hover:border-[#BCEDDB]/70"
+            : isSpecial
+              ? "border-[#FF5A2B]/40 bg-[#14171C] hover:border-[#FF5A2B]/70"
+              : "border-[#262B33] bg-[#14171C] hover:border-[#303640]"
+        }`}
     >
       {/* Port connection dots */}
-      <span className="absolute -left-1.5 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full border border-black bg-[#7C8CFF]" />
+      <span className="absolute -left-1.5 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full border border-black bg-[#FF5A2B]" />
       <span className="absolute -right-1.5 top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full border border-black bg-[#A1A7B3]" />
 
       <div className="flex items-start gap-1.5">
         <div
-          className={`h-6 w-6 rounded-md flex items-center justify-center shrink-0 mt-0.5 ${
-            isOutput
-              ? "bg-[#65C18C]/15 text-[#65C18C] border border-[#65C18C]/30"
+          className={`h-6 w-6 rounded-[4px] flex items-center justify-center shrink-0 mt-0.5 ${isOutput
+              ? "bg-[#BCEDDB]/15 text-[#BCEDDB] border border-[#BCEDDB]/30"
               : isSpecial
-              ? "bg-[#7C8CFF]/15 text-[#7C8CFF] border border-[#7C8CFF]/30"
-              : "bg-white/[0.03] text-[#A1A7B3] border border-[#262B33]"
-          }`}
+                ? "bg-[#FF5A2B]/15 text-[#FF5A2B] border border-[#FF5A2B]/30"
+                : "bg-white/[0.03] text-[#A1A7B3] border border-[#262B33]"
+            }`}
         >
           <Icon size={12} className={isActive ? "animate-pulse" : ""} />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="font-display font-semibold text-[11px] text-[#F2F4F7] group-hover:text-[#7C8CFF] transition-colors leading-tight truncate">
+          <p className="font-display font-semibold text-[11px] text-[#F2F4F7] group-hover:text-[#FF5A2B] transition-colors leading-tight truncate">
             {node.label}
           </p>
           <p className="font-mono2 text-[8.5px] text-[#6B7280] leading-tight mt-0.5 truncate">

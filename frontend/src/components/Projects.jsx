@@ -1,47 +1,51 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github, CheckCircle2, Sparkles, Terminal } from "lucide-react";
-import { Reveal, SectionHeading } from "./Reveal";
+import { ArrowUpRight, Github, CheckCircle2 } from "lucide-react";
+import { Reveal } from "./Reveal";
 import { PROJECTS } from "../data/content";
 
 export const Projects = () => {
-  const [activeTab, setActiveTab] = useState("all");
-
   return (
-    <section id="projects" className="relative py-28 sm:py-36 overflow-hidden" data-testid="projects-section">
-      {/* Ambient background glows */}
-      <div className="absolute top-1/4 -right-48 w-96 h-96 rounded-full bg-[#7C8CFF]/[0.05] blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -left-48 w-96 h-96 rounded-full bg-[#7C8CFF]/[0.03] blur-[140px] pointer-events-none" />
+    <section id="projects" className="relative py-20 sm:py-32 lg:py-36 overflow-hidden bg-[#F7FBF1]" data-testid="projects-section">
+      {/* Spec numeral */}
+      <div className="spec-numeral absolute -top-16 -left-6 z-0">02</div>
 
-      <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 relative z-10">
+        {/* Section label */}
+        <div className="flex items-center gap-4 mb-8 sm:mb-12">
+          <span className="font-mono2 text-[10px] font-semibold tracking-widest text-[#1F4D40] uppercase">02 / FEATURED PROJECTS</span>
+          <div className="h-px flex-1 bg-[#C8D1C3]" />
+          <span className="font-mono2 text-[9px] text-[#52635B] uppercase hidden sm:block">INDEX: ENTERPRISE AUTOMATION</span>
+        </div>
+
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 sm:mb-12">
           <div>
             <Reveal>
-              <p className="font-mono2 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#7C8CFF] mb-4" data-testid="projects-eyebrow">
+              <p className="font-mono2 text-[10px] sm:text-xs tracking-[0.3em] uppercase text-[#FF5A2B] mb-3 sm:mb-4" data-testid="projects-eyebrow">
                 02 — Featured Projects
               </p>
             </Reveal>
             <Reveal delay={0.08}>
-              <h2 className="font-display text-3xl sm:text-5xl lg:text-[3.25rem] font-semibold tracking-tight text-[#F2F4F7] leading-[1.08]" data-testid="projects-heading">
+              <h2 className="font-display text-2xl sm:text-4xl lg:text-[3.25rem] font-bold tracking-tight text-[#14261F] leading-[1.1]" data-testid="projects-heading">
                 Architectures that ship to production.
               </h2>
             </Reveal>
             <Reveal delay={0.14}>
-              <p className="mt-5 text-base sm:text-lg text-[#A1A7B3] leading-relaxed max-w-2xl font-normal">
+              <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-[#424845] leading-relaxed max-w-2xl font-normal">
                 Production AI systems and real-world applications engineered to eliminate manual bottlenecks, replace expensive commercial SaaS, and automate business operations.
               </p>
             </Reveal>
           </div>
 
           <Reveal delay={0.2}>
-            <div className="flex items-center gap-2 border border-[#262B33] bg-[#14171C]/80 rounded-full px-4 py-2 font-mono2 text-xs text-[#A1A7B3]">
-              <span className="h-2 w-2 rounded-full bg-[#65C18C] animate-pulse" />
+            <div className="flex items-center gap-2 border border-[#C8D1C3] bg-[#FFFFFF] rounded-[4px] px-3.5 py-2 font-mono2 text-[10px] text-[#14261F] self-start lg:self-auto">
+              <span className="h-2 w-2 rounded-full bg-[#1F4D40] animate-pulse shrink-0" />
               <span>{PROJECTS.length} PRODUCTION DEPLOYMENTS VERIFIED</span>
             </div>
           </Reveal>
         </div>
 
-        {/* Bento Showcase Grid */}
+        {/* Bento Showcase Grid — responsive cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8">
           {PROJECTS.map((p, i) => (
             <Reveal
@@ -51,7 +55,7 @@ export const Projects = () => {
             >
               <div
                 data-testid={`project-card-${p.id}`}
-                className="spotlight-card group relative h-full rounded-2xl border border-[#262B33] bg-[#14171C]/90 backdrop-blur p-6 sm:p-7 xl:p-8 flex flex-col justify-between transition-all duration-300 hover:border-[#7C8CFF]/50 hover:shadow-[0_0_40px_rgba(124,140,255,0.06)]"
+                className="spotlight-card group relative h-full rounded-2xl border border-[#C8D1C3] bg-[#FFFFFF] p-5 sm:p-7 xl:p-8 flex flex-col justify-between transition-all duration-300 hover:border-[#FF5A2B]/50 hover:shadow-md"
                 onMouseMove={(e) => {
                   const r = e.currentTarget.getBoundingClientRect();
                   e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
@@ -60,57 +64,60 @@ export const Projects = () => {
               >
                 <div>
                   {/* Top Bar: Index, Badge & Links */}
-                  <div className="flex items-center justify-between gap-3 mb-4">
-                    <div className="flex items-center gap-2.5">
-                      <span className="font-mono2 text-xs font-semibold text-[#7C8CFF]">{p.index}</span>
-                      <span className="h-1 w-1 rounded-full bg-white/20" />
-                      <span className="font-mono2 text-[10.5px] tracking-wider uppercase text-[#7C8CFF] bg-[#7C8CFF]/10 border border-[#7C8CFF]/20 rounded-full px-2.5 py-0.5">
+                  <div className="flex flex-wrap items-center justify-between gap-2.5 mb-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-mono2 text-xs font-semibold text-[#FF5A2B]">{p.index}</span>
+                      <span className="h-1 w-1 rounded-full bg-[#C8D1C3]" />
+                      <span className="font-mono2 text-[10px] sm:text-[10.5px] tracking-wider uppercase text-[#480C00] bg-[#FFDBD1] border border-[#FF5A2B]/30 rounded-full px-2.5 py-0.5 font-semibold">
                         {p.badge}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 shrink-0">
                       <a
                         href={p.githubUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="h-8 w-8 rounded-full border border-[#262B33] bg-[#191D23] flex items-center justify-center text-[#A1A7B3] hover:text-[#F2F4F7] hover:border-[#7C8CFF]/50 hover:bg-[#7C8CFF]/10 transition-all"
+                        className="h-8 w-8 rounded-full border border-[#C8D1C3] bg-[#E4E8DF] flex items-center justify-center text-[#52635B] hover:text-[#FF5A2B] hover:border-[#FF5A2B]/50 hover:bg-[#FFFFFF] transition-all"
                         aria-label={`View ${p.title} source`}
                       >
-                        <Github size={15} />
+                        <Github size={14} />
                       </a>
                       <a
                         href={p.demoUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="h-8 w-8 rounded-full border border-[#262B33] bg-[#191D23] flex items-center justify-center text-[#A1A7B3] hover:text-[#7C8CFF] hover:border-[#7C8CFF]/50 hover:bg-[#7C8CFF]/10 transition-all"
+                        className="h-8 w-8 rounded-full border border-[#C8D1C3] bg-[#E4E8DF] flex items-center justify-center text-[#52635B] hover:text-[#FF5A2B] hover:border-[#FF5A2B]/50 hover:bg-[#FFFFFF] transition-all"
                         aria-label={`Open ${p.title} live demo`}
                       >
-                        <ArrowUpRight size={15} />
+                        <ArrowUpRight size={14} />
                       </a>
                     </div>
                   </div>
 
                   {/* Title & Subtitle */}
-                  <h3 className="font-display text-xl sm:text-2xl font-semibold text-[#F2F4F7] group-hover:text-[#7C8CFF] transition-colors tracking-tight">
+                  <h3 className="font-display text-lg sm:text-2xl font-bold text-[#14261F] group-hover:text-[#FF5A2B] transition-colors tracking-tight leading-snug">
                     {p.title}
                   </h3>
-                  <p className="mt-1 font-mono2 text-xs text-[#A1A7B3] tracking-wide">
+                  <p className="mt-1 font-mono2 text-xs text-[#52635B] tracking-wide leading-relaxed">
                     {p.subtitle}
                   </p>
 
-                  <p className="mt-3 text-xs sm:text-sm text-[#A1A7B3] leading-relaxed">
+                  <p className="mt-3 text-xs sm:text-sm text-[#424845] leading-relaxed">
                     {p.description}
                   </p>
 
-                  {/* High-Impact Metrics Strip */}
-                  <div className="mt-4 grid grid-cols-3 gap-2.5 p-3 rounded-xl border border-[#262B33] bg-[#0D0F12]">
-                    {p.metrics.map((m) => (
-                      <div key={m.label} className="text-center">
-                        <p className="font-display text-lg sm:text-xl font-semibold text-[#F2F4F7] group-hover:text-[#7C8CFF] transition-colors">
+                  {/* High-Impact Metrics Strip — responsive mobile layout prevents text collision */}
+                  <div className="mt-4 grid grid-cols-1 min-[480px]:grid-cols-3 gap-2 p-3 rounded-xl border border-[#C8D1C3] bg-[#F7FBF1] divide-y min-[480px]:divide-y-0 min-[480px]:divide-x divide-[#C8D1C3]/60">
+                    {p.metrics.map((m, mi) => (
+                      <div
+                        key={m.label}
+                        className="flex items-center justify-between min-[480px]:flex-col min-[480px]:justify-center text-left min-[480px]:text-center pt-2 min-[480px]:pt-0 first:pt-0 min-[480px]:px-2"
+                      >
+                        <p className={`font-display text-base sm:text-lg lg:text-xl font-bold tracking-tight ${mi === 0 ? "text-[#FF5A2B]" : "text-[#14261F]"} group-hover:text-[#FF5A2B] transition-colors`}>
                           {m.value}
                         </p>
-                        <p className="mt-0.5 font-mono2 text-[9.5px] sm:text-[10px] tracking-wider uppercase text-[#6B7280]">
+                        <p className="font-mono2 text-[9px] sm:text-[10px] tracking-wider uppercase text-[#52635B]">
                           {m.label}
                         </p>
                       </div>
@@ -119,10 +126,10 @@ export const Projects = () => {
 
                   {/* Architectural Highlights */}
                   <div className="mt-4 space-y-1.5">
-                    <p className="font-mono2 text-[10px] tracking-wider uppercase text-[#6B7280] mb-1">Key Highlights</p>
+                    <p className="font-mono2 text-[10px] tracking-wider uppercase text-[#52635B] mb-1 font-semibold">Key Highlights</p>
                     {p.features.map((f) => (
-                      <div key={f} className="flex items-center gap-2 text-xs text-[#A1A7B3]">
-                        <CheckCircle2 size={13} className="text-[#65C18C] shrink-0" />
+                      <div key={f} className="flex items-start gap-2 text-xs text-[#424845] leading-normal">
+                        <CheckCircle2 size={13} className="text-[#1F4D40] shrink-0 mt-0.5" />
                         <span>{f}</span>
                       </div>
                     ))}
@@ -130,11 +137,11 @@ export const Projects = () => {
                 </div>
 
                 {/* Tech Stack Tags */}
-                <div className="mt-5 pt-4 border-t border-[#262B33] flex flex-wrap gap-1.5">
+                <div className="mt-5 pt-4 border-t border-[#C8D1C3] flex flex-wrap gap-1.5">
                   {p.stack.map((t) => (
                     <span
                       key={t}
-                      className="rounded-md border border-[#262B33] bg-[#191D23] px-2.5 py-0.5 font-mono2 text-[10.5px] text-[#A1A7B3] transition-colors"
+                      className="rounded-md border border-[#C8D1C3] bg-[#E4E8DF] px-2.5 py-0.5 font-mono2 text-[10px] sm:text-[10.5px] text-[#14261F] transition-colors"
                     >
                       {t}
                     </span>

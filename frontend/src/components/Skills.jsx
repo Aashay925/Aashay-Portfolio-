@@ -43,41 +43,57 @@ export const Skills = () => {
       : SKILLS_CATEGORIES.filter((c) => c.id === activeTab);
 
   return (
-    <section id="skills" className="relative py-28 sm:py-36 bg-[#0D0F12] overflow-hidden" data-testid="skills-section">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 -left-48 w-96 h-96 rounded-full bg-[#7C8CFF]/[0.05] blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/3 -right-48 w-96 h-96 rounded-full bg-[#7C8CFF]/[0.03] blur-[150px] pointer-events-none" />
+    /* Full-bleed forest inset — deep green bg like the reference */
+    <section
+      id="skills"
+      className="relative py-28 sm:py-36 bg-[#14261F] overflow-hidden"
+      data-testid="skills-section"
+    >
+      {/* Subtle tint glow */}
+      <div className="absolute top-1/3 -left-48 w-96 h-96 rounded-full bg-[#1F4D40]/30 blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/3 -right-48 w-96 h-96 rounded-full bg-[#FF5A2B]/[0.04] blur-[150px] pointer-events-none" />
+      {/* Numeral watermark in dark tint */}
+      <div className="absolute -top-12 -left-4 font-display font-extrabold text-[#1F3D32] select-none pointer-events-none"
+        style={{ fontSize: "clamp(100px, 15vw, 200px)", lineHeight: 0.85, letterSpacing: "-0.06em" }}>
+        03
+      </div>
 
-      <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20">
-        {/* Section Header */}
+      <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-20 relative z-10">
+        {/* Header */}
+        <div className="flex items-center gap-4 mb-12">
+          <span className="font-mono2 text-[10px] font-semibold tracking-widest text-[#FF5A2B] uppercase">03 / SKILLS & CAPABILITIES</span>
+          <div className="h-px flex-1 bg-white/20" />
+          <span className="font-mono2 text-[9px] text-[#BCEDDB] uppercase hidden sm:block">SYSTEM SPEC: FULL STACK ARSENAL</span>
+        </div>
+
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
           <div>
             <Reveal>
-              <p className="font-mono2 text-xs sm:text-sm tracking-[0.3em] uppercase text-[#7C8CFF] mb-4" data-testid="skills-eyebrow">
+              <p className="font-mono2 text-[10px] sm:text-xs tracking-[0.3em] uppercase text-[#FF5A2B] mb-4" data-testid="skills-eyebrow">
                 03 — Skills & Capabilities
               </p>
             </Reveal>
             <Reveal delay={0.08}>
-              <h2 className="font-display text-3xl sm:text-5xl lg:text-[3.25rem] font-semibold tracking-tight text-[#F2F4F7] leading-[1.08]" data-testid="skills-heading">
+              <h2 className="font-display text-3xl sm:text-5xl lg:text-[3.25rem] font-bold tracking-tight text-white leading-[1.08]" data-testid="skills-heading">
                 Engineering arsenal & AI stack.
               </h2>
             </Reveal>
             <Reveal delay={0.14}>
-              <p className="mt-5 text-base sm:text-lg text-[#A1A7B3] leading-relaxed max-w-2xl font-normal">
+              <p className="mt-5 text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl font-normal">
                 Hands-on production proficiency across multi-agent consensus protocols, hybrid vector retrieval, and distributed backend infrastructure.
               </p>
             </Reveal>
           </div>
 
-          {/* Domain Filter Pills */}
+          {/* Domain Filter — square buttons */}
           <Reveal delay={0.2}>
             <div className="flex flex-wrap gap-2" data-testid="skills-filter-pills">
               <button
                 onClick={() => setActiveTab("all")}
-                className={`rounded-full px-5 py-2 font-mono2 text-xs tracking-wide transition-all ${
+                className={`rounded-[4px] px-4 py-2 font-mono2 text-[10px] tracking-wide transition-all font-semibold ${
                   activeTab === "all"
-                    ? "bg-[#7C8CFF] text-[#0D0F12] font-semibold shadow-[0_0_20px_rgba(124,140,255,0.25)]"
-                    : "border border-[#262B33] bg-[#191D23] text-[#A1A7B3] hover:border-[#7C8CFF]/50 hover:text-[#F2F4F7]"
+                    ? "bg-[#FF5A2B] text-white shadow-sm"
+                    : "border border-white/20 bg-white/5 text-white/70 hover:border-white/40 hover:text-white"
                 }`}
               >
                 All Domains
@@ -86,10 +102,10 @@ export const Skills = () => {
                 <button
                   key={c.id}
                   onClick={() => setActiveTab(c.id)}
-                  className={`rounded-full px-5 py-2 font-mono2 text-xs tracking-wide transition-all ${
+                  className={`rounded-[4px] px-4 py-2 font-mono2 text-[10px] tracking-wide transition-all ${
                     activeTab === c.id
-                      ? "bg-[#7C8CFF] text-[#0D0F12] font-semibold shadow-[0_0_20px_rgba(124,140,255,0.25)]"
-                      : "border border-[#262B33] bg-[#191D23] text-[#A1A7B3] hover:border-[#7C8CFF]/50 hover:text-[#F2F4F7]"
+                      ? "bg-[#FF5A2B] text-white font-semibold shadow-sm"
+                      : "border border-white/20 bg-white/5 text-white/70 hover:border-white/40 hover:text-white"
                   }`}
                 >
                   {c.title.split(" ")[0]}
@@ -99,7 +115,7 @@ export const Skills = () => {
           </Reveal>
         </div>
 
-        {/* Categories Grid */}
+        {/* Skill Modules Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-12 sm:mb-14">
           <AnimatePresence mode="popLayout">
             {filteredCategories.map((cat, idx) => {
@@ -112,54 +128,51 @@ export const Skills = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  className="rounded-xl sm:rounded-2xl border border-[#262B33] bg-[#14171C]/90 backdrop-blur p-5 sm:p-6 lg:p-6.5 flex flex-col justify-between hover:border-[#7C8CFF]/40 transition-all duration-300 hover:shadow-[0_0_35px_rgba(124,140,255,0.06)]"
+                  className="rounded-[6px] border border-white/10 bg-white/5 p-5 sm:p-6 flex flex-col justify-between hover:border-[#FF5A2B]/30 transition-all duration-300"
                   data-testid={`skill-domain-${cat.id}`}
                 >
-                  <div>
-                    {/* Domain Header */}
-                    <div className="flex items-center justify-between pb-4 border-b border-[#262B33] mb-4.5">
-                      <div className="flex items-center gap-3">
-                        <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-[#7C8CFF]/10 border border-[#7C8CFF]/20 flex items-center justify-center text-[#7C8CFF] shrink-0">
-                          <Icon size={18} />
-                        </div>
-                        <div>
-                          <h3 className="font-display text-lg sm:text-xl font-semibold text-[#F2F4F7]">
-                            {cat.title}
-                          </h3>
-                          <p className="font-mono2 text-[11px] sm:text-xs text-[#6B7280] mt-0.5">
-                            {cat.tagline}
-                          </p>
-                        </div>
+                  {/* Domain Header */}
+                  <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-[4px] bg-[#FF5A2B]/15 border border-[#FF5A2B]/25 flex items-center justify-center text-[#FF5A2B] shrink-0">
+                        <Icon size={17} />
+                      </div>
+                      <div>
+                        <h3 className="font-display text-lg sm:text-xl font-semibold text-white">{cat.title}</h3>
+                        <p className="font-mono2 text-[10px] text-white/50 mt-0.5">{cat.tagline}</p>
                       </div>
                     </div>
+                    <span className="font-mono2 text-[9px] px-2 py-0.5 border border-[#BCEDDB]/60 text-[#BCEDDB] rounded-[2px] uppercase">
+                      EXPERT
+                    </span>
+                  </div>
 
-                    {/* Skill List with Level Badges & Real-World Highlights */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      {cat.skills.map((s) => (
-                        <div
-                          key={s.name}
-                          className="group relative rounded-lg border border-[#262B33] bg-[#0D0F12] p-2.5 sm:p-3 hover:border-[#7C8CFF]/30 hover:bg-[#191D23] transition-all"
-                        >
-                          <div className="flex items-center justify-between gap-1.5 mb-1">
-                            <span className="font-display font-medium text-xs sm:text-[13px] text-[#F2F4F7] group-hover:text-[#7C8CFF] transition-colors">
-                              {s.name}
-                            </span>
-                            <span
-                              className={`font-mono2 text-[9px] tracking-wider px-1.5 py-0.5 rounded-full uppercase shrink-0 ${
-                                s.level === "Expert"
-                                  ? "bg-[#7C8CFF]/15 text-[#7C8CFF] border border-[#7C8CFF]/30"
-                                  : "bg-white/[0.04] text-[#A1A7B3] border border-[#262B33]"
-                              }`}
-                            >
-                              {s.level}
-                            </span>
-                          </div>
-                          <p className="font-mono2 text-[10px] sm:text-[10.5px] text-[#6B7280] leading-snug">
-                            {s.highlight}
-                          </p>
+                  {/* Skill List */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {cat.skills.map((s) => (
+                      <div
+                        key={s.name}
+                        className="group relative rounded-[4px] border border-white/10 bg-white/5 p-2.5 sm:p-3 hover:border-[#FF5A2B]/30 hover:bg-white/8 transition-all"
+                      >
+                        <div className="flex items-center justify-between gap-1.5 mb-1">
+                          <span className="font-display font-medium text-xs sm:text-[13px] text-white/90 group-hover:text-white transition-colors">
+                            {s.name}
+                          </span>
+                          <span
+                            className={`font-mono2 text-[9px] tracking-wider px-1.5 py-0.5 rounded-[2px] uppercase shrink-0 ${
+                              s.level === "Expert"
+                                ? "bg-[#BCEDDB]/15 text-[#BCEDDB] border border-[#BCEDDB]/30"
+                                : "bg-white/[0.04] text-white/50 border border-white/10"
+                            }`}
+                          >
+                            [ACTIVE]
+                          </span>
                         </div>
-                      ))}
-                    </div>
+                        <p className="font-mono2 text-[10px] sm:text-[10.5px] text-white/40 leading-snug">
+                          {s.highlight}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
               );
@@ -169,28 +182,16 @@ export const Skills = () => {
 
         {/* Architectural Principles Banner */}
         <Reveal delay={0.25}>
-          <div className="rounded-2xl border border-[#262B33] bg-[#14171C]/60 backdrop-blur p-8 sm:p-10">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="h-2 w-2 rounded-full bg-[#7C8CFF]" />
-              <p className="font-mono2 text-xs tracking-[0.25em] uppercase text-[#A1A7B3]">
-                Architectural Core Principles
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {PRINCIPLES.map((pr) => {
+          <div className="border-t border-white/15 pt-10">
+            <div className="font-mono2 text-[9px] text-white/40 uppercase tracking-widest mb-6">ENGINEERING DIRECTIVES</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {PRINCIPLES.map((pr, i) => {
                 const Icon = pr.icon;
                 return (
-                  <div key={pr.title} className="space-y-2.5">
-                    <div className="flex items-center gap-2.5 text-[#7C8CFF]">
-                      <Icon size={18} />
-                      <h4 className="font-display font-semibold text-base text-[#F2F4F7]">
-                        {pr.title}
-                      </h4>
-                    </div>
-                    <p className="text-xs sm:text-sm text-[#A1A7B3] leading-relaxed">
-                      {pr.desc}
-                    </p>
+                  <div key={pr.title} className="p-4 bg-white/5 border border-white/10 rounded-[4px] space-y-2">
+                    <div className="font-mono2 text-[9px] text-[#FF5A2B]">PRINCIPLE 0{i + 1}</div>
+                    <h4 className="font-display font-semibold text-sm text-white">{pr.title}</h4>
+                    <p className="text-xs text-white/50 leading-relaxed">{pr.desc}</p>
                   </div>
                 );
               })}
