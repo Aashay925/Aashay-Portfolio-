@@ -12,6 +12,7 @@ import { VibeZone } from "./components/VibeZone";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { AIAssistant } from "./components/AIAssistant";
+import { CustomCursor } from "./components/CustomCursor";
 
 function App() {
   useEffect(() => {
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <div className="grain relative bg-[#F2F5EE] text-[#14261F] min-h-screen">
+      <CustomCursor />
       <Navbar />
       <main>
         <Hero />
