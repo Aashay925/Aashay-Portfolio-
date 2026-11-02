@@ -43,7 +43,7 @@ Core Expertise: Agentic AI (LangGraph, CrewAI), Production RAG (Gemini, MongoDB 
   Engineered production RAG pipelines (LangChain, Gemini, FAISS, ChromaDB) and cross-app Deluge scripts across 8 Zoho platforms.
 - AI Automation Intern (Sep 2025 – Dec 2025) at Nexora:
   Built SalesIQ chatbot flows driving 35% visitor-to-lead conversions.
-- Python Automation Developer (Jun 2024 – Aug 2025) at Sworn Agritech:
+- Python Automation Developer (Jun 2024 – Aug 2025) at S.A Tech pvt ltd:
   Developed Python automation scripts replacing third-party commercial tools.
 `;
 
