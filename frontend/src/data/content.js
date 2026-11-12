@@ -167,9 +167,9 @@ export const EXPERIENCE = [
   },
   {
     id: "exp-sworn",
-    period: "June 2024 — August 2025",
+    period: "FEB 2024 — August 2025",
     role: "Python Automation Developer",
-    org: "S.A Tech pvt ltd",
+    org: "Sworn Techware ltd",
     category: "Python Automation",
     summary:
       "Developed Python automation scripts to streamline agricultural business processes and cut commercial SaaS costs.",
